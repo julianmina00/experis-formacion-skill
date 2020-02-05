@@ -22,7 +22,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * A Curso.
  */
 @Entity
-@Table(name = "curso")
+@Table(name = "CU_Cursos")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Curso implements Serializable {
 

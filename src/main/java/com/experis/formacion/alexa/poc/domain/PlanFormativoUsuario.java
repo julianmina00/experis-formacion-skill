@@ -25,12 +25,12 @@ public class PlanFormativoUsuario implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("planFormativoUsuarios")
-    @Column(name = "UP_IdPlanFormativo")
+    @JoinColumn(name = "UP_IdPlanFormativo", updatable = false, insertable = false)
     private PlanFormativo planFormativo;
 
     @ManyToOne
     @JsonIgnoreProperties("planFormativoUsuarios")
-    @Column(name = "UP_IdUsuario")
+    @JoinColumn(name = "UP_IdUsuario", updatable = false, insertable = false)
     private Usuario usuario;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

@@ -14,7 +14,7 @@ import java.util.Set;
  * A PlanFormativo.
  */
 @Entity
-@Table(name = "plan_formativo")
+@Table(name = "PF_PlanFormativo")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class PlanFormativo implements Serializable {
 

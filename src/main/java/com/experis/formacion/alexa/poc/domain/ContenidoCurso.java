@@ -31,17 +31,17 @@ public class ContenidoCurso implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("contenidoCursos")
-    @Column(name = "CC_IdCurso")
+    @JoinColumn(name = "CC_IdCurso", updatable = false, insertable = false)
     private Curso curso;
 
     @ManyToOne
     @JsonIgnoreProperties("contenidoCursos")
-    @Column(name = "CC_IdInteres")
+    @JoinColumn(name = "CC_IdInteres", updatable = false, insertable = false)
     private Interes interes;
 
     @ManyToOne
     @JsonIgnoreProperties("contenidoCursos")
-    @Column(name = "CC_IdHabilidad")
+    @JoinColumn(name = "CC_IdHabilidad", updatable = false, insertable = false)
     private Habilidad habilidad;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

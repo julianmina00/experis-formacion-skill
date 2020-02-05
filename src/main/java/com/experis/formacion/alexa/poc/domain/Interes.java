@@ -46,7 +46,7 @@ public class Interes implements Serializable {
     private Set<ContenidoCurso> contenidoCursos = new HashSet<>();
 
     @ManyToOne
-    @Column(name = "CI_IdTipInteres")
+    @JoinColumn(name = "CI_IdTipInteres", updatable = false, insertable = false)
     @JsonIgnoreProperties("interes")
     private TipoInteres tipoInteres;
 

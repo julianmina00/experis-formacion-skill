@@ -50,7 +50,7 @@ public class Habilidad implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("habilidads")
-    @Column(name = "CH_TipHabilidad", updatable = false, insertable = false)
+    @JoinColumn(name = "CH_TipHabilidad", updatable = false, insertable = false)
     private TipoHabilidad tipoHabilidad;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
