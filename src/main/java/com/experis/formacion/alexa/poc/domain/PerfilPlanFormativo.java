@@ -20,7 +20,7 @@ public class PerfilPlanFormativo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "PP_IdPlanFormativo")
+    @Column(name = "PP_idPerfilPlanFormativo")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

@@ -5,7 +5,7 @@
             <column autoIncrement="true" name="CC_idContenidoCurso" type="bigint">
                 <constraints primaryKey="true" primaryKeyName="CC_ContenidoCursoPK"/>
             </column>
-            <column name="CC_Habilidad_Interes" type="varchar(255)">
+            <column name="CC_Habilidad_Interes" type="varchar(1)">
                 <constraints nullable="false"/>
             </column>
             <column name="CC_IdCurso" type="bigint"/>
@@ -50,14 +50,15 @@
     </changeSet>
     <changeSet author="jota (generated)" id="1580907326463-6">
         <createTable tableName="PP_PerfilPlanFormativo">
-            <column autoIncrement="true" name="PP_IdPlanFormativo" type="bigint">
+            <column autoIncrement="true" name="PP_idPerfilPlanFormativo" type="bigint">
                 <constraints primaryKey="true" primaryKeyName="PP_PerfilPlanFormativoPK"/>
             </column>
-            <column name="PP_InteresHabilidad" type="varchar(255)">
+            <column name="PP_InteresHabilidad" type="varchar(1)">
                 <constraints nullable="false"/>
             </column>
             <column name="PP_IdHabilidad" type="bigint"/>
             <column name="PP_IdInteres" type="bigint"/>
+            <column name="PP_IdPlanFormativo" type="bigint"/>
         </createTable>
     </changeSet>
     <changeSet author="jota (generated)" id="1580907326463-7">
