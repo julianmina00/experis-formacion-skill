@@ -11,22 +11,25 @@ import java.io.Serializable;
  * A HabilidadUsuario.
  */
 @Entity
-@Table(name = "habilidad_usuario")
+@Table(name = "UH_UsuarioHabilidades")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class HabilidadUsuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "UH_idUsuarioHabilidades")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @ManyToOne
+    @Column(name = "UH_IdHabilidad")
     @JsonIgnoreProperties("habilidadUsuarios")
     private Habilidad habilidad;
 
     @ManyToOne
+    @Column(name = "UH_IdUsuario")
     @JsonIgnoreProperties("habilidadUsuarios")
     private Usuario usuario;
 

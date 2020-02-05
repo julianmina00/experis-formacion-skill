@@ -14,22 +14,23 @@ import java.util.Set;
  * A Interes.
  */
 @Entity
-@Table(name = "interes")
+@Table(name = "CI_CatalogInteres")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Interes implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "CI_IdInteres")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @NotNull
-    @Column(name = "descripcion", nullable = false)
+    @Column(name = "CI_DescInteres", nullable = false)
     private String descripcion;
 
-    @Column(name = "descripcion_larga")
+    @Column(name = "CI_DescLargInteres")
     private String descripcionLarga;
 
     @OneToMany(mappedBy = "interes")
@@ -45,6 +46,7 @@ public class Interes implements Serializable {
     private Set<ContenidoCurso> contenidoCursos = new HashSet<>();
 
     @ManyToOne
+    @Column(name = "CI_IdTipInteres")
     @JsonIgnoreProperties("interes")
     private TipoInteres tipoInteres;
 

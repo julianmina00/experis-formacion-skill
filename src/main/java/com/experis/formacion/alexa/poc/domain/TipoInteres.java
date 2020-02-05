@@ -13,22 +13,23 @@ import java.util.Set;
  * A TipoInteres.
  */
 @Entity
-@Table(name = "tipo_interes")
+@Table(name = "TI_TipInteres")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class TipoInteres implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "TI_IdTipInteres")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @NotNull
-    @Column(name = "descripcion", nullable = false)
+    @Column(name = "TI_DescTipInteres", nullable = false)
     private String descripcion;
 
-    @Column(name = "descripcion_larga")
+    @Column(name = "TI_DescLargTipInteres")
     private String descripcionLarga;
 
     @OneToMany(mappedBy = "tipoInteres")
