@@ -57,6 +57,7 @@ entity CursoPlanFormativo {
 
 
 entity PerfilPlanFormativo {
+   interesHabilidad String required pattern(/^(H|I|h|i)$/)
 }
 
 
