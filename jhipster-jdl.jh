@@ -4,7 +4,7 @@ entity Curso {
 	fechaInicio LocalDate required,
 	fechaFin LocalDate required,
 	telematicoPresencial String required pattern(/^(T|P|t|p)$/),
-	hora LocalDate,
+	hora LocalTime,
 	ubicacion String,
 	numeroHoras Long
 }
