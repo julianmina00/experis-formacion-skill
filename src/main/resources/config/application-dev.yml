@@ -45,9 +45,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:sqlserver://localhost:1433;database=ExperisFormacion
+    url: jdbc:sqlserver://localhost:1433;database=SkillFormaciónBBDD
     username: SA
-    password: yourStrong(!)Password
+    password: Admin@123
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -68,7 +68,7 @@ spring:
       hibernate.generate_statistics: false
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
-    contexts: dev, faker
+    contexts: dev
   mail:
     host: localhost
     port: 25

@@ -3,7 +3,7 @@ entity Curso {
 	descripcionLarga String,
 	fechaInicio LocalDate required,
 	fechaFin LocalDate required,
-	telematicoPresencial String required,
+	telematicoPresencial String required pattern(/^(T|P|t|p)$/),
 	hora LocalDate,
 	ubicacion String,
 	numeroHoras Long
@@ -31,7 +31,7 @@ entity Usuario {
 	tipoDocumento String required,
 	nombre String required,
 	apellidos String required,
-	email String required,
+	email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/),
 	telefono String,
 	rol String required,
 	proyecto String,
@@ -73,34 +73,34 @@ entity PlanFormativoUsuario {
 }
 
 entity ContenidoCurso {
-	habilidadInteres String required
+	habilidadInteres String required pattern(/^(H|I|h|i)$/)
 }
 
 relationship OneToMany {
-	Habilidad{tipoHabilidad} to TipoHabilidad,
-	Interes{tipoInteres} to TipoInteres,
-	CursoPlanFormativo{curso} to Curso,
-	CursoPlanFormativo{planFormativo} to PlanFormativo,
-	PerfilPlanFormativo{habilidad} to Habilidad,
-	PerfilPlanFormativo{interes} to Interes,
-	PerfilPlanFormativo{planFormativo} to PlanFormativo,
-	CursoUsuario{curso} to Curso,
-	CursoUsuario{usuario} to Usuario,
-	HabilidadUsuario{habilidad} to Habilidad,
-	HabilidadUsuario{usuario} to Usuario,
-	InteresUsuario{interes} to Interes,
-	InteresUsuario{usuario} to Usuario,
-	PlanFormativoUsuario{planFormativo} to PlanFormativo,
-	PlanFormativoUsuario{usuario} to Usuario,
-	ContenidoCurso{curso} to Curso,
-	ContenidoCurso{interes} to Interes,
-	ContenidoCurso{habilidad} to Habilidad
+    TipoHabilidad{habilidad} to Habilidad,
+    TipoInteres{interes} to Interes,
+    Curso{cursoPlanFormativo} to CursoPlanFormativo,
+    PlanFormativo{cursoPlanFormativo} to CursoPlanFormativo,
+    Habilidad{perfilPlanFormativo} to PerfilPlanFormativo,
+    Interes{perfilPlanFormativo} to PerfilPlanFormativo,
+    PlanFormativo{perfilPlanFormativo} to PerfilPlanFormativo,
+    Curso{cursoUsuario} to CursoUsuario,
+    Usuario{cursoUsuario} to CursoUsuario,
+    Habilidad{habilidadUsuario} to HabilidadUsuario,
+    Usuario{habilidadUsuario} to HabilidadUsuario,
+    Interes{interesUsuario} to InteresUsuario,
+    Usuario{interesUsuario} to InteresUsuario,
+    PlanFormativo{planFormativoUsuario} to PlanFormativoUsuario,
+    Usuario{planFormativoUsuario} to PlanFormativoUsuario,
+    Curso{contenidoCurso} to ContenidoCurso,
+    Interes{contenidoCurso} to ContenidoCurso,
+    Habilidad{contenidoCurso} to ContenidoCurso
 }
 // Set pagination options
 paginate Usuario, Curso, PlanFormativo, TipoHabilidad, TipoInteres, Habilidad, Interes, ContenidoCurso with pagination
 
 // Use Data Transfert Objects (DTO)
-dto Usuario, Curso, PlanFormativo, TipoHabilidad, TipoInteres, Habilidad, Interes, ContenidoCurso with mapstruct
+dto * with mapstruct
 
 // Set service options to all except few
 service Usuario, Curso, PlanFormativo, TipoHabilidad, TipoInteres, Habilidad, Interes, ContenidoCurso with serviceImpl
