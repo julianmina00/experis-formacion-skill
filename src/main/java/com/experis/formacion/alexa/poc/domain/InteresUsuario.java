@@ -23,12 +23,12 @@ public class InteresUsuario implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "UI_IdInteres", updatable = false, insertable = false)
+    @JoinColumn(name = "UI_IdInteres")
     @JsonIgnoreProperties("interesUsuarios")
     private Interes interes;
 
     @ManyToOne
-    @JoinColumn(name = "UI_IdUsuario", updatable = false, insertable = false)
+    @JoinColumn(name = "UI_IdUsuario")
     @JsonIgnoreProperties("interesUsuarios")
     private Usuario usuario;
 

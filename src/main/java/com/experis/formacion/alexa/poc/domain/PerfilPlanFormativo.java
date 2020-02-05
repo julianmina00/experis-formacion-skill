@@ -30,17 +30,17 @@ public class PerfilPlanFormativo implements Serializable {
     private String interesHabilidad;
 
     @ManyToOne
-    @JoinColumn(name = "PP_IdHabilidad", updatable = false, insertable = false)
+    @JoinColumn(name = "PP_IdHabilidad")
     @JsonIgnoreProperties("perfilPlanFormativos")
     private Habilidad habilidad;
 
     @ManyToOne
-    @JoinColumn(name = "PP_IdInteres", updatable = false, insertable = false)
+    @JoinColumn(name = "PP_IdInteres")
     @JsonIgnoreProperties("perfilPlanFormativos")
     private Interes interes;
 
     @ManyToOne
-    @JoinColumn(name = "PP_IdPlanFormativo", updatable = false, insertable = false)
+    @JoinColumn(name = "PP_IdPlanFormativo")
     @JsonIgnoreProperties("perfilPlanFormativos")
     private PlanFormativo planFormativo;
 

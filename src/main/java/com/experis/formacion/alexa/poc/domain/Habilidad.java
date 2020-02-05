@@ -25,9 +25,6 @@ public class Habilidad implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "CH_TipHabilidad", nullable = false)
-    private Long idTipoHabilidad;
-
     @NotNull
     @Column(name = "CH_DescHabilidad", nullable = false)
     private String descripcion;
@@ -49,7 +46,7 @@ public class Habilidad implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("habilidads")
-    @JoinColumn(name = "CH_TipHabilidad", updatable = false, insertable = false)
+    @JoinColumn(name = "CH_TipHabilidad")
     private TipoHabilidad tipoHabilidad;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -160,19 +157,6 @@ public class Habilidad implements Serializable {
 
     public void setContenidoCursos(Set<ContenidoCurso> contenidoCursos) {
         this.contenidoCursos = contenidoCursos;
-    }
-
-    public Long getIdTipoHabilidad() {
-        return idTipoHabilidad;
-    }
-
-    public void setIdTipoHabilidad(Long idTipoHabilidad) {
-        this.idTipoHabilidad = idTipoHabilidad;
-    }
-
-    public Habilidad idTipoHabilidad(Long idTipoHabilidad) {
-        this.idTipoHabilidad = idTipoHabilidad;
-        return this;
     }
 
     public TipoHabilidad getTipoHabilidad() {

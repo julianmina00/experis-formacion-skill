@@ -23,12 +23,12 @@ public class CursoPlanFormativo implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "CP_IdCurso", updatable = false, insertable = false)
+    @JoinColumn(name = "CP_IdCurso")
     @JsonIgnoreProperties("cursoPlanFormativos")
     private Curso curso;
 
     @ManyToOne
-    @JoinColumn(name = "CP_IdPlanFormativo", updatable = false, insertable = false)
+    @JoinColumn(name = "CP_IdPlanFormativo")
     @JsonIgnoreProperties("cursoPlanFormativos")
     private PlanFormativo planFormativo;
 
