@@ -1,0 +1,23 @@
+{
+  "experisFormacionApp": {
+    "cursoPlanFormativo": {
+      "home": {
+        "title": "Curso Plan Formativos",
+        "createLabel": "Crear nuevo Curso Plan Formativo",
+        "createOrEditLabel": "Crear o editar Curso Plan Formativo",
+        "notFound": "Ningún Curso Plan Formativos encontrado"
+      },
+      "created": "Un nuevo Curso Plan Formativo ha sido creado con el identificador {{ param }}",
+      "updated": "Un Curso Plan Formativo ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Curso Plan Formativo ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Curso Plan Formativo {{ id }}?"
+      },
+      "detail": {
+        "title": "Curso Plan Formativo"
+      },
+      "curso": "Curso",
+      "planFormativo": "Plan Formativo"
+    }
+  }
+}

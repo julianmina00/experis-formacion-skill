@@ -1,0 +1,30 @@
+{
+    "name": "CursoPlanFormativo",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "curso",
+            "otherEntityRelationshipName": "cursoPlanFormativo",
+            "relationshipName": "curso",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "planFormativo",
+            "otherEntityRelationshipName": "cursoPlanFormativo",
+            "relationshipName": "planFormativo",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200205110940",
+    "entityTableName": "curso_plan_formativo",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,23 @@
+{
+  "experisFormacionApp": {
+    "planFormativoUsuario": {
+      "home": {
+        "title": "Plan Formativo Usuarios",
+        "createLabel": "Crear nuevo Plan Formativo Usuario",
+        "createOrEditLabel": "Crear o editar Plan Formativo Usuario",
+        "notFound": "Ningún Plan Formativo Usuarios encontrado"
+      },
+      "created": "Un nuevo Plan Formativo Usuario ha sido creado con el identificador {{ param }}",
+      "updated": "Un Plan Formativo Usuario ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Plan Formativo Usuario ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Plan Formativo Usuario {{ id }}?"
+      },
+      "detail": {
+        "title": "Plan Formativo Usuario"
+      },
+      "planFormativo": "Plan Formativo",
+      "usuario": "Usuario"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+    "name": "PerfilPlanFormativo",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "habilidad",
+            "otherEntityRelationshipName": "perfilPlanFormativo",
+            "relationshipName": "habilidad",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "interes",
+            "otherEntityRelationshipName": "perfilPlanFormativo",
+            "relationshipName": "interes",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "planFormativo",
+            "otherEntityRelationshipName": "perfilPlanFormativo",
+            "relationshipName": "planFormativo",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200205110941",
+    "entityTableName": "perfil_plan_formativo",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

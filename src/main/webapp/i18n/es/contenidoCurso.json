@@ -1,0 +1,25 @@
+{
+  "experisFormacionApp": {
+    "contenidoCurso": {
+      "home": {
+        "title": "Contenido Cursos",
+        "createLabel": "Crear nuevo Contenido Curso",
+        "createOrEditLabel": "Crear o editar Contenido Curso",
+        "notFound": "Ningún Contenido Cursos encontrado"
+      },
+      "created": "Un nuevo Contenido Curso ha sido creado con el identificador {{ param }}",
+      "updated": "Un Contenido Curso ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Contenido Curso ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Contenido Curso {{ id }}?"
+      },
+      "detail": {
+        "title": "Contenido Curso"
+      },
+      "habilidadInteres": "Habilidad Interes",
+      "curso": "Curso",
+      "interes": "Interes",
+      "habilidad": "Habilidad"
+    }
+  }
+}

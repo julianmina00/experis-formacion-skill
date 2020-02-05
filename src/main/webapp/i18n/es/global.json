@@ -7,6 +7,20 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entidades",
+        "curso": "Curso",
+        "planFormativo": "Plan Formativo",
+        "tipoHabilidad": "Tipo Habilidad",
+        "tipoInteres": "Tipo Interes",
+        "usuario": "Usuario",
+        "habilidad": "Habilidad",
+        "interes": "Interes",
+        "cursoPlanFormativo": "Curso Plan Formativo",
+        "perfilPlanFormativo": "Perfil Plan Formativo",
+        "cursoUsuario": "Curso Usuario",
+        "habilidadUsuario": "Habilidad Usuario",
+        "interesUsuario": "Interes Usuario",
+        "planFormativoUsuario": "Plan Formativo Usuario",
+        "contenidoCurso": "Contenido Curso",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

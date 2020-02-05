@@ -1,0 +1,47 @@
+{
+    "name": "ContenidoCurso",
+    "fields": [
+        {
+            "fieldName": "habilidadInteres",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^(H|I|h|i)$"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "curso",
+            "otherEntityRelationshipName": "contenidoCurso",
+            "relationshipName": "curso",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "interes",
+            "otherEntityRelationshipName": "contenidoCurso",
+            "relationshipName": "interes",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "habilidad",
+            "otherEntityRelationshipName": "contenidoCurso",
+            "relationshipName": "habilidad",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200205110946",
+    "entityTableName": "contenido_curso",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

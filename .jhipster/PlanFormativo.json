@@ -1,0 +1,60 @@
+{
+    "name": "PlanFormativo",
+    "fields": [
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "descripcionLarga",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fechaInicio",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fechaFin",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "cursoPlanFormativo",
+            "otherEntityRelationshipName": "planFormativo",
+            "relationshipName": "cursoPlanFormativo"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "perfilPlanFormativo",
+            "otherEntityRelationshipName": "planFormativo",
+            "relationshipName": "perfilPlanFormativo"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "planFormativoUsuario",
+            "otherEntityRelationshipName": "planFormativo",
+            "relationshipName": "planFormativoUsuario"
+        }
+    ],
+    "changelogDate": "20200205110934",
+    "entityTableName": "plan_formativo",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

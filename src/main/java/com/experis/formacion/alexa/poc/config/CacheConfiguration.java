@@ -45,6 +45,38 @@ public class CacheConfiguration {
             createCache(cm, com.experis.formacion.alexa.poc.domain.User.class.getName());
             createCache(cm, com.experis.formacion.alexa.poc.domain.Authority.class.getName());
             createCache(cm, com.experis.formacion.alexa.poc.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Curso.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Curso.class.getName() + ".cursoPlanFormativos");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Curso.class.getName() + ".cursoUsuarios");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Curso.class.getName() + ".contenidoCursos");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.PlanFormativo.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.PlanFormativo.class.getName() + ".cursoPlanFormativos");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.PlanFormativo.class.getName() + ".perfilPlanFormativos");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.PlanFormativo.class.getName() + ".planFormativoUsuarios");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.TipoHabilidad.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.TipoHabilidad.class.getName() + ".habilidads");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.TipoInteres.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.TipoInteres.class.getName() + ".interes");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Usuario.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Usuario.class.getName() + ".cursoUsuarios");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Usuario.class.getName() + ".habilidadUsuarios");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Usuario.class.getName() + ".interesUsuarios");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Usuario.class.getName() + ".planFormativoUsuarios");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Habilidad.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Habilidad.class.getName() + ".perfilPlanFormativos");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Habilidad.class.getName() + ".habilidadUsuarios");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Habilidad.class.getName() + ".contenidoCursos");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Interes.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Interes.class.getName() + ".perfilPlanFormativos");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Interes.class.getName() + ".interesUsuarios");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Interes.class.getName() + ".contenidoCursos");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.CursoPlanFormativo.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.PerfilPlanFormativo.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.CursoUsuario.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.HabilidadUsuario.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.InteresUsuario.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.PlanFormativoUsuario.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.ContenidoCurso.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

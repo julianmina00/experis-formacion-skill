@@ -1,0 +1,81 @@
+{
+    "name": "Curso",
+    "fields": [
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "descripcionLarga",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fechaInicio",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fechaFin",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "telematicoPresencial",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^(T|P|t|p)$"
+        },
+        {
+            "fieldName": "hora",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "ubicacion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numeroHoras",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "cursoPlanFormativo",
+            "otherEntityRelationshipName": "curso",
+            "relationshipName": "cursoPlanFormativo"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "cursoUsuario",
+            "otherEntityRelationshipName": "curso",
+            "relationshipName": "cursoUsuario"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "contenidoCurso",
+            "otherEntityRelationshipName": "curso",
+            "relationshipName": "contenidoCurso"
+        }
+    ],
+    "changelogDate": "20200205110933",
+    "entityTableName": "curso",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

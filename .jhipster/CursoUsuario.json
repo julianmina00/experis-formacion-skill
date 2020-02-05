@@ -1,0 +1,30 @@
+{
+    "name": "CursoUsuario",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "curso",
+            "otherEntityRelationshipName": "cursoUsuario",
+            "relationshipName": "curso",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "usuario",
+            "otherEntityRelationshipName": "cursoUsuario",
+            "relationshipName": "usuario",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200205110942",
+    "entityTableName": "curso_usuario",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

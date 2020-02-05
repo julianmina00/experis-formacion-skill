@@ -1,0 +1,30 @@
+{
+    "name": "HabilidadUsuario",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "habilidad",
+            "otherEntityRelationshipName": "habilidadUsuario",
+            "relationshipName": "habilidad",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "usuario",
+            "otherEntityRelationshipName": "habilidadUsuario",
+            "relationshipName": "usuario",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200205110943",
+    "entityTableName": "habilidad_usuario",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

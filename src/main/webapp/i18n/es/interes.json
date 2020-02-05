@@ -1,0 +1,27 @@
+{
+  "experisFormacionApp": {
+    "interes": {
+      "home": {
+        "title": "Interes",
+        "createLabel": "Crear nuevo Interes",
+        "createOrEditLabel": "Crear o editar Interes",
+        "notFound": "Ningún Interes encontrado"
+      },
+      "created": "Un nuevo Interes ha sido creado con el identificador {{ param }}",
+      "updated": "Un Interes ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Interes ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Interes {{ id }}?"
+      },
+      "detail": {
+        "title": "Interes"
+      },
+      "descripcion": "Descripcion",
+      "descripcionLarga": "Descripcion Larga",
+      "perfilPlanFormativo": "Perfil Plan Formativo",
+      "interesUsuario": "Interes Usuario",
+      "contenidoCurso": "Contenido Curso",
+      "tipoInteres": "Tipo Interes"
+    }
+  }
+}

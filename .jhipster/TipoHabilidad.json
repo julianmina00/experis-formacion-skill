@@ -1,0 +1,34 @@
+{
+    "name": "TipoHabilidad",
+    "fields": [
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "descripcionLarga",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "habilidad",
+            "otherEntityRelationshipName": "tipoHabilidad",
+            "relationshipName": "habilidad"
+        }
+    ],
+    "changelogDate": "20200205110935",
+    "entityTableName": "tipo_habilidad",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

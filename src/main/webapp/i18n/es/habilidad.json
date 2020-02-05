@@ -1,0 +1,27 @@
+{
+  "experisFormacionApp": {
+    "habilidad": {
+      "home": {
+        "title": "Habilidads",
+        "createLabel": "Crear nuevo Habilidad",
+        "createOrEditLabel": "Crear o editar Habilidad",
+        "notFound": "Ningún Habilidads encontrado"
+      },
+      "created": "Un nuevo Habilidad ha sido creado con el identificador {{ param }}",
+      "updated": "Un Habilidad ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Habilidad ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Habilidad {{ id }}?"
+      },
+      "detail": {
+        "title": "Habilidad"
+      },
+      "descripcion": "Descripcion",
+      "descripcionLarga": "Descripcion Larga",
+      "perfilPlanFormativo": "Perfil Plan Formativo",
+      "habilidadUsuario": "Habilidad Usuario",
+      "contenidoCurso": "Contenido Curso",
+      "tipoHabilidad": "Tipo Habilidad"
+    }
+  }
+}

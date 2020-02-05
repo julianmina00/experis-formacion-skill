@@ -1,0 +1,24 @@
+{
+  "experisFormacionApp": {
+    "perfilPlanFormativo": {
+      "home": {
+        "title": "Perfil Plan Formativos",
+        "createLabel": "Crear nuevo Perfil Plan Formativo",
+        "createOrEditLabel": "Crear o editar Perfil Plan Formativo",
+        "notFound": "Ningún Perfil Plan Formativos encontrado"
+      },
+      "created": "Un nuevo Perfil Plan Formativo ha sido creado con el identificador {{ param }}",
+      "updated": "Un Perfil Plan Formativo ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Perfil Plan Formativo ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Perfil Plan Formativo {{ id }}?"
+      },
+      "detail": {
+        "title": "Perfil Plan Formativo"
+      },
+      "habilidad": "Habilidad",
+      "interes": "Interes",
+      "planFormativo": "Plan Formativo"
+    }
+  }
+}
