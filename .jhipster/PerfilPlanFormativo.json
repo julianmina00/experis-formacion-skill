@@ -34,7 +34,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20200205120936",
+    "changelogDate": "20200205110941",
     "entityTableName": "perfil_plan_formativo",
     "dto": "mapstruct",
     "pagination": "no",

@@ -8,6 +8,7 @@ import com.experis.formacion.alexa.poc.service.dto.CursoDTO;
 import com.experis.formacion.alexa.poc.service.mapper.CursoMapper;
 import com.experis.formacion.alexa.poc.web.rest.errors.ExceptionTranslator;
 
+import java.time.LocalTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -57,8 +58,8 @@ public class CursoResourceIT {
     private static final String DEFAULT_TELEMATICO_PRESENCIAL = "T";
     private static final String UPDATED_TELEMATICO_PRESENCIAL = "TB";
 
-    private static final ZonedDateTime DEFAULT_HORA = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_HORA = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final LocalTime DEFAULT_HORA = LocalTime.ofSecondOfDay(0L);
+    private static final LocalTime UPDATED_HORA = LocalTime.now(ZoneId.systemDefault()).withNano(0);
 
     private static final String DEFAULT_UBICACION = "AAAAAAAAAA";
     private static final String UPDATED_UBICACION = "BBBBBBBBBB";

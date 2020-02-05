@@ -1,5 +1,6 @@
 package com.experis.formacion.alexa.poc.service.dto;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -27,7 +28,7 @@ public class CursoDTO implements Serializable {
     @Pattern(regexp = "^(T|P|t|p)$")
     private String telematicoPresencial;
 
-    private ZonedDateTime hora;
+    private LocalTime hora;
 
     private String ubicacion;
 
@@ -82,11 +83,11 @@ public class CursoDTO implements Serializable {
         this.telematicoPresencial = telematicoPresencial;
     }
 
-    public ZonedDateTime getHora() {
+    public LocalTime getHora() {
         return hora;
     }
 
-    public void setHora(ZonedDateTime hora) {
+    public void setHora(LocalTime hora) {
         this.hora = hora;
     }
 

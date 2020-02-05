@@ -47,7 +47,7 @@
             "relationshipName": "planFormativoUsuario"
         }
     ],
-    "changelogDate": "20200205120929",
+    "changelogDate": "20200205110934",
     "entityTableName": "plan_formativo",
     "dto": "mapstruct",
     "pagination": "pagination",

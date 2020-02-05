@@ -17,7 +17,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20200205120937",
+    "changelogDate": "20200205110942",
     "entityTableName": "curso_usuario",
     "dto": "mapstruct",
     "pagination": "no",

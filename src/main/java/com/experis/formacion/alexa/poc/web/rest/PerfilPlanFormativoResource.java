@@ -47,7 +47,7 @@ public class PerfilPlanFormativoResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/perfil-plan-formativos")
-    public ResponseEntity<PerfilPlanFormativoDTO> createPerfilPlanFormativo(@Valid @RequestBody PerfilPlanFormativoDTO perfilPlanFormativoDTO) throws URISyntaxException {
+    public ResponseEntity<PerfilPlanFormativoDTO> createPerfilPlanFormativo(@RequestBody PerfilPlanFormativoDTO perfilPlanFormativoDTO) throws URISyntaxException {
         log.debug("REST request to save PerfilPlanFormativo : {}", perfilPlanFormativoDTO);
         if (perfilPlanFormativoDTO.getId() != null) {
             throw new BadRequestAlertException("A new perfilPlanFormativo cannot already have an ID", ENTITY_NAME, "idexists");
@@ -68,7 +68,7 @@ public class PerfilPlanFormativoResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/perfil-plan-formativos")
-    public ResponseEntity<PerfilPlanFormativoDTO> updatePerfilPlanFormativo(@Valid @RequestBody PerfilPlanFormativoDTO perfilPlanFormativoDTO) throws URISyntaxException {
+    public ResponseEntity<PerfilPlanFormativoDTO> updatePerfilPlanFormativo(@RequestBody PerfilPlanFormativoDTO perfilPlanFormativoDTO) throws URISyntaxException {
         log.debug("REST request to update PerfilPlanFormativo : {}", perfilPlanFormativoDTO);
         if (perfilPlanFormativoDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

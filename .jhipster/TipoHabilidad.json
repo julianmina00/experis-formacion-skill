@@ -21,7 +21,7 @@
             "relationshipName": "habilidad"
         }
     ],
-    "changelogDate": "20200205120930",
+    "changelogDate": "20200205110935",
     "entityTableName": "tipo_habilidad",
     "dto": "mapstruct",
     "pagination": "pagination",

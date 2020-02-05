@@ -17,7 +17,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20200205120938",
+    "changelogDate": "20200205110943",
     "entityTableName": "habilidad_usuario",
     "dto": "mapstruct",
     "pagination": "no",

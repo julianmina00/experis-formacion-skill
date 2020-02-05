@@ -21,23 +21,24 @@ public class PlanFormativo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "PF_PlanFormativo")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @NotNull
-    @Column(name = "descripcion", nullable = false)
+    @Column(name = "PF_DescPlanFormativo", nullable = false)
     private String descripcion;
 
-    @Column(name = "descripcion_larga")
+    @Column(name = "PF_DescLargPlanFormativo")
     private String descripcionLarga;
 
     @NotNull
-    @Column(name = "fecha_inicio", nullable = false)
+    @Column(name = "PF_FechaInicio", nullable = false)
     private LocalDate fechaInicio;
 
     @NotNull
-    @Column(name = "fecha_fin", nullable = false)
+    @Column(name = "PF_FechaFin", nullable = false)
     private LocalDate fechaFin;
 
     @OneToMany(mappedBy = "planFormativo")

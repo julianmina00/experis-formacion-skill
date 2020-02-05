@@ -68,7 +68,7 @@
             "relationshipName": "contenidoCurso"
         }
     ],
-    "changelogDate": "20200205120928",
+    "changelogDate": "20200205110933",
     "entityTableName": "curso",
     "dto": "mapstruct",
     "pagination": "pagination",

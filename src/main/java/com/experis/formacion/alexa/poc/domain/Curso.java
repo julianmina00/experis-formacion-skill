@@ -1,15 +1,22 @@
 package com.experis.formacion.alexa.poc.domain;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Curso.
@@ -22,37 +29,38 @@ public class Curso implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "CU_IdCurso")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @NotNull
-    @Column(name = "descripcion", nullable = false)
+    @Column(name = "CU_Descripción", nullable = false)
     private String descripcion;
 
-    @Column(name = "descripcion_larga")
+    @Column(name = "CU_DescripcionLarga")
     private String descripcionLarga;
 
     @NotNull
-    @Column(name = "fecha_inicio", nullable = false)
+    @Column(name = "CU_FechaIni", nullable = false)
     private LocalDate fechaInicio;
 
     @NotNull
-    @Column(name = "fecha_fin", nullable = false)
+    @Column(name = "CU_FechaFin", nullable = false)
     private LocalDate fechaFin;
 
     @NotNull
     @Pattern(regexp = "^(T|P|t|p)$")
-    @Column(name = "telematico_presencial", nullable = false)
+    @Column(name = "CU_Telem_Presenc", nullable = false)
     private String telematicoPresencial;
 
-    @Column(name = "hora")
-    private ZonedDateTime hora;
+    @Column(name = "CU_Hora")
+    private LocalTime hora;
 
-    @Column(name = "ubicacion")
+    @Column(name = "CU_Ubicacion")
     private String ubicacion;
 
-    @Column(name = "numero_horas")
+    @Column(name = "CU_NumHoras")
     private Long numeroHoras;
 
     @OneToMany(mappedBy = "curso")
@@ -141,16 +149,16 @@ public class Curso implements Serializable {
         this.telematicoPresencial = telematicoPresencial;
     }
 
-    public ZonedDateTime getHora() {
+    public LocalTime getHora() {
         return hora;
     }
 
-    public Curso hora(ZonedDateTime hora) {
+    public Curso hora(LocalTime hora) {
         this.hora = hora;
         return this;
     }
 
-    public void setHora(ZonedDateTime hora) {
+    public void setHora(LocalTime hora) {
         this.hora = hora;
     }
 

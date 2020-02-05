@@ -17,7 +17,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20200205120939",
+    "changelogDate": "20200205110944",
     "entityTableName": "interes_usuario",
     "dto": "mapstruct",
     "pagination": "no",

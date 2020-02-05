@@ -40,7 +40,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20200205120933",
+    "changelogDate": "20200205110938",
     "entityTableName": "habilidad",
     "dto": "mapstruct",
     "pagination": "pagination",

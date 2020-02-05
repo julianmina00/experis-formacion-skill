@@ -17,7 +17,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20200205120935",
+    "changelogDate": "20200205110940",
     "entityTableName": "curso_plan_formativo",
     "dto": "mapstruct",
     "pagination": "no",

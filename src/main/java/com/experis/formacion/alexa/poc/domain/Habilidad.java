@@ -14,22 +14,26 @@ import java.util.Set;
  * A Habilidad.
  */
 @Entity
-@Table(name = "habilidad")
+@Table(name = "CH_CatalogoHabilidad")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Habilidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "CH_IdHabilidad")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @Column(name = "CH_TipHabilidad", nullable = false)
+    private Long idTipoHabilidad;
+
     @NotNull
-    @Column(name = "descripcion", nullable = false)
+    @Column(name = "CH_DescHabilidad", nullable = false)
     private String descripcion;
 
-    @Column(name = "descripcion_larga")
+    @Column(name = "CH_DescLargHabilidad")
     private String descripcionLarga;
 
     @OneToMany(mappedBy = "habilidad")
@@ -46,6 +50,7 @@ public class Habilidad implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("habilidads")
+    @Column(name = "CH_TipHabilidad", updatable = false, insertable = false)
     private TipoHabilidad tipoHabilidad;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -156,6 +161,19 @@ public class Habilidad implements Serializable {
 
     public void setContenidoCursos(Set<ContenidoCurso> contenidoCursos) {
         this.contenidoCursos = contenidoCursos;
+    }
+
+    public Long getIdTipoHabilidad() {
+        return idTipoHabilidad;
+    }
+
+    public void setIdTipoHabilidad(Long idTipoHabilidad) {
+        this.idTipoHabilidad = idTipoHabilidad;
+    }
+
+    public Habilidad idTipoHabilidad(Long idTipoHabilidad) {
+        this.idTipoHabilidad = idTipoHabilidad;
+        return this;
     }
 
     public TipoHabilidad getTipoHabilidad() {

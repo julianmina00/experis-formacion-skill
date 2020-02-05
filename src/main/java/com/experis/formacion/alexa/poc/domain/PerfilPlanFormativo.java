@@ -1,10 +1,11 @@
 package com.experis.formacion.alexa.poc.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
 
@@ -12,31 +13,35 @@ import java.io.Serializable;
  * A PerfilPlanFormativo.
  */
 @Entity
-@Table(name = "perfil_plan_formativo")
+@Table(name = "PP_PerfilPlanFormativo")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class PerfilPlanFormativo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "PP_IdPlanFormativo")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @NotNull
-    @Pattern(regexp = "^(H|I|h|i)$")
-    @Column(name = "interes_habilidad", nullable = false)
+    @Pattern(regexp = "^(I|H|i|h)$")
+    @Column(name = "PP_InteresHabilidad", nullable = false)
     private String interesHabilidad;
 
     @ManyToOne
+    @Column(name = "PP_IdHabilidad")
     @JsonIgnoreProperties("perfilPlanFormativos")
     private Habilidad habilidad;
 
     @ManyToOne
+    @Column(name = "PP_IdInteres")
     @JsonIgnoreProperties("perfilPlanFormativos")
     private Interes interes;
 
     @ManyToOne
+    @Column(name = "PP_IdPlanFormativo")
     @JsonIgnoreProperties("perfilPlanFormativos")
     private PlanFormativo planFormativo;
 
