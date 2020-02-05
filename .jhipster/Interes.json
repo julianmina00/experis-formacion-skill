@@ -1,0 +1,53 @@
+{
+    "name": "Interes",
+    "fields": [
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "descripcionLarga",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "perfilPlanFormativo",
+            "otherEntityRelationshipName": "interes",
+            "relationshipName": "perfilPlanFormativo"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "interesUsuario",
+            "otherEntityRelationshipName": "interes",
+            "relationshipName": "interesUsuario"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "contenidoCurso",
+            "otherEntityRelationshipName": "interes",
+            "relationshipName": "contenidoCurso"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "tipoInteres",
+            "otherEntityRelationshipName": "interes",
+            "relationshipName": "tipoInteres",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200205120934",
+    "entityTableName": "interes",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

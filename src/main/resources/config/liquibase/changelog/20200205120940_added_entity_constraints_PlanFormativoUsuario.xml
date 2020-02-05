@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity PlanFormativoUsuario.
+    -->
+    <changeSet id="20200205120940-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="plan_formativo_id"
+                                 baseTableName="plan_formativo_usuario"
+                                 constraintName="fk_plan_formativo_usuario_plan_formativo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="plan_formativo"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_id"
+                                 baseTableName="plan_formativo_usuario"
+                                 constraintName="fk_plan_formativo_usuario_usuario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+
+    </changeSet>
+</databaseChangeLog>

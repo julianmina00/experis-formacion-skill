@@ -1,0 +1,23 @@
+{
+  "experisFormacionApp": {
+    "cursoUsuario": {
+      "home": {
+        "title": "Curso Usuarios",
+        "createLabel": "Crear nuevo Curso Usuario",
+        "createOrEditLabel": "Crear o editar Curso Usuario",
+        "notFound": "Ningún Curso Usuarios encontrado"
+      },
+      "created": "Un nuevo Curso Usuario ha sido creado con el identificador {{ param }}",
+      "updated": "Un Curso Usuario ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Curso Usuario ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Curso Usuario {{ id }}?"
+      },
+      "detail": {
+        "title": "Curso Usuario"
+      },
+      "curso": "Curso",
+      "usuario": "Usuario"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "experisFormacionApp": {
+    "tipoInteres": {
+      "home": {
+        "title": "Tipo Interes",
+        "createLabel": "Crear nuevo Tipo Interes",
+        "createOrEditLabel": "Crear o editar Tipo Interes",
+        "notFound": "Ningún Tipo Interes encontrado"
+      },
+      "created": "Un nuevo Tipo Interes ha sido creado con el identificador {{ param }}",
+      "updated": "Un Tipo Interes ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Tipo Interes ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Tipo Interes {{ id }}?"
+      },
+      "detail": {
+        "title": "Tipo Interes"
+      },
+      "descripcion": "Descripcion",
+      "descripcionLarga": "Descripcion Larga",
+      "interes": "Interes"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "experisFormacionApp": {
+    "tipoHabilidad": {
+      "home": {
+        "title": "Tipo Habilidads",
+        "createLabel": "Crear nuevo Tipo Habilidad",
+        "createOrEditLabel": "Crear o editar Tipo Habilidad",
+        "notFound": "Ningún Tipo Habilidads encontrado"
+      },
+      "created": "Un nuevo Tipo Habilidad ha sido creado con el identificador {{ param }}",
+      "updated": "Un Tipo Habilidad ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Tipo Habilidad ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Tipo Habilidad {{ id }}?"
+      },
+      "detail": {
+        "title": "Tipo Habilidad"
+      },
+      "descripcion": "Descripcion",
+      "descripcionLarga": "Descripcion Larga",
+      "habilidad": "Habilidad"
+    }
+  }
+}

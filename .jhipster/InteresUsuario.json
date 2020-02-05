@@ -1,0 +1,30 @@
+{
+    "name": "InteresUsuario",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "interes",
+            "otherEntityRelationshipName": "interesUsuario",
+            "relationshipName": "interes",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "usuario",
+            "otherEntityRelationshipName": "interesUsuario",
+            "relationshipName": "usuario",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200205120939",
+    "entityTableName": "interes_usuario",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

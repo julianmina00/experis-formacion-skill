@@ -1,0 +1,23 @@
+{
+  "experisFormacionApp": {
+    "habilidadUsuario": {
+      "home": {
+        "title": "Habilidad Usuarios",
+        "createLabel": "Crear nuevo Habilidad Usuario",
+        "createOrEditLabel": "Crear o editar Habilidad Usuario",
+        "notFound": "Ningún Habilidad Usuarios encontrado"
+      },
+      "created": "Un nuevo Habilidad Usuario ha sido creado con el identificador {{ param }}",
+      "updated": "Un Habilidad Usuario ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Habilidad Usuario ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Habilidad Usuario {{ id }}?"
+      },
+      "detail": {
+        "title": "Habilidad Usuario"
+      },
+      "habilidad": "Habilidad",
+      "usuario": "Usuario"
+    }
+  }
+}

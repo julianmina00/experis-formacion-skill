@@ -1,0 +1,116 @@
+{
+    "name": "Usuario",
+    "fields": [
+        {
+            "fieldName": "documento",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "tipoDocumento",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "nombre",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "apellidos",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+        },
+        {
+            "fieldName": "telefono",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "rol",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "proyecto",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ubicacion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "managerNombre",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "managerEmail",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "talentMentorNombre",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "talentMentorEmail",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "cursoUsuario",
+            "otherEntityRelationshipName": "usuario",
+            "relationshipName": "cursoUsuario"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "habilidadUsuario",
+            "otherEntityRelationshipName": "usuario",
+            "relationshipName": "habilidadUsuario"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "interesUsuario",
+            "otherEntityRelationshipName": "usuario",
+            "relationshipName": "interesUsuario"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "planFormativoUsuario",
+            "otherEntityRelationshipName": "usuario",
+            "relationshipName": "planFormativoUsuario"
+        }
+    ],
+    "changelogDate": "20200205120932",
+    "entityTableName": "usuario",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,30 @@
+{
+    "name": "PlanFormativoUsuario",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "planFormativo",
+            "otherEntityRelationshipName": "planFormativoUsuario",
+            "relationshipName": "planFormativo",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "usuario",
+            "otherEntityRelationshipName": "planFormativoUsuario",
+            "relationshipName": "usuario",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200205120940",
+    "entityTableName": "plan_formativo_usuario",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

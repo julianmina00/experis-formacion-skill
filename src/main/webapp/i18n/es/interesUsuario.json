@@ -1,0 +1,23 @@
+{
+  "experisFormacionApp": {
+    "interesUsuario": {
+      "home": {
+        "title": "Interes Usuarios",
+        "createLabel": "Crear nuevo Interes Usuario",
+        "createOrEditLabel": "Crear o editar Interes Usuario",
+        "notFound": "Ningún Interes Usuarios encontrado"
+      },
+      "created": "Un nuevo Interes Usuario ha sido creado con el identificador {{ param }}",
+      "updated": "Un Interes Usuario ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Interes Usuario ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Interes Usuario {{ id }}?"
+      },
+      "detail": {
+        "title": "Interes Usuario"
+      },
+      "interes": "Interes",
+      "usuario": "Usuario"
+    }
+  }
+}

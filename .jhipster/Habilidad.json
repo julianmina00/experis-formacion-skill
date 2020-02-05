@@ -1,0 +1,53 @@
+{
+    "name": "Habilidad",
+    "fields": [
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "descripcionLarga",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "perfilPlanFormativo",
+            "otherEntityRelationshipName": "habilidad",
+            "relationshipName": "perfilPlanFormativo"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "habilidadUsuario",
+            "otherEntityRelationshipName": "habilidad",
+            "relationshipName": "habilidadUsuario"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "contenidoCurso",
+            "otherEntityRelationshipName": "habilidad",
+            "relationshipName": "contenidoCurso"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "tipoHabilidad",
+            "otherEntityRelationshipName": "habilidad",
+            "relationshipName": "tipoHabilidad",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200205120933",
+    "entityTableName": "habilidad",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
