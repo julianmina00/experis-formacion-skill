@@ -30,8 +30,7 @@ public class Curso implements Serializable {
 
     @Id
     @Column(name = "CU_IdCurso")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull

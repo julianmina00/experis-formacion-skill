@@ -19,8 +19,7 @@ public class HabilidadUsuario implements Serializable {
 
     @Id
     @Column(name = "UH_idUsuarioHabilidades")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

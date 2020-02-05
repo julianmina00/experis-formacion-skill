@@ -19,8 +19,7 @@ public class CursoPlanFormativo implements Serializable {
 
     @Id
     @Column(name = "CP_IdCursoPlanFormativo")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

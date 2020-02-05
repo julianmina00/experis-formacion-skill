@@ -19,8 +19,7 @@ public class PlanFormativoUsuario implements Serializable {
 
     @Id
     @Column(name = "UP_idUsuarioPlanFormativo")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

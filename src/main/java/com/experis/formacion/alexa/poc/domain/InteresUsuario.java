@@ -19,8 +19,7 @@ public class InteresUsuario implements Serializable {
 
     @Id
     @Column(name = "UI_idUsuarioIntereses")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

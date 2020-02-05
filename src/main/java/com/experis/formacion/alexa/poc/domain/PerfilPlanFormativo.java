@@ -21,8 +21,7 @@ public class PerfilPlanFormativo implements Serializable {
 
     @Id
     @Column(name = "PP_IdPlanFormativo")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull

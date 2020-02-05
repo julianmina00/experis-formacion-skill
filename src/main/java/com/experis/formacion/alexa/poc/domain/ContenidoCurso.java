@@ -20,8 +20,7 @@ public class ContenidoCurso implements Serializable {
 
     @Id
     @Column(name = "CC_idContenidoCurso")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
