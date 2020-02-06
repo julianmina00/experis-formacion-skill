@@ -38,6 +38,8 @@
     "enableTranslation": true,
     "nativeLanguage": "es",
     "languages": ["es"],
-    "blueprints": []
+    "blueprints": [],
+    "herokuAppName": "experis-formacion",
+    "herokuDeployType": "git"
   }
 }
