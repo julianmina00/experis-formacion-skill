@@ -626,7 +626,7 @@
                         <defaultSchemaName></defaultSchemaName>
                         <username>nnfkwwujmacfeq</username>
                         <password>ceeaac7dab62253277bff009588047113867bd101d02656b1c0bea90b97f034b</password>
-                        <referenceUrl>hibernate:spring:com.experis.formacion.alexa.poc.domain?dialect=io.github.jhipster.domain.util.FixedPostgreSQL95Dialect&amp;hibernate.physical_naming_strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl&amp;hibernate.implicit_naming_strategy=org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl</referenceUrl>
+                        <referenceUrl>hibernate:spring:com.experis.formacion.alexa.poc.domain?dialect=io.github.jhipster.domain.util.FixedPostgreSQL95Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                         <verbose>true</verbose>
                         <logging>debug</logging>
                         <contexts>!test</contexts>
@@ -1173,12 +1173,12 @@
                         <configuration combine.self="override">
                             <changeLogFile>src/main/resources/config/liquibase/master.xml</changeLogFile>
                             <diffChangeLogFile>src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
-                            <driver></driver>
-                            <url>${env.JDBC_DATABASE_URL}</url>
+                            <driver>org.postgresql.Driver</driver>
+                            <url>jdbc:postgresql://ec2-46-137-177-160.eu-west-1.compute.amazonaws.com:5432/d20j127hf096s6</url>
                             <defaultSchemaName></defaultSchemaName>
-                            <username>${env.JDBC_DATABASE_USERNAME}</username>
-                            <password>${env.JDBC_DATABASE_PASSWORD}</password>
-                            <referenceUrl>hibernate:spring:com.experis.formacion.alexa.poc.domain?dialect=org.hibernate.dialect.SQLServer2012Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
+                            <username>nnfkwwujmacfeq</username>
+                            <password>ceeaac7dab62253277bff009588047113867bd101d02656b1c0bea90b97f034b</password>
+                            <referenceUrl>hibernate:spring:com.experis.formacion.alexa.poc.domain?dialect=io.github.jhipster.domain.util.FixedPostgreSQL95Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                             <verbose>true</verbose>
                             <logging>debug</logging>
                             <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
