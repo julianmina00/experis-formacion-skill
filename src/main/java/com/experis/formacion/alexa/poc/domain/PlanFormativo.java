@@ -14,30 +14,30 @@ import java.util.Set;
  * A PlanFormativo.
  */
 @Entity
-@Table(name = "PF_PlanFormativo")
+@Table(name = "pf_planformativo")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class PlanFormativo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "PF_PlanFormativo")
+    @Column(name = "pf_planformativo")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Column(name = "PF_DescPlanFormativo", nullable = false)
+    @Column(name = "pf_descplanformativo", nullable = false)
     private String descripcion;
 
-    @Column(name = "PF_DescLargPlanFormativo")
+    @Column(name = "pf_desclargplanformativo")
     private String descripcionLarga;
 
     @NotNull
-    @Column(name = "PF_FechaInicio", nullable = false)
+    @Column(name = "pf_fechainicio", nullable = false)
     private LocalDate fechaInicio;
 
     @NotNull
-    @Column(name = "PF_FechaFin", nullable = false)
+    @Column(name = "pf_fechafin", nullable = false)
     private LocalDate fechaFin;
 
     @OneToMany(mappedBy = "planFormativo")

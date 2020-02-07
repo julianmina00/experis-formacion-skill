@@ -22,44 +22,44 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * A Curso.
  */
 @Entity
-@Table(name = "CU_Cursos")
+@Table(name = "cu_cursos")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Curso implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "CU_IdCurso")
+    @Column(name = "cu_idcurso")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Column(name = "CU_Descripción", nullable = false)
+    @Column(name = "cu_descripcion", nullable = false)
     private String descripcion;
 
-    @Column(name = "CU_DescripcionLarga")
+    @Column(name = "cu_descripcionlarga")
     private String descripcionLarga;
 
     @NotNull
-    @Column(name = "CU_FechaIni", nullable = false)
+    @Column(name = "cu_fechaini", nullable = false)
     private LocalDate fechaInicio;
 
     @NotNull
-    @Column(name = "CU_FechaFin", nullable = false)
+    @Column(name = "cu_fechafin", nullable = false)
     private LocalDate fechaFin;
 
     @NotNull
     @Pattern(regexp = "^(T|P|t|p)$")
-    @Column(name = "CU_Telem_Presenc", nullable = false)
+    @Column(name = "cu_telem_presenc", nullable = false)
     private String telematicoPresencial;
 
-    @Column(name = "CU_Hora")
+    @Column(name = "cu_hora")
     private LocalTime hora;
 
-    @Column(name = "CU_Ubicacion")
+    @Column(name = "cu_ubicacion")
     private String ubicacion;
 
-    @Column(name = "CU_NumHoras")
+    @Column(name = "cu_numhoras")
     private Long numeroHoras;
 
     @OneToMany(mappedBy = "curso")

@@ -13,22 +13,22 @@ import java.util.Set;
  * A TipoHabilidad.
  */
 @Entity
-@Table(name = "TH_TipHabilidad")
+@Table(name = "th_tiphabilidad")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class TipoHabilidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "TH_IdTipHabilidad")
+    @Column(name = "th_idtiphabilidad")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Column(name = "TH_DescTipHabilidad", nullable = false)
+    @Column(name = "th_desctiphabilidad", nullable = false)
     private String descripcion;
 
-    @Column(name = "TH_DescLargTipHabilidad")
+    @Column(name = "th_desclargtiphabilidad")
     private String descripcionLarga;
 
     @OneToMany(mappedBy = "tipoHabilidad")

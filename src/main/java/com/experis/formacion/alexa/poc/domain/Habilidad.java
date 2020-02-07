@@ -14,22 +14,22 @@ import java.util.Set;
  * A Habilidad.
  */
 @Entity
-@Table(name = "CH_CatalogoHabilidad")
+@Table(name = "ch_catalogohabilidad")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Habilidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "CH_IdHabilidad")
+    @Column(name = "ch_idhabilidad")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Column(name = "CH_DescHabilidad", nullable = false)
+    @Column(name = "ch_deschabilidad", nullable = false)
     private String descripcion;
 
-    @Column(name = "CH_DescLargHabilidad")
+    @Column(name = "ch_desclarghabilidad")
     private String descripcionLarga;
 
     @OneToMany(mappedBy = "habilidad")
@@ -46,7 +46,7 @@ public class Habilidad implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("habilidads")
-    @JoinColumn(name = "CH_TipHabilidad")
+    @JoinColumn(name = "ch_tiphabilidad")
     private TipoHabilidad tipoHabilidad;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

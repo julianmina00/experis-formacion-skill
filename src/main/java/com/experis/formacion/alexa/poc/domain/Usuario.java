@@ -13,62 +13,62 @@ import java.util.Set;
  * A Usuario.
  */
 @Entity
-@Table(name = "US_Usuario")
+@Table(name = "us_usuario")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "US_IdUsuario")
+    @Column(name = "us_idusuario")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Column(name = "US_Documento", nullable = false)
+    @Column(name = "us_documento", nullable = false)
     private String documento;
 
     @NotNull
-    @Column(name = "US_TipDocumento", nullable = false)
+    @Column(name = "us_tipdocumento", nullable = false)
     private String tipoDocumento;
 
     @NotNull
-    @Column(name = "US_Nombre", nullable = false)
+    @Column(name = "us_nombre", nullable = false)
     private String nombre;
 
     @NotNull
-    @Column(name = "US_Apellidos", nullable = false)
+    @Column(name = "us_apellidos", nullable = false)
     private String apellidos;
 
     @NotNull
     @Pattern(regexp = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")
-    @Column(name = "US_Email", nullable = false)
+    @Column(name = "us_email", nullable = false)
     private String email;
 
-    @Column(name = "US_Tlf")
+    @Column(name = "us_tlf")
     private String telefono;
 
     @NotNull
-    @Column(name = "US_Rol", nullable = false)
+    @Column(name = "us_rol", nullable = false)
     private String rol;
 
-    @Column(name = "US_Proyecto")
+    @Column(name = "us_proyecto")
     private String proyecto;
 
-    @Column(name = "US_Ubicacion")
+    @Column(name = "us_ubicacion")
     private String ubicacion;
 
     @NotNull
-    @Column(name = "US_ManagerNombre", nullable = false)
+    @Column(name = "us_managernombre", nullable = false)
     private String managerNombre;
 
-    @Column(name = "US_ManagerEmail")
+    @Column(name = "us_manageremail")
     private String managerEmail;
 
-    @Column(name = "US_TalentMentorNombre")
+    @Column(name = "us_talentmentornombre")
     private String talentMentorNombre;
 
-    @Column(name = "US_TalentMentorEmail")
+    @Column(name = "us_talentmentoremail")
     private String talentMentorEmail;
 
     @OneToMany(mappedBy = "usuario")

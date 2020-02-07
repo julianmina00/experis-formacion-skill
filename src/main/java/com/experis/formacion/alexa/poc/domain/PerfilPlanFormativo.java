@@ -13,34 +13,34 @@ import java.io.Serializable;
  * A PerfilPlanFormativo.
  */
 @Entity
-@Table(name = "PP_PerfilPlanFormativo")
+@Table(name = "pp_perfilplanformativo")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class PerfilPlanFormativo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "PP_idPerfilPlanFormativo")
+    @Column(name = "pp_idperfilplanformativo")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @Pattern(regexp = "^(I|H|i|h)$")
-    @Column(name = "PP_InteresHabilidad", nullable = false)
+    @Column(name = "pp_intereshabilidad", nullable = false)
     private String interesHabilidad;
 
     @ManyToOne
-    @JoinColumn(name = "PP_IdHabilidad")
+    @JoinColumn(name = "pp_idhabilidad")
     @JsonIgnoreProperties("perfilPlanFormativos")
     private Habilidad habilidad;
 
     @ManyToOne
-    @JoinColumn(name = "PP_IdInteres")
+    @JoinColumn(name = "pp_idinteres")
     @JsonIgnoreProperties("perfilPlanFormativos")
     private Interes interes;
 
     @ManyToOne
-    @JoinColumn(name = "PP_IdPlanFormativo")
+    @JoinColumn(name = "pp_idplanformativo")
     @JsonIgnoreProperties("perfilPlanFormativos")
     private PlanFormativo planFormativo;
 

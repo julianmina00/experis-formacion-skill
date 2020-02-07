@@ -11,25 +11,25 @@ import java.io.Serializable;
  * A PlanFormativoUsuario.
  */
 @Entity
-@Table(name = "UP_UsuarioPlanFormativo")
+@Table(name = "up_usuarioplanformativo")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class PlanFormativoUsuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "UP_idUsuarioPlanFormativo")
+    @Column(name = "up_idusuarioplanformativo")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
     @JsonIgnoreProperties("planFormativoUsuarios")
-    @JoinColumn(name = "UP_IdPlanFormativo")
+    @JoinColumn(name = "up_idplanformativo")
     private PlanFormativo planFormativo;
 
     @ManyToOne
     @JsonIgnoreProperties("planFormativoUsuarios")
-    @JoinColumn(name = "UP_IdUsuario")
+    @JoinColumn(name = "up_idusuario")
     private Usuario usuario;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
