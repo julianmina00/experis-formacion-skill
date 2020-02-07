@@ -14,7 +14,8 @@
     <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200205125452_create_tables_from_model.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200207160736_create_tables_from_model.xml" relativeToChangelogFile="false"/>
+    <!-- <include file="config/liquibase/changelog/20200205125452_create_tables_from_model.xml" relativeToChangelogFile="false"/> -->
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

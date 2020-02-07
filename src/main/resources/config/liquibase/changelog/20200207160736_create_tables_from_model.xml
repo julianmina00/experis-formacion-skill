@@ -1,0 +1,248 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="jota (generated)" id="1581091696322-2">
+        <createTable tableName="cc_contenidocurso">
+            <column autoIncrement="true" name="cc_idcontenidocurso" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="cc_contenidocursoPK"/>
+            </column>
+            <column name="cc_habilidad_interes" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cc_idcurso" type="BIGINT"/>
+            <column name="cc_idhabilidad" type="BIGINT"/>
+            <column name="cc_idinteres" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-3">
+        <createTable tableName="ch_catalogohabilidad">
+            <column autoIncrement="true" name="ch_idhabilidad" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ch_catalogohabilidadPK"/>
+            </column>
+            <column name="ch_deschabilidad" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ch_desclarghabilidad" type="VARCHAR(255)"/>
+            <column name="ch_tiphabilidad" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-4">
+        <createTable tableName="ci_cataloginteres">
+            <column autoIncrement="true" name="ci_idinteres" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ci_cataloginteresPK"/>
+            </column>
+            <column name="ci_descinteres" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ci_desclarginteres" type="VARCHAR(255)"/>
+            <column name="ci_idtipinteres" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-5">
+        <createTable tableName="cp_cursoplanformativo">
+            <column autoIncrement="true" name="cp_idcursoplanformativo" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="cp_cursoplanformativoPK"/>
+            </column>
+            <column name="cp_idcurso" type="BIGINT"/>
+            <column name="cp_idplanformativo" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-6">
+        <createTable tableName="cu_cursos">
+            <column autoIncrement="true" name="cu_idcurso" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="cu_cursosPK"/>
+            </column>
+            <column name="cu_descripcion" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cu_descripcionlarga" type="VARCHAR(255)"/>
+            <column name="cu_fechafin" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cu_fechaini" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cu_hora" type="TIME WITHOUT TIME ZONE"/>
+            <column name="cu_numhoras" type="BIGINT"/>
+            <column name="cu_telem_presenc" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cu_ubicacion" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-12">
+        <createTable tableName="pf_planformativo">
+            <column autoIncrement="true" name="pf_planformativo" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="pf_planformativoPK"/>
+            </column>
+            <column name="pf_descplanformativo" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pf_desclargplanformativo" type="VARCHAR(255)"/>
+            <column name="pf_fechafin" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pf_fechainicio" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-13">
+        <createTable tableName="pp_perfilplanformativo">
+            <column autoIncrement="true" name="pp_idperfilplanformativo" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="pp_perfilplanformativoPK"/>
+            </column>
+            <column name="pp_intereshabilidad" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pp_idhabilidad" type="BIGINT"/>
+            <column name="pp_idinteres" type="BIGINT"/>
+            <column name="pp_idplanformativo" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-14">
+        <createTable tableName="th_tiphabilidad">
+            <column autoIncrement="true" name="th_idtiphabilidad" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="th_tiphabilidadPK"/>
+            </column>
+            <column name="th_desctiphabilidad" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="th_desclargtiphabilidad" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-15">
+        <createTable tableName="ti_tipinteres">
+            <column autoIncrement="true" name="ti_idtipinteres" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ti_tipinteresPK"/>
+            </column>
+            <column name="ti_desctipinteres" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ti_desclargtipinteres" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-16">
+        <createTable tableName="uc_usuariocurso">
+            <column autoIncrement="true" name="uc_idusuariocurso" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="uc_usuariocursoPK"/>
+            </column>
+            <column name="uc_idcurso" type="BIGINT"/>
+            <column name="uc_idusuario" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-17">
+        <createTable tableName="uh_usuariohabilidades">
+            <column autoIncrement="true" name="uh_idusuariohabilidades" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="uh_usuariohabilidadesPK"/>
+            </column>
+            <column name="uh_idhabilidad" type="BIGINT"/>
+            <column name="uh_idusuario" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-18">
+        <createTable tableName="ui_usuariointereses">
+            <column autoIncrement="true" name="ui_idusuariointereses" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ui_usuariointeresesPK"/>
+            </column>
+            <column name="ui_idinteres" type="BIGINT"/>
+            <column name="ui_idusuario" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-19">
+        <createTable tableName="up_usuarioplanformativo">
+            <column autoIncrement="true" name="up_idusuarioplanformativo" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="up_usuarioplanformativoPK"/>
+            </column>
+            <column name="up_idplanformativo" type="BIGINT"/>
+            <column name="up_idusuario" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-20">
+        <createTable tableName="us_usuario">
+            <column autoIncrement="true" name="us_idusuario" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="us_usuarioPK"/>
+            </column>
+            <column name="us_apellidos" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="us_documento" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="us_email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="us_manageremail" type="VARCHAR(255)"/>
+            <column name="us_managernombre" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="us_nombre" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="us_proyecto" type="VARCHAR(255)"/>
+            <column name="us_rol" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="us_talentmentoremail" type="VARCHAR(255)"/>
+            <column name="us_talentmentornombre" type="VARCHAR(255)"/>
+            <column name="us_tlf" type="VARCHAR(255)"/>
+            <column name="us_tipdocumento" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="us_ubicacion" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-26">
+        <addForeignKeyConstraint baseColumnNames="cc_idcurso" baseTableName="cc_contenidocurso" constraintName="FK5iqnajgytpbf2mo49cuax8q6p" deferrable="false" initiallyDeferred="false" referencedColumnNames="cu_idcurso" referencedTableName="cu_cursos" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-27">
+        <addForeignKeyConstraint baseColumnNames="cc_idhabilidad" baseTableName="cc_contenidocurso" constraintName="FK7au6ve1v76ka383ijc0ewfeps" deferrable="false" initiallyDeferred="false" referencedColumnNames="ch_idhabilidad" referencedTableName="ch_catalogohabilidad" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-28">
+        <addForeignKeyConstraint baseColumnNames="ch_tiphabilidad" baseTableName="ch_catalogohabilidad" constraintName="FK89jolloul96kav1lr0urikueb" deferrable="false" initiallyDeferred="false" referencedColumnNames="th_idtiphabilidad" referencedTableName="th_tiphabilidad" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-29">
+        <addForeignKeyConstraint baseColumnNames="ui_idusuario" baseTableName="ui_usuariointereses" constraintName="FKa55uqk54psti5udeachi76h7" deferrable="false" initiallyDeferred="false" referencedColumnNames="us_idusuario" referencedTableName="us_usuario" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-30">
+        <addForeignKeyConstraint baseColumnNames="ci_idtipinteres" baseTableName="ci_cataloginteres" constraintName="FKb8kcnnlv8kadofqmbmm6giig0" deferrable="false" initiallyDeferred="false" referencedColumnNames="ti_idtipinteres" referencedTableName="ti_tipinteres" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-31">
+        <addForeignKeyConstraint baseColumnNames="uc_idcurso" baseTableName="uc_usuariocurso" constraintName="FKe0yaynpish0y7g70yarsxjep0" deferrable="false" initiallyDeferred="false" referencedColumnNames="cu_idcurso" referencedTableName="cu_cursos" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-32">
+        <addForeignKeyConstraint baseColumnNames="pp_idhabilidad" baseTableName="pp_perfilplanformativo" constraintName="FKeihfhwtupyhmiewfom79bly81" deferrable="false" initiallyDeferred="false" referencedColumnNames="ch_idhabilidad" referencedTableName="ch_catalogohabilidad" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-33">
+        <addForeignKeyConstraint baseColumnNames="cc_idinteres" baseTableName="cc_contenidocurso" constraintName="FKgoftl3d5lutppb1h931o4vgy2" deferrable="false" initiallyDeferred="false" referencedColumnNames="ci_idinteres" referencedTableName="ci_cataloginteres" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-34">
+        <addForeignKeyConstraint baseColumnNames="pp_idinteres" baseTableName="pp_perfilplanformativo" constraintName="FKhv40e0cvuuykmsppnsrwuut6e" deferrable="false" initiallyDeferred="false" referencedColumnNames="ci_idinteres" referencedTableName="ci_cataloginteres" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-35">
+        <addForeignKeyConstraint baseColumnNames="up_idusuario" baseTableName="up_usuarioplanformativo" constraintName="FKilmeliut4i5aq8s5o3nnmeekb" deferrable="false" initiallyDeferred="false" referencedColumnNames="us_idusuario" referencedTableName="us_usuario" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-36">
+        <addForeignKeyConstraint baseColumnNames="uh_idhabilidad" baseTableName="uh_usuariohabilidades" constraintName="FKj4cxlo14qfrdmdwd4o0dqe9pg" deferrable="false" initiallyDeferred="false" referencedColumnNames="ch_idhabilidad" referencedTableName="ch_catalogohabilidad" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-37">
+        <addForeignKeyConstraint baseColumnNames="uh_idusuario" baseTableName="uh_usuariohabilidades" constraintName="FKkcprxqgdkp7uakbigicwbogch" deferrable="false" initiallyDeferred="false" referencedColumnNames="us_idusuario" referencedTableName="us_usuario" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-38">
+        <addForeignKeyConstraint baseColumnNames="ui_idinteres" baseTableName="ui_usuariointereses" constraintName="FKnnx3a34xr3x2ply0jv4050kvl" deferrable="false" initiallyDeferred="false" referencedColumnNames="ci_idinteres" referencedTableName="ci_cataloginteres" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-39">
+        <addForeignKeyConstraint baseColumnNames="uc_idusuario" baseTableName="uc_usuariocurso" constraintName="FKns3sd0f1qjab0qbnr2hqgncas" deferrable="false" initiallyDeferred="false" referencedColumnNames="us_idusuario" referencedTableName="us_usuario" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-40">
+        <addForeignKeyConstraint baseColumnNames="cp_idcurso" baseTableName="cp_cursoplanformativo" constraintName="FKp5ara86pn4qpcqpnt7qwkjsjt" deferrable="false" initiallyDeferred="false" referencedColumnNames="cu_idcurso" referencedTableName="cu_cursos" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-41">
+        <addForeignKeyConstraint baseColumnNames="cp_idplanformativo" baseTableName="cp_cursoplanformativo" constraintName="FKpvf9wnhyqnp9w9gw4kwsrjpv8" deferrable="false" initiallyDeferred="false" referencedColumnNames="pf_planformativo" referencedTableName="pf_planformativo" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-42">
+        <addForeignKeyConstraint baseColumnNames="pp_idplanformativo" baseTableName="pp_perfilplanformativo" constraintName="FKsoei80rp40tirfsvp9qknphe1" deferrable="false" initiallyDeferred="false" referencedColumnNames="pf_planformativo" referencedTableName="pf_planformativo" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581091696322-43">
+        <addForeignKeyConstraint baseColumnNames="up_idplanformativo" baseTableName="up_usuarioplanformativo" constraintName="FKtc7ut5loxx7fwdgx4s09q2123" deferrable="false" initiallyDeferred="false" referencedColumnNames="pf_planformativo" referencedTableName="pf_planformativo" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
