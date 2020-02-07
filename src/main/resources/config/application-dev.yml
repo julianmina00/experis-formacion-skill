@@ -45,9 +45,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:sqlserver://localhost:1433;database=SkillFormaciónBBDD
-    username: SA
-    password: Admin@123
+    url: jdbc:postgresql://ec2-46-137-177-160.eu-west-1.compute.amazonaws.com:5432/d20j127hf096s6
+    username: nnfkwwujmacfeq
+    password: ceeaac7dab62253277bff009588047113867bd101d02656b1c0bea90b97f034b
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -57,8 +57,8 @@ spring:
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
   jpa:
-    database-platform: org.hibernate.dialect.SQLServer2012Dialect
-    database: SQL_SERVER
+    database-platform: io.github.jhipster.domain.util.FixedPostgreSQL95Dialect
+    database: POSTGRESQL
     show-sql: true
     properties:
       hibernate.id.new_generator_mappings: true

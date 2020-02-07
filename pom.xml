@@ -168,12 +168,8 @@
             <artifactId>cache-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.sabomichal</groupId>
-            <artifactId>liquibase-mssql</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -625,12 +621,12 @@
                     <configuration>
                         <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
                         <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
-                        <driver></driver>
-                        <url>jdbc:sqlserver://localhost:1433;database=SkillFormaciónBBDD</url>
+                        <driver>org.postgresql.Driver</driver>
+                        <url>jdbc:postgresql://ec2-46-137-177-160.eu-west-1.compute.amazonaws.com:5432/d20j127hf096s6</url>
                         <defaultSchemaName></defaultSchemaName>
-                        <username>SA</username>
-                        <password>Admin@123</password>
-                        <referenceUrl>hibernate:spring:com.experis.formacion.alexa.poc.domain?dialect=org.hibernate.dialect.SQLServer2012Dialect&amp;hibernate.physical_naming_strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl&amp;hibernate.implicit_naming_strategy=org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl</referenceUrl>
+                        <username>nnfkwwujmacfeq</username>
+                        <password>ceeaac7dab62253277bff009588047113867bd101d02656b1c0bea90b97f034b</password>
+                        <referenceUrl>hibernate:spring:com.experis.formacion.alexa.poc.domain?dialect=io.github.jhipster.domain.util.FixedPostgreSQL95Dialect&amp;hibernate.physical_naming_strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl&amp;hibernate.implicit_naming_strategy=org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl</referenceUrl>
                         <verbose>true</verbose>
                         <logging>debug</logging>
                         <contexts>!test</contexts>
