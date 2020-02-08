@@ -1,0 +1,427 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "experis formación",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "HelloWorldIntent",
+          "slots": [],
+          "samples": [
+            "que pasa tía",
+            "hello",
+            "how are you",
+            "say hi world",
+            "say hi",
+            "hi",
+            "say hello world",
+            "say hello"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "RegistrarUsuarioIntent",
+          "slots": [
+            {
+              "name": "nombre",
+              "type": "AMAZON.FirstName",
+              "samples": [
+                "Yo soy {nombre}",
+                "Soy {nombre}",
+                "Es {nombre}",
+                "{nombre}",
+                "Me llamo {nombre}",
+                "Mi nombre es {nombre}"
+              ]
+            },
+            {
+              "name": "apellido",
+              "type": "AMAZON.Person",
+              "samples": [
+                "mis apellidos son {apellido}",
+                "mi apellido es {apellido}",
+                "{apellido}"
+              ]
+            },
+            {
+              "name": "tipoDocumento",
+              "type": "TIPO_DOCUMENTO",
+              "samples": [
+                "mi documento de identidad es {tipoDocumento}",
+                "mi documento es {tipoDocumento}",
+                "es {tipoDocumento}",
+                "mi tipo de documento es {tipoDocumento}",
+                "{tipoDocumento}"
+              ]
+            },
+            {
+              "name": "numeroDocumento",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "Los números son {numeroDocumento}",
+                "Los número de mi DNI son {numeroDocumento}",
+                "{numeroDocumento}",
+                "Es {numeroDocumento}",
+                "Mi DNI es {numeroDocumento}"
+              ]
+            },
+            {
+              "name": "telefono",
+              "type": "AMAZON.PhoneNumber",
+              "samples": [
+                "{telefono}",
+                "Al numero {telefono}",
+                "Al {telefono}",
+                "Mi teléfono es {telefono}",
+                "Mi número telefónico es {telefono}"
+              ]
+            },
+            {
+              "name": "perfilTecnico",
+              "type": "PERFIL_TECNICO",
+              "samples": [
+                "es {perfilTecnico} ",
+                "mi perfil técnico es {perfilTecnico} ",
+                "{perfilTecnico} ",
+                "soy {perfilTecnico} "
+              ]
+            },
+            {
+              "name": "manager",
+              "type": "AMAZON.Person",
+              "samples": [
+                "Su nombre es {manager}",
+                "Mi mánager se llama {manager}",
+                "Es {manager}",
+                "{manager}",
+                "Mi mánager es {manager}"
+              ]
+            },
+            {
+              "name": "proyecto",
+              "type": "AMAZON.Corporation",
+              "samples": [
+                "actualmente estoy en el proyecto {proyecto}",
+                "es {proyecto}",
+                "mi prouecto es {proyecto}",
+                "mi proyecto actual es {proyecto}",
+                "{proyecto}",
+                "en {proyecto}",
+                "actualmente estoy trabajando en el proyecto {proyecto}"
+              ]
+            },
+            {
+              "name": "ciudad",
+              "type": "AMAZON.Region",
+              "samples": [
+                "Estoy ubicado en {ciudad}",
+                "En {ciudad}",
+                "Vivo en {ciudad}",
+                "{ciudad}",
+                "Estoy en {ciudad}",
+                "me encuentro en {ciudad}"
+              ]
+            }
+          ],
+          "samples": [
+            "registro",
+            "regístrame",
+            "quiero registrarme"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "id": "3",
+              "name": {
+                "value": "Especialista"
+              }
+            },
+            {
+              "id": "2",
+              "name": {
+                "value": "Consultor"
+              }
+            },
+            {
+              "id": "1",
+              "name": {
+                "value": "Técnico"
+              }
+            }
+          ],
+          "name": "PERFIL_TECNICO"
+        },
+        {
+          "values": [
+            {
+              "id": "Pasaporte",
+              "name": {
+                "value": "Pasaporte"
+              }
+            },
+            {
+              "id": "NIE",
+              "name": {
+                "value": "NIE",
+                "synonyms": [
+                  "tarjeta de extrangera",
+                  "tarjeta de extrangero",
+                  "número de extrangero",
+                  "nie"
+                ]
+              }
+            },
+            {
+              "id": "DNI",
+              "name": {
+                "value": "DNI",
+                "synonyms": [
+                  "carnet de identidad",
+                  "dni",
+                  "de ene i",
+                  "deenei"
+                ]
+              }
+            }
+          ],
+          "name": "TIPO_DOCUMENTO"
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "RegistrarUsuarioIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "nombre",
+              "type": "AMAZON.FirstName",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.407848082910.836403356546"
+              }
+            },
+            {
+              "name": "apellido",
+              "type": "AMAZON.Person",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.451472066678.1156657986527"
+              }
+            },
+            {
+              "name": "tipoDocumento",
+              "type": "TIPO_DOCUMENTO",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.451472066678.325158486528"
+              }
+            },
+            {
+              "name": "numeroDocumento",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.407848082910.637770884034"
+              }
+            },
+            {
+              "name": "telefono",
+              "type": "AMAZON.PhoneNumber",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.407848082910.780388203252"
+              }
+            },
+            {
+              "name": "perfilTecnico",
+              "type": "PERFIL_TECNICO",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.410171193745.1327108364408"
+              }
+            },
+            {
+              "name": "manager",
+              "type": "AMAZON.Person",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.407848082910.222971244624"
+              }
+            },
+            {
+              "name": "ciudad",
+              "type": "AMAZON.Region",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.410171193745.75850235213"
+              }
+            },
+            {
+              "name": "proyecto",
+              "type": "AMAZON.Corporation",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.451472066678.1223243993448"
+              }
+            }
+          ],
+          "delegationStrategy": "ALWAYS"
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.410171193745.1327108364408",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿eres técnico, consultor o especialista?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Cuál es tu perfil, eres técnico, consultor o especialista?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.410171193745.75850235213",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿En qué ciudad estás?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿En qué ciudad te encuentras?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿En qué ciudad estás ubicado?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.407848082910.222971244624",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cómo se llama tu manager en Experis?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Quién es tu manager en Experis?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.407848082910.780388203252",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿A qué número telefónico podriamos llamarte?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.407848082910.637770884034",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Cuales son los números de tu {tipoDocumento} , solo números."
+          },
+          {
+            "type": "PlainText",
+            "value": "Necesitaré también tu número de {tipoDocumento} , sin letras."
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.407848082910.836403356546",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Dime tu nombre"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Cómo te llamas?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Cuál es tu nombre?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.451472066678.325158486528",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿qué tipo de documento personal tienes, deenei, nie, pasaporte?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿qué tipo de documento de identidad tienes?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.451472066678.1156657986527",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuales son tus apellidos?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.451472066678.1223243993448",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuál es tu proyecto actual?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿a qué proyecto te encuentras asignado?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿en qué proyecto estas trabajando ahora mismo?"
+          }
+        ]
+      }
+    ]
+  },
+  "version": "13"
+}
