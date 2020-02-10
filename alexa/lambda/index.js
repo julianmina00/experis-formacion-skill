@@ -3,6 +3,9 @@
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 const interceptors = require('./interceptors');
+const logic = require('./logic');
+
+var response = [];
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -10,11 +13,8 @@ const LaunchRequestHandler = {
     },
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
-        console.log(`attributesManager: ${JSON.stringify(attributesManager)}`);
         const requestAttributes = attributesManager.getRequestAttributes();
-        console.log(`requestAttributes: ${JSON.stringify(requestAttributes)}`);
-        //const speakOutput = requestAttributes.t('WELCOME_MSG');
-        const speakOutput = 'Bienvenido a Experis Formación. Para empezar, debes registrarte como usuario. Para esto, puedes decir: registro, regístrame o quiero registrarme.';
+        const speakOutput = requestAttributes.t('WELCOME_MSG');
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -26,14 +26,34 @@ const RegistrarUsuarioIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegistrarUsuarioIntent';
     },
-    handle(handlerInput) {
-        //const {attributesManager} = handlerInput;
-        //const requestAttributes = attributesManager.getRequestAttributes();
-        //const speakOutput = requestAttributes.t('USUARIO_REGISTRADO_MSG');
-        const speakOutput = 'Perfecto! ya estás registrado';
+    async handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const intent = handlerInput.requestEnvelope.request.intent;
+        
+        const usuario = JSON.stringify({
+          nombre: intent.slots.nombre.value,
+          apellidos: intent.slots.apellido.value,
+          tipoDocumento: intent.slots.tipoDocumento.resolutions.resolutionsPerAuthority[0].values[0].value.name,
+          documento: intent.slots.numeroDocumento.value,
+          telefono: intent.slots.telefono.value,
+          email: 'email@experis.com',
+          rol: intent.slots.perfilTecnico.resolutions.resolutionsPerAuthority[0].values[0].value.name,
+          managerNombre: intent.slots.manager.value,
+          managerEmail: 'manager@experis.com',
+          proyecto: intent.slots.proyecto.value,
+          talentMentorNombre: 'Talent Mentor',
+          talentMentorEmail: 'talent-mentor@experis.com',
+          ubicacion: intent.slots.ciudad.value
+        });
+        
+        response = await logic.httpPost(usuario);
+        console.log("Usuario creado: "+JSON.stringify(response));
+        
+        const speakOutput = requestAttributes.t('USUARIO_REGISTRADO_MSG');
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            //.reprompt(speakOutput)
+            .reprompt(speakOutput)
             .getResponse();
     }
 };

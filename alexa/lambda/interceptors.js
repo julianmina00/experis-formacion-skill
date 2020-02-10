@@ -3,6 +3,7 @@ const i18n = require('i18next');
 const sprintf = require('i18next-sprintf-postprocessor');
 
 module.exports = {
+    
     // This request interceptor will log all incoming requests to this lambda
     LoggingRequestInterceptor: {
         process(handlerInput) {
@@ -23,11 +24,15 @@ module.exports = {
         process(handlerInput) {
             const localizationClient = i18n.use(sprintf).init({
                 lng: handlerInput.requestEnvelope.request.locale,
+                //resources: languageString,
                 resources: require('./localisation'),
+                fallbackLng: 'es',
+                overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
+                returnObjects: true
             });
             const attributes = handlerInput.attributesManager.getRequestAttributes();
-            attributes.t = function translate(...args) {
-                return localizationClient.localize(...args);
+            attributes.t = function (...args) {
+                return localizationClient.t(...args);
             }
         }
     },
