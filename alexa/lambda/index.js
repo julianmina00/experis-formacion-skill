@@ -5,7 +5,7 @@ const Alexa = require('ask-sdk-core');
 const interceptors = require('./interceptors');
 const logic = require('./logic');
 
-var response = [];
+//var response = [];
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -29,6 +29,7 @@ const RegistrarUsuarioIntentHandler = {
     async handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
         const intent = handlerInput.requestEnvelope.request.intent;
         
         const usuario = JSON.stringify({
@@ -47,10 +48,64 @@ const RegistrarUsuarioIntentHandler = {
           ubicacion: intent.slots.ciudad.value
         });
         
-        response = await logic.httpPost(usuario);
+        const response = await logic.registrarUsuario(usuario);
         console.log("Usuario creado: "+JSON.stringify(response));
+        logic.setSessionAttribute(handlerInput,'userId', response.id);
+        logic.setSessionAttribute(handlerInput,'userName', response.nombre);
+        logic.setSessionAttribute(handlerInput,'previousIntent', 'RegistrarUsuarioIntent');
+        const speakOutput = requestAttributes.t('USUARIO_REGISTRADO_MSG', logic.getSessionAttribute(handlerInput, 'userName'))+requestAttributes.t('REGISTRAR_IDIOMAS_MSG');
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const OtrosIdiomasIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && ((Alexa.getIntentName(handlerInput.requestEnvelope) === 'SiIdiomasIntent' && logic.getSessionAttribute(handlerInput, 'previousIntent') === 'RegistrarUsuarioIntent')
+                || Alexa.getIntentName(handlerInput.requestEnvelope) === 'OtrosIdiomasIntent')
+    },
+    async handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const intent = handlerInput.requestEnvelope.request.intent;
+        logic.setSessionAttribute(handlerInput,'previousIntent', Alexa.getIntentName(handlerInput.requestEnvelope));
         
-        const speakOutput = requestAttributes.t('USUARIO_REGISTRADO_MSG');
+        
+        const idioma = JSON.stringify({
+          usuarioId: logic.getSessionAttribute(handlerInput, 'userId'),
+          idioma: intent.slots.idioma.value,
+          nivel: intent.slots.nivel.resolutions.resolutionsPerAuthority[0].values[0].value.id
+        });
+        
+        const response = await logic.registrarIdioma(idioma);
+        console.log("Idioma registrado: "+JSON.stringify(response));
+        
+        const speakOutput = requestAttributes.t('REGISTRAR_OTRO_IDIOMA_MSG');
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const NoIdiomasIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NoIdiomasIntent'
+            && (logic.getSessionAttribute(handlerInput, 'previousIntent') === 'RegistrarUsuarioIntent' 
+                || logic.getSessionAttribute(handlerInput, 'previousIntent') === 'OtrosIdiomasIntent')
+    },
+    handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        logic.setSessionAttribute(handlerInput,'previousIntent', 'NoIdiomasIntent');
+        
+        const speakOutput = requestAttributes.t('NO_IDIOMAS_MSG');
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -113,15 +168,17 @@ const SessionEndedRequestHandler = {
 // handler chain below.
 const IntentReflectorHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' 
+                && (Alexa.getIntentName(handlerInput.requestEnvelope) !== 'NoIdiomasIntent' )
+                && (Alexa.getIntentName(handlerInput.requestEnvelope) !== 'SiIdiomasIntent' );
     },
     handle(handlerInput) {
         const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
-        const speakOutput = `You just triggered ${intentName}`;
+        const speakOutput = 'Has lanzado el intent ${intentName}';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .reprompt(speakOutput)
             .getResponse();
     }
 };
@@ -151,11 +208,13 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         RegistrarUsuarioIntentHandler,
+        OtrosIdiomasIntentHandler,
+        NoIdiomasIntentHandler,
         HelloWorldIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
-        SessionEndedRequestHandler,
-        IntentReflectorHandler // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
+        SessionEndedRequestHandler/*,
+        IntentReflectorHandler*/ // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
     )
     .addRequestInterceptors(
         interceptors.LocalizationRequestInterceptor,

@@ -142,6 +142,93 @@
             "regístrame",
             "quiero registrarme"
           ]
+        },
+        {
+          "name": "RegistrarInteresesIntent",
+          "slots": [],
+          "samples": [
+            "añadir intereses",
+            "registrar intereses",
+            "intereses"
+          ]
+        },
+        {
+          "name": "RegistrarHabilidadedIntent",
+          "slots": [],
+          "samples": [
+            "añadir habilidades",
+            "registrar habilidades",
+            "habilidades"
+          ]
+        },
+        {
+          "name": "OtrosIdiomasIntent",
+          "slots": [
+            {
+              "name": "idioma",
+              "type": "AMAZON.Language",
+              "samples": [
+                "el idioma {idioma}",
+                "el {idioma}",
+                "{idioma}"
+              ]
+            },
+            {
+              "name": "nivel",
+              "type": "NIVEL_IDIOMA",
+              "samples": [
+                "tengo nivel {nivel}",
+                "es {nivel}",
+                "mi nivel es {nivel}",
+                "{nivel}"
+              ]
+            }
+          ],
+          "samples": [
+            "añadir idioma",
+            "añadir idiomas",
+            "idiomas"
+          ]
+        },
+        {
+          "name": "SiIdiomasIntent",
+          "slots": [
+            {
+              "name": "idioma",
+              "type": "AMAZON.Language",
+              "samples": [
+                "el idioma {idioma}",
+                "el {idioma}",
+                "{idioma}"
+              ]
+            },
+            {
+              "name": "nivel",
+              "type": "NIVEL_IDIOMA",
+              "samples": [
+                "tengo nivel {nivel}",
+                "es {nivel}",
+                "mi nivel es {nivel}",
+                "{nivel}"
+              ]
+            }
+          ],
+          "samples": [
+            "okey",
+            "vale",
+            "sí"
+          ]
+        },
+        {
+          "name": "NoIdiomasIntent",
+          "slots": [],
+          "samples": [
+            "luego",
+            "después",
+            "ahora no",
+            "ninguno",
+            "no"
+          ]
         }
       ],
       "types": [
@@ -181,9 +268,9 @@
               "name": {
                 "value": "NIE",
                 "synonyms": [
-                  "tarjeta de extrangera",
-                  "tarjeta de extrangero",
-                  "número de extrangero",
+                  "número de extranjería",
+                  "tarjeta de extranjera",
+                  "tarjeta de extranjero",
                   "nie"
                 ]
               }
@@ -193,6 +280,9 @@
               "name": {
                 "value": "DNI",
                 "synonyms": [
+                  "déenei",
+                  "dénei",
+                  "dé ene i",
                   "carnet de identidad",
                   "dni",
                   "de ene i",
@@ -202,6 +292,42 @@
             }
           ],
           "name": "TIPO_DOCUMENTO"
+        },
+        {
+          "values": [
+            {
+              "id": "1",
+              "name": {
+                "value": "básico"
+              }
+            },
+            {
+              "id": "2",
+              "name": {
+                "value": "intermedio"
+              }
+            },
+            {
+              "id": "3",
+              "name": {
+                "value": "avanzado",
+                "synonyms": [
+                  "conversación",
+                  "conversacional"
+                ]
+              }
+            },
+            {
+              "id": "4",
+              "name": {
+                "value": "nativo",
+                "synonyms": [
+                  "lengua nativa"
+                ]
+              }
+            }
+          ],
+          "name": "NIVEL_IDIOMA"
         }
       ]
     },
@@ -291,6 +417,58 @@
               "confirmationRequired": false,
               "prompts": {
                 "elicitation": "Elicit.Slot.451472066678.1223243993448"
+              }
+            }
+          ],
+          "delegationStrategy": "ALWAYS"
+        },
+        {
+          "name": "OtrosIdiomasIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "idioma",
+              "type": "AMAZON.Language",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1084722133137.1182798065212"
+              }
+            },
+            {
+              "name": "nivel",
+              "type": "NIVEL_IDIOMA",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.418212342492.1186741400657"
+              }
+            }
+          ],
+          "delegationStrategy": "ALWAYS"
+        },
+        {
+          "name": "SiIdiomasIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "idioma",
+              "type": "AMAZON.Language",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1084722133137.1182798065212"
+              }
+            },
+            {
+              "name": "nivel",
+              "type": "NIVEL_IDIOMA",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.418212342492.1186741400657"
               }
             }
           ],
@@ -420,8 +598,46 @@
             "value": "¿en qué proyecto estas trabajando ahora mismo?"
           }
         ]
+      },
+      {
+        "id": "Elicit.Slot.1084722133137.1182798065212",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuál idioma deseas añadir?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿qué idioma deseas añadir?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Qué idioma?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cuál?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.418212342492.1186741400657",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cómo consideras tu nivel de {idioma} . básico,  intermedio, avanzado o nativo?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿qué nivel de {idioma} tienes. básico,  intermedio, avanzado o nativo?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cuál es tu nivel de {idioma} . básico,  intermedio, avanzado o nativo?"
+          }
+        ]
       }
     ]
   },
-  "version": "13"
+  "version": "17"
 }

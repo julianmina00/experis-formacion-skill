@@ -1,12 +1,39 @@
+const constants = require('./constants');
+
 module.exports = {
-    httpPost(data){
+    
+    setSessionAttribute(handlerInput, attribute, value){
+        const {attributesManager} = handlerInput;
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        sessionAttributes[attribute] = value;
+        console.log('...The session attribute ['+attribute+'] was set to: '+value);
+    },
+    
+    getSessionAttribute(handlerInput, attribute){
+        const {attributesManager} = handlerInput;
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        return sessionAttributes[attribute] ? sessionAttributes[attribute] : '';
+    },
+    
+    registrarUsuario(data){
+        console.log("....Registrando usuario: "+data);
+        return this.httpPost(data, constants.endpoints.REGISTRO_USUARIOS);
+    },
+    
+    registrarIdioma(data){
+        //return this.httpPost(data, constants.endpoints.REGISTRO_IDIOMAS);
+        return new Promise(((resolve, reject) => {
+            console.log("....Registrando idioma: "+data);
+        }));
+    },
+        
+    httpPost(data, endpoint){
         return new Promise(((resolve, reject) => {
             const https = require('https')
-
             const options = {
               hostname: 'experis-formacion.herokuapp.com',
               port: 443,
-              path: '/api/usuarios',
+              path: endpoint,
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -34,6 +61,5 @@ module.exports = {
             request.write(data);
             request.end();
         }));
-        
     }
 }
