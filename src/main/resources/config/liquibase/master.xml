@@ -15,14 +15,7 @@
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200207160736_create_tables_from_model.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200205110937_added_entity_Usuario.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200213122630_added_entity_RelacionTipoHabilidad.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200213122631_added_entity_RelacionTipoInteres.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200213122632_added_entity_NivelIdioma.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200213122633_added_entity_IdiomaUsuario.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200213135235_adding_new_tables_to_the_model.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
-    <include file="config/liquibase/changelog/20200213122630_added_entity_constraints_RelacionTipoHabilidad.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200213122631_added_entity_constraints_RelacionTipoInteres.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200213122633_added_entity_constraints_IdiomaUsuario.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

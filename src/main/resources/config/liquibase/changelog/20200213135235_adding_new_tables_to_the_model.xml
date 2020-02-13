@@ -1,0 +1,73 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="jota (generated)" id="1581602007778-3">
+        <createTable tableName="iu_idiomausuario">
+            <column autoIncrement="true" name="iu_ididiomausuario" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="iu_idiomausuarioPK"/>
+            </column>
+            <column name="iu_idioma" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="iu_nivelidioma" type="BIGINT"/>
+            <column name="iu_usuario" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581602007778-4">
+        <createTable tableName="ni_nivelidioma">
+            <column autoIncrement="true" name="ni_idnivelidioma" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ni_nivelidiomaPK"/>
+            </column>
+            <column name="ni_descripcion" type="VARCHAR(255)"/>
+            <column name="ni_nivel" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581602007778-5">
+        <createTable tableName="rh_relactiphabilidad">
+            <column autoIncrement="true" name="rh_unica" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="rh_relactiphabilidadPK"/>
+            </column>
+            <column name="rh_profundidad" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rh_idtiphabilidad_hija" type="BIGINT"/>
+            <column name="rh_idtiphabilidad_padre" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581602007778-6">
+        <createTable tableName="ri_relactipinteres">
+            <column autoIncrement="true" name="ri_unica" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ri_relactipinteresPK"/>
+            </column>
+            <column name="ri_profundidad" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ri_idtipinteres_hijo" type="BIGINT"/>
+            <column name="ri_idtipinteres_padre" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581602007778-7">
+        <addColumn tableName="us_usuario">
+            <column name="us_compania" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581602007778-8">
+        <addForeignKeyConstraint baseColumnNames="ri_idtipinteres_hijo" baseTableName="ri_relactipinteres" constraintName="FK2xo5ls0puk1mgj0s9qiwyxfxj" deferrable="false" initiallyDeferred="false" referencedColumnNames="ti_idtipinteres" referencedTableName="ti_tipinteres" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581602007778-9">
+        <addForeignKeyConstraint baseColumnNames="rh_idtiphabilidad_hija" baseTableName="rh_relactiphabilidad" constraintName="FK68xlxg7b3gxxyi3bx9pny3mm1" deferrable="false" initiallyDeferred="false" referencedColumnNames="th_idtiphabilidad" referencedTableName="th_tiphabilidad" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581602007778-10">
+        <addForeignKeyConstraint baseColumnNames="iu_usuario" baseTableName="iu_idiomausuario" constraintName="FK798cr2vur44j58jd7c9rilmm5" deferrable="false" initiallyDeferred="false" referencedColumnNames="us_idusuario" referencedTableName="us_usuario" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581602007778-11">
+        <addForeignKeyConstraint baseColumnNames="ri_idtipinteres_padre" baseTableName="ri_relactipinteres" constraintName="FKcrhftdtyjssber4xa452exy9h" deferrable="false" initiallyDeferred="false" referencedColumnNames="ti_idtipinteres" referencedTableName="ti_tipinteres" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581602007778-12">
+        <addForeignKeyConstraint baseColumnNames="iu_nivelidioma" baseTableName="iu_idiomausuario" constraintName="FKl3awe8uscq7oe63v4hxhtf93u" deferrable="false" initiallyDeferred="false" referencedColumnNames="ni_idnivelidioma" referencedTableName="ni_nivelidioma" validate="true"/>
+    </changeSet>
+    <changeSet author="jota (generated)" id="1581602007778-13">
+        <addForeignKeyConstraint baseColumnNames="rh_idtiphabilidad_padre" baseTableName="rh_relactiphabilidad" constraintName="FKlhvrf6cy9pi0dey1gtuh6ifh9" deferrable="false" initiallyDeferred="false" referencedColumnNames="th_idtiphabilidad" referencedTableName="th_tiphabilidad" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

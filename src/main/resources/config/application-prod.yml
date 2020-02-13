@@ -40,9 +40,9 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://ec2-46-137-177-160.eu-west-1.compute.amazonaws.com:5432/d20j127hf096s6
-    username: nnfkwwujmacfeq
-    password: ceeaac7dab62253277bff009588047113867bd101d02656b1c0bea90b97f034b
+    url: jdbc:postgresql://ec2-54-217-204-34.eu-west-1.compute.amazonaws.com:5432/davt6hcupap0vs
+    username: lyqbbibutpwtpo
+    password: e24266f117ee5e3dfa92df18eca5b1b83324e3d24ba5e831b7351884488c2a32
     hikari:
       poolName: Hikari
       auto-commit: false
