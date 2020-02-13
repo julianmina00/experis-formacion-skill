@@ -21,10 +21,13 @@ module.exports = {
     },
     
     registrarIdioma(data){
-        //return this.httpPost(data, constants.endpoints.REGISTRO_IDIOMAS);
-        return new Promise(((resolve, reject) => {
-            console.log("....Registrando idioma: "+data);
-        }));
+        console.log("....Registrando idioma: "+data);
+        return this.httpPost(data, constants.endpoints.REGISTRO_IDIOMAS);
+    },
+    
+    registrarHabilidad(data){
+        console.log("....Registrando habilidad: "+data);
+        return this.httpPost(data, constants.endpoints.REGISTRO_HABILIDAD);
     },
         
     httpPost(data, endpoint){

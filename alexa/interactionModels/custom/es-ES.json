@@ -101,14 +101,12 @@
               ]
             },
             {
-              "name": "manager",
-              "type": "AMAZON.Person",
+              "name": "compania",
+              "type": "AMAZON.Corporation",
               "samples": [
-                "Su nombre es {manager}",
-                "Mi mánager se llama {manager}",
-                "Es {manager}",
-                "{manager}",
-                "Mi mánager es {manager}"
+                "para {compania}",
+                "{compania}",
+                "en {compania}"
               ]
             },
             {
@@ -135,6 +133,28 @@
                 "Estoy en {ciudad}",
                 "me encuentro en {ciudad}"
               ]
+            },
+            {
+              "name": "manager",
+              "type": "AMAZON.Person",
+              "samples": [
+                "Su nombre es {manager}",
+                "Mi mánager se llama {manager}",
+                "Es {manager}",
+                "{manager}",
+                "Mi mánager es {manager}"
+              ]
+            },
+            {
+              "name": "talentMentor",
+              "type": "AMAZON.Person",
+              "samples": [
+                "el nombre de mi tálent méntor es {talentMentor}",
+                "mi tálent méntor es {talentMentor}",
+                "{talentMentor}",
+                "se llama {talentMentor}",
+                "es {talentMentor}"
+              ]
             }
           ],
           "samples": [
@@ -153,7 +173,36 @@
         },
         {
           "name": "RegistrarHabilidadesIntent",
-          "slots": [],
+          "slots": [
+            {
+              "name": "areaGeneral",
+              "type": "AMAZON.CreativeWorkType",
+              "samples": [
+                "el área general es {areaGeneral}",
+                "es {areaGeneral}",
+                "{areaGeneral}"
+              ]
+            },
+            {
+              "name": "areaEspecifica",
+              "type": "AMAZON.CreativeWorkType",
+              "samples": [
+                "el área específica es {areaEspecifica}",
+                "es {areaEspecifica}",
+                "{areaEspecifica}"
+              ]
+            },
+            {
+              "name": "habilidad",
+              "type": "AMAZON.CreativeWorkType",
+              "samples": [
+                "se llama {habilidad}",
+                "la habilidad es {habilidad}",
+                "{habilidad}",
+                "es {habilidad}"
+              ]
+            }
+          ],
           "samples": [
             "registrar habilidades",
             "habilidades"
@@ -234,6 +283,55 @@
           "slots": [],
           "samples": [
             "cambiar de usuario"
+          ]
+        },
+        {
+          "name": "NoHabilidadesIntent",
+          "slots": [],
+          "samples": [
+            "luego",
+            "después",
+            "ahora no",
+            "no"
+          ]
+        },
+        {
+          "name": "SiHabilidadesIntent",
+          "slots": [
+            {
+              "name": "areaGeneral",
+              "type": "AMAZON.CreativeWorkType",
+              "samples": [
+                "el área general es {areaGeneral}",
+                "es {areaGeneral}",
+                "{areaGeneral}"
+              ]
+            },
+            {
+              "name": "areaEspecifica",
+              "type": "AMAZON.CreativeWorkType",
+              "samples": [
+                "el área específica es {areaEspecifica}",
+                "es {areaEspecifica}",
+                "{areaEspecifica}"
+              ]
+            },
+            {
+              "name": "habilidad",
+              "type": "AMAZON.CreativeWorkType",
+              "samples": [
+                "se llama {habilidad}",
+                "la habilidad es {habilidad}",
+                "{habilidad}",
+                "es {habilidad}"
+              ]
+            }
+          ],
+          "samples": [
+            "por supuesto",
+            "okey",
+            "vale",
+            "sí"
           ]
         }
       ],
@@ -399,12 +497,12 @@
               }
             },
             {
-              "name": "manager",
-              "type": "AMAZON.Person",
+              "name": "compania",
+              "type": "AMAZON.Corporation",
               "elicitationRequired": true,
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.407848082910.222971244624"
+                "elicitation": "Elicit.Slot.1480327222193.515304352507"
               }
             },
             {
@@ -423,6 +521,24 @@
               "confirmationRequired": false,
               "prompts": {
                 "elicitation": "Elicit.Slot.451472066678.1223243993448"
+              }
+            },
+            {
+              "name": "manager",
+              "type": "AMAZON.Person",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.407848082910.222971244624"
+              }
+            },
+            {
+              "name": "talentMentor",
+              "type": "AMAZON.Person",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1480327222193.970261587539"
               }
             }
           ],
@@ -479,6 +595,74 @@
             }
           ],
           "delegationStrategy": "ALWAYS"
+        },
+        {
+          "name": "RegistrarHabilidadesIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "areaGeneral",
+              "type": "AMAZON.CreativeWorkType",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1480670123954.1248925533981"
+              }
+            },
+            {
+              "name": "areaEspecifica",
+              "type": "AMAZON.CreativeWorkType",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1480670123954.1203339646411"
+              }
+            },
+            {
+              "name": "habilidad",
+              "type": "AMAZON.CreativeWorkType",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1480670123954.639173371817"
+              }
+            }
+          ]
+        },
+        {
+          "name": "SiHabilidadesIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "areaGeneral",
+              "type": "AMAZON.CreativeWorkType",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1480670123954.1248925533981"
+              }
+            },
+            {
+              "name": "areaEspecifica",
+              "type": "AMAZON.CreativeWorkType",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1480670123954.1203339646411"
+              }
+            },
+            {
+              "name": "habilidad",
+              "type": "AMAZON.CreativeWorkType",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1480670123954.639173371817"
+              }
+            }
+          ]
         }
       ],
       "delegationStrategy": "ALWAYS"
@@ -642,8 +826,77 @@
             "value": "¿cuál es tu nivel de {idioma} . básico,  intermedio, avanzado o nativo?"
           }
         ]
+      },
+      {
+        "id": "Elicit.Slot.1480327222193.515304352507",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿en qué compañía estás?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿para qué compañía trabajas?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿en qué compañía trabajas?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1480327222193.970261587539",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuál es el nombre de tu tálent méntor?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cómo se llama tu tálent méntor?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿quién es tu tálent méntor?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1480670123954.1248925533981",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuál es el área general de la habilidad?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1480670123954.1203339646411",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuál es el área específica de la habilidad?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1480670123954.639173371817",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿qué habilidad deseas agregar?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cómo se llama la habilidad que quieres agregar?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cuál es la habilidad?"
+          }
+        ]
       }
     ]
   },
-  "version": "19"
+  "version": "20"
 }
