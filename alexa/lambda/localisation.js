@@ -1,11 +1,16 @@
 module.exports = {
     es: {
         translation: {
-          WELCOME_MSG:  'Bienvenido a Experis Formación. Para empezar, debes registrarte como usuario. Para esto, puedes decir: registro, regístrame o quiero registrarme.',
+            
+          BIENVENIDA_MSG: 'Bienvenido a Experis Formación. Para empezar, debes registrarte como usuario. Para esto, puedes decir: registro, regístrame o quiero registrarme.',
+          BIENVENIDO_USUARIO_MSG: '¡Hola %s! me alegra oirte de nuevo. <amazon:effect name="whispered">Si no eres %s di: cambiar de usuario.</amazon:effect>',
+          BIENVENIDA_REGISTRO_HABILIDADES: '...todavía no has registrado tus habilidades técnicas. Esto es necesario para poder ofrecerte cursos y planes formativos. Para añadir tus habilidades puedes decir: registrar habilidades; o simplemente: habilidades',
+          BIENVENIDA_REGISTRO_INTERESES: '...aún no tienes registrado ningún interés técnico o profesional. Sin esto, no podré recomendarte cursos y planes formativos de tu interés. Para nuevos intereses puedes decir: registrar intereses; o simplement: intereses',  
+          BIENVENIDA_REGISTRO_IDIOMAS: '...parece que aún no has registrado ningún idioma a tu perfil. Conocer los idiomas que manejas me permitiría recomendarte cursos en otros idiomas y cursos para reforzar tus idiomas según tu nivel. Para añadir idiomas puedes decir: registrar idiomas; o simplement: idiomas',
           USUARIO_REGISTRADO_MSG: '¡Perfecto, %s! Ya estás registrado en Experis Formación. ',
           REGISTRAR_IDIOMAS_MSG: '¿Deseas añadir algún idioma a tu perfil profesional? ',
           REGISTRAR_OTRO_IDIOMA_MSG: '¿Deseas añadir otro idioma? ',
-          NO_IDIOMAS_MSG: 'Vale. Cuando desees añadir un nuevo idioma sólo tienes que decir: añadir idioma. ',
+          NO_IDIOMAS_MSG: 'Vale. Cuando desees añadir un nuevo idioma sólo tienes que decir: registrar idioma; o simplemente: idioma.',
           HELP_MSG: '',
           GOODBYE_MSG: 'Hasta luego!',
           REFLECTOR_MSG: '',

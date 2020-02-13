@@ -3,6 +3,7 @@
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 const interceptors = require('./interceptors');
+const persistence = require('./persistence');
 const logic = require('./logic');
 
 //var response = [];
@@ -14,7 +15,28 @@ const LaunchRequestHandler = {
     handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
-        const speakOutput = requestAttributes.t('WELCOME_MSG');
+        const userName = logic.getSessionAttribute(handlerInput, 'userName');
+        let speakOutput = requestAttributes.t('BIENVENIDA_MSG');
+        if(userName){
+            speakOutput = requestAttributes.t('BIENVENIDO_USUARIO_MSG', userName, userName);
+            const habilidades = logic.getSessionAttribute(handlerInput, 'habilidadesRegistradas');
+            if(habilidades !== true){
+                speakOutput = speakOutput + requestAttributes.t('BIENVENIDA_REGISTRO_HABILIDADES');
+            }
+            else{
+                const intereses = logic.getSessionAttribute(handlerInput, 'interesesRegistrados');
+                if(intereses !== true){
+                    speakOutput = speakOutput + requestAttributes.t('BIENVENIDA_REGISTRO_INTERESES');
+                }
+                else{
+                    const idiomas = logic.getSessionAttribute(handlerInput, 'idiomasRegistrados');
+                    if(idiomas !== true){
+                        speakOutput = speakOutput + requestAttributes.t('BIENVENIDA_REGISTRO_INTERESES');
+                    }
+                }
+            }
+        }
+        
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -83,6 +105,7 @@ const OtrosIdiomasIntentHandler = {
         
         const response = await logic.registrarIdioma(idioma);
         console.log("Idioma registrado: "+JSON.stringify(response));
+        logic.setSessionAttribute(handlerInput, 'idiomasRegistrados', true);
         
         const speakOutput = requestAttributes.t('REGISTRAR_OTRO_IDIOMA_MSG');
         return handlerInput.responseBuilder
@@ -216,14 +239,17 @@ exports.handler = Alexa.SkillBuilders.custom()
         SessionEndedRequestHandler/*,
         IntentReflectorHandler*/ // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
     )
-    .addRequestInterceptors(
-        interceptors.LocalizationRequestInterceptor,
-        interceptors.LoggingRequestInterceptor
-    )
-    .addResponseInterceptors(
-        interceptors.LoggingResponseInterceptor
-    )
     .addErrorHandlers(
         ErrorHandler
     )
+    .addRequestInterceptors(
+        interceptors.LocalizationRequestInterceptor,
+        interceptors.LoggingRequestInterceptor,
+        interceptors.LoadAttributesRequestInterceptor
+    )
+    .addResponseInterceptors(
+        interceptors.LoggingResponseInterceptor,
+        interceptors.SaveAttributesResponseInterceptor
+    )
+    .withPersistenceAdapter(persistence.getPersistenceAdapter())
     .lambda();

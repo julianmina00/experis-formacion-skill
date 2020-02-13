@@ -147,16 +147,14 @@
           "name": "RegistrarInteresesIntent",
           "slots": [],
           "samples": [
-            "añadir intereses",
             "registrar intereses",
             "intereses"
           ]
         },
         {
-          "name": "RegistrarHabilidadedIntent",
+          "name": "RegistrarHabilidadesIntent",
           "slots": [],
           "samples": [
-            "añadir habilidades",
             "registrar habilidades",
             "habilidades"
           ]
@@ -185,8 +183,9 @@
             }
           ],
           "samples": [
-            "añadir idioma",
-            "añadir idiomas",
+            "idioma",
+            "registrar idiomas",
+            "registrar idioma",
             "idiomas"
           ]
         },
@@ -228,6 +227,13 @@
             "ahora no",
             "ninguno",
             "no"
+          ]
+        },
+        {
+          "name": "CambiarUsuarioIntent",
+          "slots": [],
+          "samples": [
+            "cambiar de usuario"
           ]
         }
       ],
@@ -639,5 +645,5 @@
       }
     ]
   },
-  "version": "17"
+  "version": "19"
 }
