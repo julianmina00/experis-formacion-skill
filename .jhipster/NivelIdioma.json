@@ -1,0 +1,34 @@
+{
+    "name": "NivelIdioma",
+    "fields": [
+        {
+            "fieldName": "nivel",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "idiomaUsuario",
+            "otherEntityRelationshipName": "nivelIdioma",
+            "relationshipName": "idiomaUsuario"
+        }
+    ],
+    "changelogDate": "20200213122632",
+    "entityTableName": "nivel_idioma",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -74,6 +74,12 @@ export const UsuarioDetail = (props: IUsuarioDetailProps) => {
           </dt>
           <dd>{usuarioEntity.proyecto}</dd>
           <dt>
+            <span id="compania">
+              <Translate contentKey="experisFormacionApp.usuario.compania">Compania</Translate>
+            </span>
+          </dt>
+          <dd>{usuarioEntity.compania}</dd>
+          <dt>
             <span id="ubicacion">
               <Translate contentKey="experisFormacionApp.usuario.ubicacion">Ubicacion</Translate>
             </span>

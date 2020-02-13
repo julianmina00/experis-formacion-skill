@@ -20,6 +20,8 @@ public interface UsuarioMapper extends EntityMapper<UsuarioDTO, Usuario> {
     @Mapping(target = "removeInteresUsuario", ignore = true)
     @Mapping(target = "planFormativoUsuarios", ignore = true)
     @Mapping(target = "removePlanFormativoUsuario", ignore = true)
+    @Mapping(target = "idiomaUsuarios", ignore = true)
+    @Mapping(target = "removeIdiomaUsuario", ignore = true)
     Usuario toEntity(UsuarioDTO usuarioDTO);
 
     default Usuario fromId(Long id) {

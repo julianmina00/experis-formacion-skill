@@ -170,6 +170,12 @@ export const UsuarioUpdate = (props: IUsuarioUpdateProps) => {
                 <AvField id="usuario-proyecto" type="text" name="proyecto" />
               </AvGroup>
               <AvGroup>
+                <Label id="companiaLabel" for="usuario-compania">
+                  <Translate contentKey="experisFormacionApp.usuario.compania">Compania</Translate>
+                </Label>
+                <AvField id="usuario-compania" type="text" name="compania" />
+              </AvGroup>
+              <AvGroup>
                 <Label id="ubicacionLabel" for="usuario-ubicacion">
                   <Translate contentKey="experisFormacionApp.usuario.ubicacion">Ubicacion</Translate>
                 </Label>

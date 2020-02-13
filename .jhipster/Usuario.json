@@ -54,6 +54,10 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "compania",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "ubicacion",
             "fieldType": "String"
         },
@@ -101,6 +105,12 @@
             "otherEntityName": "planFormativoUsuario",
             "otherEntityRelationshipName": "usuario",
             "relationshipName": "planFormativoUsuario"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "idiomaUsuario",
+            "otherEntityRelationshipName": "usuario",
+            "relationshipName": "idiomaUsuario"
         }
     ],
     "changelogDate": "20200205110937",

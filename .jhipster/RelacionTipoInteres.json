@@ -1,0 +1,40 @@
+{
+    "name": "RelacionTipoInteres",
+    "fields": [
+        {
+            "fieldName": "profundidad",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "max"
+            ],
+            "fieldValidateRulesMax": 10
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "tipoInteres",
+            "otherEntityRelationshipName": "relacionTipoInteres",
+            "relationshipName": "padre",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "tipoInteres",
+            "otherEntityRelationshipName": "relacionTipoInteres",
+            "relationshipName": "hija",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200213122631",
+    "entityTableName": "relacion_tipo_interes",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

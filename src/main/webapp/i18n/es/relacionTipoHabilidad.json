@@ -1,0 +1,24 @@
+{
+  "experisFormacionApp": {
+    "relacionTipoHabilidad": {
+      "home": {
+        "title": "Relacion Tipo Habilidads",
+        "createLabel": "Crear nuevo Relacion Tipo Habilidad",
+        "createOrEditLabel": "Crear o editar Relacion Tipo Habilidad",
+        "notFound": "Ningún Relacion Tipo Habilidads encontrado"
+      },
+      "created": "Un nuevo Relacion Tipo Habilidad ha sido creado con el identificador {{ param }}",
+      "updated": "Un Relacion Tipo Habilidad ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Relacion Tipo Habilidad ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Relacion Tipo Habilidad {{ id }}?"
+      },
+      "detail": {
+        "title": "Relacion Tipo Habilidad"
+      },
+      "profundidad": "Profundidad",
+      "padre": "Padre",
+      "hija": "Hija"
+    }
+  }
+}

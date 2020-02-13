@@ -21,6 +21,10 @@
         "interesUsuario": "Interes Usuario",
         "planFormativoUsuario": "Plan Formativo Usuario",
         "contenidoCurso": "Contenido Curso",
+        "relacionTipoHabilidad": "Relacion Tipo Habilidad",
+        "relacionTipoInteres": "Relacion Tipo Interes",
+        "nivelIdioma": "Nivel Idioma",
+        "idiomaUsuario": "Idioma Usuario",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

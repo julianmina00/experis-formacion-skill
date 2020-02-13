@@ -55,6 +55,9 @@ public class Usuario implements Serializable {
     @Column(name = "us_proyecto")
     private String proyecto;
 
+    @Column(name = "us_compania")
+    private String compania;
+
     @Column(name = "us_ubicacion")
     private String ubicacion;
 
@@ -86,6 +89,10 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "usuario")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PlanFormativoUsuario> planFormativoUsuarios = new HashSet<>();
+
+    @OneToMany(mappedBy = "usuario")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<IdiomaUsuario> idiomaUsuarios = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -198,6 +205,19 @@ public class Usuario implements Serializable {
 
     public void setProyecto(String proyecto) {
         this.proyecto = proyecto;
+    }
+
+    public String getCompania() {
+        return compania;
+    }
+
+    public Usuario compania(String compania) {
+        this.compania = compania;
+        return this;
+    }
+
+    public void setCompania(String compania) {
+        this.compania = compania;
     }
 
     public String getUbicacion() {
@@ -364,6 +384,31 @@ public class Usuario implements Serializable {
     public void setPlanFormativoUsuarios(Set<PlanFormativoUsuario> planFormativoUsuarios) {
         this.planFormativoUsuarios = planFormativoUsuarios;
     }
+
+    public Set<IdiomaUsuario> getIdiomaUsuarios() {
+        return idiomaUsuarios;
+    }
+
+    public Usuario idiomaUsuarios(Set<IdiomaUsuario> idiomaUsuarios) {
+        this.idiomaUsuarios = idiomaUsuarios;
+        return this;
+    }
+
+    public Usuario addIdiomaUsuario(IdiomaUsuario idiomaUsuario) {
+        this.idiomaUsuarios.add(idiomaUsuario);
+        idiomaUsuario.setUsuario(this);
+        return this;
+    }
+
+    public Usuario removeIdiomaUsuario(IdiomaUsuario idiomaUsuario) {
+        this.idiomaUsuarios.remove(idiomaUsuario);
+        idiomaUsuario.setUsuario(null);
+        return this;
+    }
+
+    public void setIdiomaUsuarios(Set<IdiomaUsuario> idiomaUsuarios) {
+        this.idiomaUsuarios = idiomaUsuarios;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -394,6 +439,7 @@ public class Usuario implements Serializable {
             ", telefono='" + getTelefono() + "'" +
             ", rol='" + getRol() + "'" +
             ", proyecto='" + getProyecto() + "'" +
+            ", compania='" + getCompania() + "'" +
             ", ubicacion='" + getUbicacion() + "'" +
             ", managerNombre='" + getManagerNombre() + "'" +
             ", managerEmail='" + getManagerEmail() + "'" +

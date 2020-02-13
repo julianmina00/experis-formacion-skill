@@ -1,0 +1,40 @@
+{
+    "name": "RelacionTipoHabilidad",
+    "fields": [
+        {
+            "fieldName": "profundidad",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "max"
+            ],
+            "fieldValidateRulesMax": 10
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "tipoHabilidad",
+            "otherEntityRelationshipName": "relacionTipoHabilidad",
+            "relationshipName": "padre",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "tipoHabilidad",
+            "otherEntityRelationshipName": "relacionTipoHabilidad",
+            "relationshipName": "hija",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200213122630",
+    "entityTableName": "relacion_tipo_habilidad",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

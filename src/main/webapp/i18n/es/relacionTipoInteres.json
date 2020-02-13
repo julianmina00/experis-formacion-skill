@@ -1,0 +1,24 @@
+{
+  "experisFormacionApp": {
+    "relacionTipoInteres": {
+      "home": {
+        "title": "Relacion Tipo Interes",
+        "createLabel": "Crear nuevo Relacion Tipo Interes",
+        "createOrEditLabel": "Crear o editar Relacion Tipo Interes",
+        "notFound": "Ningún Relacion Tipo Interes encontrado"
+      },
+      "created": "Un nuevo Relacion Tipo Interes ha sido creado con el identificador {{ param }}",
+      "updated": "Un Relacion Tipo Interes ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Relacion Tipo Interes ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Relacion Tipo Interes {{ id }}?"
+      },
+      "detail": {
+        "title": "Relacion Tipo Interes"
+      },
+      "profundidad": "Profundidad",
+      "padre": "Padre",
+      "hija": "Hija"
+    }
+  }
+}

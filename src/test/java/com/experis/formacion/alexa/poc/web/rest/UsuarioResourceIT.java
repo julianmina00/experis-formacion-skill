@@ -48,8 +48,8 @@ public class UsuarioResourceIT {
     private static final String DEFAULT_APELLIDOS = "AAAAAAAAAA";
     private static final String UPDATED_APELLIDOS = "BBBBBBBBBB";
 
-    private static final String DEFAULT_EMAIL = "+^]0i@\\ms<`f.|0D";
-    private static final String UPDATED_EMAIL = "e0@jb2.;";
+    private static final String DEFAULT_EMAIL = ":Z%i@S+.s#lrm";
+    private static final String UPDATED_EMAIL = "\"hb@7M.<NU~P";
 
     private static final String DEFAULT_TELEFONO = "AAAAAAAAAA";
     private static final String UPDATED_TELEFONO = "BBBBBBBBBB";
@@ -59,6 +59,9 @@ public class UsuarioResourceIT {
 
     private static final String DEFAULT_PROYECTO = "AAAAAAAAAA";
     private static final String UPDATED_PROYECTO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COMPANIA = "AAAAAAAAAA";
+    private static final String UPDATED_COMPANIA = "BBBBBBBBBB";
 
     private static final String DEFAULT_UBICACION = "AAAAAAAAAA";
     private static final String UPDATED_UBICACION = "BBBBBBBBBB";
@@ -131,6 +134,7 @@ public class UsuarioResourceIT {
             .telefono(DEFAULT_TELEFONO)
             .rol(DEFAULT_ROL)
             .proyecto(DEFAULT_PROYECTO)
+            .compania(DEFAULT_COMPANIA)
             .ubicacion(DEFAULT_UBICACION)
             .managerNombre(DEFAULT_MANAGER_NOMBRE)
             .managerEmail(DEFAULT_MANAGER_EMAIL)
@@ -154,6 +158,7 @@ public class UsuarioResourceIT {
             .telefono(UPDATED_TELEFONO)
             .rol(UPDATED_ROL)
             .proyecto(UPDATED_PROYECTO)
+            .compania(UPDATED_COMPANIA)
             .ubicacion(UPDATED_UBICACION)
             .managerNombre(UPDATED_MANAGER_NOMBRE)
             .managerEmail(UPDATED_MANAGER_EMAIL)
@@ -191,6 +196,7 @@ public class UsuarioResourceIT {
         assertThat(testUsuario.getTelefono()).isEqualTo(DEFAULT_TELEFONO);
         assertThat(testUsuario.getRol()).isEqualTo(DEFAULT_ROL);
         assertThat(testUsuario.getProyecto()).isEqualTo(DEFAULT_PROYECTO);
+        assertThat(testUsuario.getCompania()).isEqualTo(DEFAULT_COMPANIA);
         assertThat(testUsuario.getUbicacion()).isEqualTo(DEFAULT_UBICACION);
         assertThat(testUsuario.getManagerNombre()).isEqualTo(DEFAULT_MANAGER_NOMBRE);
         assertThat(testUsuario.getManagerEmail()).isEqualTo(DEFAULT_MANAGER_EMAIL);
@@ -371,6 +377,7 @@ public class UsuarioResourceIT {
             .andExpect(jsonPath("$.[*].telefono").value(hasItem(DEFAULT_TELEFONO)))
             .andExpect(jsonPath("$.[*].rol").value(hasItem(DEFAULT_ROL)))
             .andExpect(jsonPath("$.[*].proyecto").value(hasItem(DEFAULT_PROYECTO)))
+            .andExpect(jsonPath("$.[*].compania").value(hasItem(DEFAULT_COMPANIA)))
             .andExpect(jsonPath("$.[*].ubicacion").value(hasItem(DEFAULT_UBICACION)))
             .andExpect(jsonPath("$.[*].managerNombre").value(hasItem(DEFAULT_MANAGER_NOMBRE)))
             .andExpect(jsonPath("$.[*].managerEmail").value(hasItem(DEFAULT_MANAGER_EMAIL)))
@@ -397,6 +404,7 @@ public class UsuarioResourceIT {
             .andExpect(jsonPath("$.telefono").value(DEFAULT_TELEFONO))
             .andExpect(jsonPath("$.rol").value(DEFAULT_ROL))
             .andExpect(jsonPath("$.proyecto").value(DEFAULT_PROYECTO))
+            .andExpect(jsonPath("$.compania").value(DEFAULT_COMPANIA))
             .andExpect(jsonPath("$.ubicacion").value(DEFAULT_UBICACION))
             .andExpect(jsonPath("$.managerNombre").value(DEFAULT_MANAGER_NOMBRE))
             .andExpect(jsonPath("$.managerEmail").value(DEFAULT_MANAGER_EMAIL))
@@ -433,6 +441,7 @@ public class UsuarioResourceIT {
             .telefono(UPDATED_TELEFONO)
             .rol(UPDATED_ROL)
             .proyecto(UPDATED_PROYECTO)
+            .compania(UPDATED_COMPANIA)
             .ubicacion(UPDATED_UBICACION)
             .managerNombre(UPDATED_MANAGER_NOMBRE)
             .managerEmail(UPDATED_MANAGER_EMAIL)
@@ -457,6 +466,7 @@ public class UsuarioResourceIT {
         assertThat(testUsuario.getTelefono()).isEqualTo(UPDATED_TELEFONO);
         assertThat(testUsuario.getRol()).isEqualTo(UPDATED_ROL);
         assertThat(testUsuario.getProyecto()).isEqualTo(UPDATED_PROYECTO);
+        assertThat(testUsuario.getCompania()).isEqualTo(UPDATED_COMPANIA);
         assertThat(testUsuario.getUbicacion()).isEqualTo(UPDATED_UBICACION);
         assertThat(testUsuario.getManagerNombre()).isEqualTo(UPDATED_MANAGER_NOMBRE);
         assertThat(testUsuario.getManagerEmail()).isEqualTo(UPDATED_MANAGER_EMAIL);

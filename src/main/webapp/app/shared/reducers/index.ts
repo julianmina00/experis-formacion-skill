@@ -68,6 +68,22 @@ import planFormativoUsuario, {
 import contenidoCurso, {
   ContenidoCursoState
 } from 'app/entities/contenido-curso/contenido-curso.reducer';
+// prettier-ignore
+import relacionTipoHabilidad, {
+  RelacionTipoHabilidadState
+} from 'app/entities/relacion-tipo-habilidad/relacion-tipo-habilidad.reducer';
+// prettier-ignore
+import relacionTipoInteres, {
+  RelacionTipoInteresState
+} from 'app/entities/relacion-tipo-interes/relacion-tipo-interes.reducer';
+// prettier-ignore
+import nivelIdioma, {
+  NivelIdiomaState
+} from 'app/entities/nivel-idioma/nivel-idioma.reducer';
+// prettier-ignore
+import idiomaUsuario, {
+  IdiomaUsuarioState
+} from 'app/entities/idioma-usuario/idioma-usuario.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -95,6 +111,10 @@ export interface IRootState {
   readonly interesUsuario: InteresUsuarioState;
   readonly planFormativoUsuario: PlanFormativoUsuarioState;
   readonly contenidoCurso: ContenidoCursoState;
+  readonly relacionTipoHabilidad: RelacionTipoHabilidadState;
+  readonly relacionTipoInteres: RelacionTipoInteresState;
+  readonly nivelIdioma: NivelIdiomaState;
+  readonly idiomaUsuario: IdiomaUsuarioState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -124,6 +144,10 @@ const rootReducer = combineReducers<IRootState>({
   interesUsuario,
   planFormativoUsuario,
   contenidoCurso,
+  relacionTipoHabilidad,
+  relacionTipoInteres,
+  nivelIdioma,
+  idiomaUsuario,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

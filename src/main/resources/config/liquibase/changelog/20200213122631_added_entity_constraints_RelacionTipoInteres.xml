@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity RelacionTipoInteres.
+    -->
+    <changeSet id="20200213122631-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="padre_id"
+                                 baseTableName="relacion_tipo_interes"
+                                 constraintName="fk_relacion_tipo_interes_padre_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tipo_interes"/>
+
+        <addForeignKeyConstraint baseColumnNames="hija_id"
+                                 baseTableName="relacion_tipo_interes"
+                                 constraintName="fk_relacion_tipo_interes_hija_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tipo_interes"/>
+
+    </changeSet>
+</databaseChangeLog>

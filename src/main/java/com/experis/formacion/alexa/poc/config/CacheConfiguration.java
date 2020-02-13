@@ -77,6 +77,12 @@ public class CacheConfiguration {
             createCache(cm, com.experis.formacion.alexa.poc.domain.InteresUsuario.class.getName());
             createCache(cm, com.experis.formacion.alexa.poc.domain.PlanFormativoUsuario.class.getName());
             createCache(cm, com.experis.formacion.alexa.poc.domain.ContenidoCurso.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.Usuario.class.getName() + ".idiomaUsuarios");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.RelacionTipoHabilidad.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.RelacionTipoInteres.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.NivelIdioma.class.getName());
+            createCache(cm, com.experis.formacion.alexa.poc.domain.NivelIdioma.class.getName() + ".idiomaUsuarios");
+            createCache(cm, com.experis.formacion.alexa.poc.domain.IdiomaUsuario.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

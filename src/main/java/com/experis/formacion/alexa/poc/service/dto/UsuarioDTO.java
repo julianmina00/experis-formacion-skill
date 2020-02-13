@@ -33,6 +33,8 @@ public class UsuarioDTO implements Serializable {
 
     private String proyecto;
 
+    private String compania;
+
     private String ubicacion;
 
     @NotNull
@@ -117,6 +119,14 @@ public class UsuarioDTO implements Serializable {
         this.proyecto = proyecto;
     }
 
+    public String getCompania() {
+        return compania;
+    }
+
+    public void setCompania(String compania) {
+        this.compania = compania;
+    }
+
     public String getUbicacion() {
         return ubicacion;
     }
@@ -190,6 +200,7 @@ public class UsuarioDTO implements Serializable {
             ", telefono='" + getTelefono() + "'" +
             ", rol='" + getRol() + "'" +
             ", proyecto='" + getProyecto() + "'" +
+            ", compania='" + getCompania() + "'" +
             ", ubicacion='" + getUbicacion() + "'" +
             ", managerNombre='" + getManagerNombre() + "'" +
             ", managerEmail='" + getManagerEmail() + "'" +

@@ -1,0 +1,24 @@
+{
+  "experisFormacionApp": {
+    "nivelIdioma": {
+      "home": {
+        "title": "Nivel Idiomas",
+        "createLabel": "Crear nuevo Nivel Idioma",
+        "createOrEditLabel": "Crear o editar Nivel Idioma",
+        "notFound": "Ningún Nivel Idiomas encontrado"
+      },
+      "created": "Un nuevo Nivel Idioma ha sido creado con el identificador {{ param }}",
+      "updated": "Un Nivel Idioma ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Nivel Idioma ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Nivel Idioma {{ id }}?"
+      },
+      "detail": {
+        "title": "Nivel Idioma"
+      },
+      "nivel": "Nivel",
+      "descripcion": "Descripcion",
+      "idiomaUsuario": "Idioma Usuario"
+    }
+  }
+}

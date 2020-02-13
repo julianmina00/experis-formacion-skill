@@ -1,0 +1,38 @@
+{
+    "name": "IdiomaUsuario",
+    "fields": [
+        {
+            "fieldName": "idioma",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "usuario",
+            "otherEntityRelationshipName": "idiomaUsuario",
+            "relationshipName": "usuario",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "nivelIdioma",
+            "otherEntityRelationshipName": "idiomaUsuario",
+            "relationshipName": "nivelIdioma",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200213122633",
+    "entityTableName": "idioma_usuario",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

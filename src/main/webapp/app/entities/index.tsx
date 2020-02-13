@@ -18,6 +18,10 @@ import HabilidadUsuario from './habilidad-usuario';
 import InteresUsuario from './interes-usuario';
 import PlanFormativoUsuario from './plan-formativo-usuario';
 import ContenidoCurso from './contenido-curso';
+import RelacionTipoHabilidad from './relacion-tipo-habilidad';
+import RelacionTipoInteres from './relacion-tipo-interes';
+import NivelIdioma from './nivel-idioma';
+import IdiomaUsuario from './idioma-usuario';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -38,6 +42,10 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}interes-usuario`} component={InteresUsuario} />
       <ErrorBoundaryRoute path={`${match.url}plan-formativo-usuario`} component={PlanFormativoUsuario} />
       <ErrorBoundaryRoute path={`${match.url}contenido-curso`} component={ContenidoCurso} />
+      <ErrorBoundaryRoute path={`${match.url}relacion-tipo-habilidad`} component={RelacionTipoHabilidad} />
+      <ErrorBoundaryRoute path={`${match.url}relacion-tipo-interes`} component={RelacionTipoInteres} />
+      <ErrorBoundaryRoute path={`${match.url}nivel-idioma`} component={NivelIdioma} />
+      <ErrorBoundaryRoute path={`${match.url}idioma-usuario`} component={IdiomaUsuario} />
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
     </Switch>
   </div>

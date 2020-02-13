@@ -93,6 +93,9 @@ export const Usuario = (props: IUsuarioProps) => {
                 <th className="hand" onClick={sort('proyecto')}>
                   <Translate contentKey="experisFormacionApp.usuario.proyecto">Proyecto</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('compania')}>
+                  <Translate contentKey="experisFormacionApp.usuario.compania">Compania</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('ubicacion')}>
                   <Translate contentKey="experisFormacionApp.usuario.ubicacion">Ubicacion</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -130,6 +133,7 @@ export const Usuario = (props: IUsuarioProps) => {
                   <td>{usuario.telefono}</td>
                   <td>{usuario.rol}</td>
                   <td>{usuario.proyecto}</td>
+                  <td>{usuario.compania}</td>
                   <td>{usuario.ubicacion}</td>
                   <td>{usuario.managerNombre}</td>
                   <td>{usuario.managerEmail}</td>
