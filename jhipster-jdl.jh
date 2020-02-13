@@ -35,6 +35,7 @@ entity Usuario {
 	telefono String,
 	rol String required,
 	proyecto String,
+	compania String,
 	ubicacion String,
 	managerNombre String required,
 	managerEmail String,
@@ -51,6 +52,24 @@ entity Interes {
 	descripcion String required,
 	descripcionLarga String
 }
+
+entity RelacionTipoHabilidad {
+	profundidad Integer required max(10)
+}
+
+entity RelacionTipoInteres {
+	profundidad Integer required max(10)
+}
+
+entity NivelIdioma {
+	nivel String required,
+    descripcion String
+}
+
+entity IdiomaUsuario {
+	idioma String required
+}
+
 
 entity CursoPlanFormativo {
 }
@@ -78,6 +97,10 @@ entity ContenidoCurso {
 }
 
 relationship OneToMany {
+    TipoHabilidad{padre} to RelacionTipoHabilidad,
+    TipoHabilidad{hija} to RelacionTipoHabilidad,
+    TipoInteres{padre} to RelacionTipoInteres,
+    TipoInteres{hija} to RelacionTipoInteres,
     TipoHabilidad{habilidad} to Habilidad,
     TipoInteres{interes} to Interes,
     Curso{cursoPlanFormativo} to CursoPlanFormativo,
@@ -95,13 +118,16 @@ relationship OneToMany {
     Usuario{planFormativoUsuario} to PlanFormativoUsuario,
     Curso{contenidoCurso} to ContenidoCurso,
     Interes{contenidoCurso} to ContenidoCurso,
-    Habilidad{contenidoCurso} to ContenidoCurso
+    Habilidad{contenidoCurso} to ContenidoCurso,
+    Usuario{idiomaUsuario} to IdiomaUsuario,
+    NivelIdioma{idiomaUsuario} to IdiomaUsuario
+     
 }
 // Set pagination options
-paginate Usuario, Curso, PlanFormativo, TipoHabilidad, TipoInteres, Habilidad, Interes, ContenidoCurso with pagination
+paginate Usuario, Curso, PlanFormativo, RelacionTipoHabilidad, RelacionTipoInteres, TipoHabilidad, TipoInteres, Habilidad, Interes, ContenidoCurso, IdiomaUsuario with pagination
 
 // Use Data Transfert Objects (DTO)
 dto * with mapstruct
 
 // Set service options to all except few
-service Usuario, Curso, PlanFormativo, TipoHabilidad, TipoInteres, Habilidad, Interes, ContenidoCurso with serviceImpl
+service Usuario, Curso, PlanFormativo, RelacionTipoHabilidad, RelacionTipoInteres, TipoHabilidad, TipoInteres, Habilidad, Interes, ContenidoCurso, IdiomaUsuario with serviceImpl
