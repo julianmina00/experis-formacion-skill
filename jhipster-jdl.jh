@@ -96,11 +96,14 @@ entity ContenidoCurso {
 	habilidadInteres String required pattern(/^(H|I|h|i)$/)
 }
 
+relationship ManyToOne{
+    RelacionTipoHabilidad{padre} to TipoHabilidad,
+    RelacionTipoHabilidad{hija} to TipoHabilidad,
+    RelacionTipoInteres{padre} to TipoInteres,
+    RelacionTipoInteres{hija} to TipoInteres,
+}
+
 relationship OneToMany {
-    TipoHabilidad{padre} to RelacionTipoHabilidad,
-    TipoHabilidad{hija} to RelacionTipoHabilidad,
-    TipoInteres{padre} to RelacionTipoInteres,
-    TipoInteres{hija} to RelacionTipoInteres,
     TipoHabilidad{habilidad} to Habilidad,
     TipoInteres{interes} to Interes,
     Curso{cursoPlanFormativo} to CursoPlanFormativo,
