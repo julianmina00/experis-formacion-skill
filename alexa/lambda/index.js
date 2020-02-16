@@ -155,11 +155,14 @@ const RegistrarHabilidadesIntentHandler = {
           habilidad: intent.slots.habilidad.value
         });
         
+        let speakOutput = '...';
         const response = await logic.registrarHabilidad(habilidad);
+        if(response.usuarioId !== logic.getSessionAttribute(handlerInput, 'userId')){
+            speakOutput += 'Ha ocurrido un error. '+response.detail;
+        }
         console.log("Habilidad registrada: "+JSON.stringify(response));
         logic.setSessionAttribute(handlerInput, 'habilidadesRegistradas', true);
-        let speakOutput = requestAttributes.t('REGISTRAR_OTRA_HABILIDAD_MSG')+utils.otrasOpciones(handlerInput);
-        logic.setSessionAttribute(handlerInput,'previousIntent', Alexa.getIntentName(handlerInput.requestEnvelope));
+        speakOutput += requestAttributes.t('REGISTRAR_OTRA_HABILIDAD_MSG')+utils.otrasOpciones(handlerInput);
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
