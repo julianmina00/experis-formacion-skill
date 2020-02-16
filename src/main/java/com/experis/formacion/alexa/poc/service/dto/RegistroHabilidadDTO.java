@@ -7,8 +7,8 @@ import java.util.Objects;
  */
 public class RegistroHabilidadDTO implements Serializable {
 
-    private String grupoGeneral;
-    private String grupoSecundario;
+    private String tipoPrincipal;
+    private String tipoSecundario;
     private String habilidad;
     private Long usuarioId;
 
@@ -20,20 +20,20 @@ public class RegistroHabilidadDTO implements Serializable {
         this.usuarioId = usuarioId;
     }
 
-    public String getGrupoGeneral() {
-        return grupoGeneral;
+    public String getTipoPrincipal() {
+        return tipoPrincipal;
     }
 
-    public void setGrupoGeneral(String grupoGeneral) {
-        this.grupoGeneral = grupoGeneral;
+    public void setTipoPrincipal(String tipoPrincipal) {
+        this.tipoPrincipal = tipoPrincipal;
     }
 
-    public String getGrupoSecundario() {
-        return grupoSecundario;
+    public String getTipoSecundario() {
+        return tipoSecundario;
     }
 
-    public void setGrupoSecundario(String grupoSecundario) {
-        this.grupoSecundario = grupoSecundario;
+    public void setTipoSecundario(String tipoSecundario) {
+        this.tipoSecundario = tipoSecundario;
     }
 
     public String getHabilidad() {
@@ -53,22 +53,22 @@ public class RegistroHabilidadDTO implements Serializable {
             return false;
         }
         RegistroHabilidadDTO that = (RegistroHabilidadDTO) o;
-        return Objects.equals(grupoGeneral, that.grupoGeneral) &&
-            Objects.equals(grupoSecundario, that.grupoSecundario) &&
+        return Objects.equals(tipoPrincipal, that.tipoPrincipal) &&
+            Objects.equals(tipoSecundario, that.tipoSecundario) &&
             Objects.equals(habilidad, that.habilidad) &&
             Objects.equals(usuarioId, that.usuarioId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(grupoGeneral, grupoSecundario, habilidad, usuarioId);
+        return Objects.hash(tipoPrincipal, tipoSecundario, habilidad, usuarioId);
     }
 
     @Override
     public String toString() {
         return "RegistroHabilidadDTO{" +
-            "grupoGeneral='" + grupoGeneral + '\'' +
-            ", grupoSecundario='" + grupoSecundario + '\'' +
+            "grupoGeneral='" + tipoPrincipal + '\'' +
+            ", grupoSecundario='" + tipoSecundario + '\'' +
             ", habilidad='" + habilidad + '\'' +
             ", usuarioId=" + usuarioId +
             '}';

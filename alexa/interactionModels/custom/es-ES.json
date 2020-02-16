@@ -77,16 +77,6 @@
               ]
             },
             {
-              "name": "perfilTecnico",
-              "type": "PERFIL_TECNICO",
-              "samples": [
-                "es {perfilTecnico} ",
-                "mi perfil técnico es {perfilTecnico} ",
-                "{perfilTecnico} ",
-                "soy {perfilTecnico} "
-              ]
-            },
-            {
               "name": "compania",
               "type": "AMAZON.Corporation",
               "samples": [
@@ -141,9 +131,20 @@
                 "se llama {talentMentor}",
                 "es {talentMentor}"
               ]
+            },
+            {
+              "name": "perfilTecnico",
+              "type": "PERFIL_TECNICO",
+              "samples": [
+                "es {perfilTecnico} ",
+                "mi perfil técnico es {perfilTecnico} ",
+                "{perfilTecnico} ",
+                "soy {perfilTecnico} "
+              ]
             }
           ],
           "samples": [
+            "registrar perfil",
             "registro",
             "regístrame",
             "quiero registrarme"
@@ -153,21 +154,21 @@
           "name": "RegistrarInteresesIntent",
           "slots": [
             {
-              "name": "areaGeneral",
+              "name": "tipoInteresPrincipal",
               "type": "AMAZON.CreativeWorkType",
               "samples": [
-                "el área general es {areaGeneral}",
-                "es {areaGeneral}",
-                "{areaGeneral}"
+                "el tipo principal del interés es {tipoInteresPrincipal}",
+                "es {tipoInteresPrincipal}",
+                "{tipoInteresPrincipal}"
               ]
             },
             {
-              "name": "areaEspecifica",
+              "name": "tipoInteresEspecifico",
               "type": "AMAZON.CreativeWorkType",
               "samples": [
-                "el área específica es {areaEspecifica}",
-                "es {areaEspecifica}",
-                "{areaEspecifica}"
+                "el típo específico del interés es {tipoInteresEspecifico}",
+                "es {tipoInteresEspecifico}",
+                "{tipoInteresEspecifico}"
               ]
             },
             {
@@ -193,21 +194,21 @@
           "name": "RegistrarHabilidadesIntent",
           "slots": [
             {
-              "name": "areaGeneral",
+              "name": "tipoHabilidadPrincipal",
               "type": "AMAZON.CreativeWorkType",
               "samples": [
-                "el área general es {areaGeneral}",
-                "es {areaGeneral}",
-                "{areaGeneral}"
+                "el  tipo principal de la habilidad es {tipoHabilidadPrincipal}",
+                "es {tipoHabilidadPrincipal}",
+                "{tipoHabilidadPrincipal}"
               ]
             },
             {
-              "name": "areaEspecifica",
+              "name": "tipoHabilidadEspecifico",
               "type": "AMAZON.CreativeWorkType",
               "samples": [
-                "el área específica es {areaEspecifica}",
-                "es {areaEspecifica}",
-                "{areaEspecifica}"
+                "el tipo específico de la habilidad es {tipoHabilidadEspecifico}",
+                "es {tipoHabilidadEspecifico}",
+                "{tipoHabilidadEspecifico}"
               ]
             },
             {
@@ -421,15 +422,6 @@
               }
             },
             {
-              "name": "perfilTecnico",
-              "type": "PERFIL_TECNICO",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.410171193745.1327108364408"
-              }
-            },
-            {
               "name": "compania",
               "type": "AMAZON.Corporation",
               "elicitationRequired": true,
@@ -473,6 +465,15 @@
               "prompts": {
                 "elicitation": "Elicit.Slot.1480327222193.970261587539"
               }
+            },
+            {
+              "name": "perfilTecnico",
+              "type": "PERFIL_TECNICO",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.410171193745.1327108364408"
+              }
             }
           ],
           "delegationStrategy": "ALWAYS"
@@ -509,7 +510,7 @@
           "prompts": {},
           "slots": [
             {
-              "name": "areaGeneral",
+              "name": "tipoHabilidadPrincipal",
               "type": "AMAZON.CreativeWorkType",
               "elicitationRequired": true,
               "confirmationRequired": false,
@@ -518,7 +519,7 @@
               }
             },
             {
-              "name": "areaEspecifica",
+              "name": "tipoHabilidadEspecifico",
               "type": "AMAZON.CreativeWorkType",
               "elicitationRequired": true,
               "confirmationRequired": false,
@@ -543,7 +544,7 @@
           "prompts": {},
           "slots": [
             {
-              "name": "areaGeneral",
+              "name": "tipoInteresPrincipal",
               "type": "AMAZON.CreativeWorkType",
               "elicitationRequired": true,
               "confirmationRequired": false,
@@ -552,7 +553,7 @@
               }
             },
             {
-              "name": "areaEspecifica",
+              "name": "tipoInteresEspecifico",
               "type": "AMAZON.CreativeWorkType",
               "elicitationRequired": true,
               "confirmationRequired": false,
@@ -662,7 +663,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "¿qué tipo de documento personal tienes, deenei, nie, pasaporte?"
+            "value": "¿qué tipo de documento personal tienes, de ene i, nie o pasaporte?"
           },
           {
             "type": "PlainText",
@@ -773,7 +774,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "¿cuál es el área general de la habilidad?"
+            "value": "¿cuál es el tipo principal de la habilidad que quiere registrar?"
           }
         ]
       },
@@ -782,7 +783,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "¿cuál es el área específica de la habilidad?"
+            "value": "¿cuál es el tipo específico de la habilidad que quieres registar?"
           }
         ]
       },
@@ -808,7 +809,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "¿cuál es el área general de tu interés?"
+            "value": "¿cuál es el tipo principal del interés que quieres registrar?"
           }
         ]
       },
@@ -817,7 +818,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "¿cuál es el área específica de tu interés?"
+            "value": "¿cuál es el tipo específico del interés que quiere registrar?"
           }
         ]
       },
@@ -840,5 +841,5 @@
       }
     ]
   },
-  "version": "22"
+  "version": "26"
 }

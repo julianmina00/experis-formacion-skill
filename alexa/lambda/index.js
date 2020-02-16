@@ -150,8 +150,8 @@ const RegistrarHabilidadesIntentHandler = {
         
         const habilidad = JSON.stringify({
           usuarioId: logic.getSessionAttribute(handlerInput, 'userId'),
-          tipoPrincipal: intent.slots.areaGeneral.value,
-          tipoSecundario: intent.slots.areaEspecifica.value,
+          tipoPrincipal: intent.slots.tipoHabilidadPrincipal.value,
+          tipoSecundario: intent.slots.tipoHabilidadEspecifica.value,
           habilidad: intent.slots.habilidad.value
         });
         
@@ -183,8 +183,8 @@ const RegistrarInteresesIntentHandler = {
         
         const interes = JSON.stringify({
           usuarioId: logic.getSessionAttribute(handlerInput, 'userId'),
-          tipoPrincipal: intent.slots.areaGeneral.value,
-          tipoSecundario: intent.slots.areaEspecifica.value,
+          tipoPrincipal: intent.slots.tipoInteresPrincipal.value,
+          tipoSecundario: intent.slots.tipoInteresEspecifico.value,
           interes: intent.slots.interes.value
         });
         

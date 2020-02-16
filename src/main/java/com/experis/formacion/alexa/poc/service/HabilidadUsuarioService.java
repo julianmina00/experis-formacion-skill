@@ -82,9 +82,9 @@ public class HabilidadUsuarioService {
         if(habilidadOptional.isPresent() && !tipoHabilidadesRelacionadas.isEmpty()){
             Habilidad habilidad = habilidadOptional.get();
             boolean containsGrupoGeneral = tipoHabilidadesRelacionadas.stream().anyMatch(
-                tipoHabilidad -> tipoHabilidad.getDescripcion().equalsIgnoreCase(dto.getGrupoGeneral()));
+                tipoHabilidad -> tipoHabilidad.getDescripcion().equalsIgnoreCase(dto.getTipoPrincipal()));
             boolean containsGrupoSecundario = tipoHabilidadesRelacionadas.stream().anyMatch(
-                tipoHabilidad -> tipoHabilidad.getDescripcion().equalsIgnoreCase(dto.getGrupoSecundario()));
+                tipoHabilidad -> tipoHabilidad.getDescripcion().equalsIgnoreCase(dto.getTipoSecundario()));
 
             if(containsGrupoGeneral && containsGrupoSecundario){
                 if(habilidadUsuarioRepository.existsByUsuarioAndHabilidadDescripcionIgnoreCase(usuario, habilidad.getDescripcion())){
@@ -93,18 +93,18 @@ public class HabilidadUsuarioService {
                 return Collections.singletonList(habilidadUsuarioMapper.toDto(createHabilidadUsuario(usuario, habilidad)));
             }
             else if(containsGrupoGeneral){
-                throw new RuntimeException("El tipo de habilidad "+dto.getGrupoSecundario()+" no está relacionado con la habilidad: "+habilidad.getDescripcion());
+                throw new RuntimeException("El tipo de habilidad "+dto.getTipoSecundario()+" no está relacionado con la habilidad: "+habilidad.getDescripcion());
             }
             else {
-                throw new RuntimeException("El tipo de habilidad "+dto.getGrupoGeneral()+"  no está relacionado con la habilidad: "+habilidad.getDescripcion());
+                throw new RuntimeException("El tipo de habilidad "+dto.getTipoPrincipal()+"  no está relacionado con la habilidad: "+habilidad.getDescripcion());
             }
         }
         else{
-            Optional<TipoHabilidad> optional = tipoHabilidadRepository.findOneByDescripcionIgnoreCase(dto.getGrupoGeneral());
+            Optional<TipoHabilidad> optional = tipoHabilidadRepository.findOneByDescripcionIgnoreCase(dto.getTipoPrincipal());
             return optional.map(padre -> {
                 List<TipoHabilidad> tipoHabilidades = tipoHabilidadesHijasEnArbol(padre, 1);
                 List<TipoHabilidad> tipoHabilidadesFiltradas = tipoHabilidades.stream()
-                    .filter(tipoHabilidad -> tipoHabilidad.getDescripcion().equalsIgnoreCase(dto.getGrupoSecundario()))
+                    .filter(tipoHabilidad -> tipoHabilidad.getDescripcion().equalsIgnoreCase(dto.getTipoSecundario()))
                     .collect(Collectors.toList());
                 List<HabilidadUsuario> nuevasHabilidadUsuario = new ArrayList<>();
                 if(!tipoHabilidadesFiltradas.isEmpty()){
@@ -117,7 +117,7 @@ public class HabilidadUsuarioService {
                     return habilidadesUsuario;
                 }
                 else{
-                    TipoHabilidad nuevoTipoHabilidad = creteTipoHabilidad(dto.getGrupoSecundario());
+                    TipoHabilidad nuevoTipoHabilidad = creteTipoHabilidad(dto.getTipoSecundario());
                     createRelacionTipoHabilidad(padre, nuevoTipoHabilidad, 1);
                     Habilidad nuevaHabilidad = createHabilidad(dto.getHabilidad(), nuevoTipoHabilidad);
                     HabilidadUsuario habilidadUsuario = createHabilidadUsuario(usuario, nuevaHabilidad);
