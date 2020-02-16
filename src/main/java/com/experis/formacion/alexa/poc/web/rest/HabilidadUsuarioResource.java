@@ -1,6 +1,7 @@
 package com.experis.formacion.alexa.poc.web.rest;
 
 import com.experis.formacion.alexa.poc.service.HabilidadUsuarioService;
+import com.experis.formacion.alexa.poc.service.dto.RegistroHabilidadDTO;
 import com.experis.formacion.alexa.poc.web.rest.errors.BadRequestAlertException;
 import com.experis.formacion.alexa.poc.service.dto.HabilidadUsuarioDTO;
 
@@ -36,6 +37,19 @@ public class HabilidadUsuarioResource {
 
     public HabilidadUsuarioResource(HabilidadUsuarioService habilidadUsuarioService) {
         this.habilidadUsuarioService = habilidadUsuarioService;
+    }
+
+    @PostMapping("/registrar-habilidad")
+    public ResponseEntity<HabilidadUsuarioDTO> registrarHabilidadUsuario(@RequestBody RegistroHabilidadDTO habilidadUsuarioDTO) throws URISyntaxException {
+        log.debug("REST request to save HabilidadUsuario : {}", habilidadUsuarioDTO);
+        List<HabilidadUsuarioDTO> result = habilidadUsuarioService.register(habilidadUsuarioDTO);
+        if(result.isEmpty()){
+            throw new RuntimeException("el usuario ya tenía registrada la habilidad "+habilidadUsuarioDTO.getHabilidad());
+        }
+        HabilidadUsuarioDTO habilidadUsuario = result.get(0);
+        return ResponseEntity.created(new URI("/api/habilidad-usuarios/"+habilidadUsuario.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, habilidadUsuarioDTO.getHabilidad()))
+            .body(habilidadUsuario);
     }
 
     /**

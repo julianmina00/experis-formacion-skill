@@ -24,7 +24,7 @@ public class RelacionTipoInteres implements Serializable {
     private Long id;
 
     @NotNull
-    @Max(value = 10)
+    @Max(value = 3)
     @Column(name = "ri_profundidad", nullable = false)
     private Integer profundidad;
 

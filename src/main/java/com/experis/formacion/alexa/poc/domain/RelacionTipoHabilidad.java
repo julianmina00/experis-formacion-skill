@@ -24,7 +24,7 @@ public class RelacionTipoHabilidad implements Serializable {
     private Long id;
 
     @NotNull
-    @Max(value = 10)
+    @Max(value = 3)
     @Column(name = "rh_profundidad", nullable = false)
     private Integer profundidad;
 
