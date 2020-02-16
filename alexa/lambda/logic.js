@@ -29,6 +29,11 @@ module.exports = {
         console.log("....Registrando habilidad: "+data);
         return this.httpPost(data, constants.endpoints.REGISTRO_HABILIDAD);
     },
+    
+    registrarInteres(data){
+        console.log("....Registrando interés: "+data);
+        return this.httpPost(data, constants.endpoints.REGISTRO_INTERES);
+    },
         
     httpPost(data, endpoint){
         return new Promise(((resolve, reject) => {

@@ -16,20 +16,6 @@
           "samples": []
         },
         {
-          "name": "HelloWorldIntent",
-          "slots": [],
-          "samples": [
-            "que pasa tía",
-            "hello",
-            "how are you",
-            "say hi world",
-            "say hi",
-            "hi",
-            "say hello world",
-            "say hello"
-          ]
-        },
-        {
           "name": "AMAZON.NavigateHomeIntent",
           "samples": []
         },
@@ -165,8 +151,40 @@
         },
         {
           "name": "RegistrarInteresesIntent",
-          "slots": [],
+          "slots": [
+            {
+              "name": "areaGeneral",
+              "type": "AMAZON.CreativeWorkType",
+              "samples": [
+                "el área general es {areaGeneral}",
+                "es {areaGeneral}",
+                "{areaGeneral}"
+              ]
+            },
+            {
+              "name": "areaEspecifica",
+              "type": "AMAZON.CreativeWorkType",
+              "samples": [
+                "el área específica es {areaEspecifica}",
+                "es {areaEspecifica}",
+                "{areaEspecifica}"
+              ]
+            },
+            {
+              "name": "interes",
+              "type": "AMAZON.CreativeWorkType",
+              "samples": [
+                "se llama {interes}",
+                "el interés es {interes}",
+                "{interes}",
+                "es {interes}"
+              ]
+            }
+          ],
           "samples": [
+            "interés",
+            "registrar interés",
+            "otro interés",
             "registrar intereses",
             "intereses"
           ]
@@ -204,12 +222,15 @@
             }
           ],
           "samples": [
+            "otra habilidad",
+            "habilidad",
+            "registrar habilidad",
             "registrar habilidades",
             "habilidades"
           ]
         },
         {
-          "name": "OtrosIdiomasIntent",
+          "name": "RegistarIdiomasIntent",
           "slots": [
             {
               "name": "idioma",
@@ -232,6 +253,7 @@
             }
           ],
           "samples": [
+            "otro idioma",
             "idioma",
             "registrar idiomas",
             "registrar idioma",
@@ -239,99 +261,10 @@
           ]
         },
         {
-          "name": "SiIdiomasIntent",
-          "slots": [
-            {
-              "name": "idioma",
-              "type": "AMAZON.Language",
-              "samples": [
-                "el idioma {idioma}",
-                "el {idioma}",
-                "{idioma}"
-              ]
-            },
-            {
-              "name": "nivel",
-              "type": "NIVEL_IDIOMA",
-              "samples": [
-                "tengo nivel {nivel}",
-                "es {nivel}",
-                "mi nivel es {nivel}",
-                "{nivel}"
-              ]
-            }
-          ],
-          "samples": [
-            "okey",
-            "vale",
-            "sí"
-          ]
-        },
-        {
-          "name": "NoIdiomasIntent",
-          "slots": [],
-          "samples": [
-            "luego",
-            "después",
-            "ahora no",
-            "ninguno",
-            "no"
-          ]
-        },
-        {
           "name": "CambiarUsuarioIntent",
           "slots": [],
           "samples": [
             "cambiar de usuario"
-          ]
-        },
-        {
-          "name": "NoHabilidadesIntent",
-          "slots": [],
-          "samples": [
-            "luego",
-            "después",
-            "ahora no",
-            "no"
-          ]
-        },
-        {
-          "name": "SiHabilidadesIntent",
-          "slots": [
-            {
-              "name": "areaGeneral",
-              "type": "AMAZON.CreativeWorkType",
-              "samples": [
-                "el área general es {areaGeneral}",
-                "es {areaGeneral}",
-                "{areaGeneral}"
-              ]
-            },
-            {
-              "name": "areaEspecifica",
-              "type": "AMAZON.CreativeWorkType",
-              "samples": [
-                "el área específica es {areaEspecifica}",
-                "es {areaEspecifica}",
-                "{areaEspecifica}"
-              ]
-            },
-            {
-              "name": "habilidad",
-              "type": "AMAZON.CreativeWorkType",
-              "samples": [
-                "se llama {habilidad}",
-                "la habilidad es {habilidad}",
-                "{habilidad}",
-                "es {habilidad}"
-              ]
-            }
-          ],
-          "samples": [
-            "por supuesto",
-            "okey",
-            "vale",
-            "sí"
           ]
         }
       ],
@@ -545,33 +478,7 @@
           "delegationStrategy": "ALWAYS"
         },
         {
-          "name": "OtrosIdiomasIntent",
-          "confirmationRequired": false,
-          "prompts": {},
-          "slots": [
-            {
-              "name": "idioma",
-              "type": "AMAZON.Language",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.1084722133137.1182798065212"
-              }
-            },
-            {
-              "name": "nivel",
-              "type": "NIVEL_IDIOMA",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.418212342492.1186741400657"
-              }
-            }
-          ],
-          "delegationStrategy": "ALWAYS"
-        },
-        {
-          "name": "SiIdiomasIntent",
+          "name": "RegistarIdiomasIntent",
           "confirmationRequired": false,
           "prompts": {},
           "slots": [
@@ -631,7 +538,7 @@
           ]
         },
         {
-          "name": "SiHabilidadesIntent",
+          "name": "RegistrarInteresesIntent",
           "confirmationRequired": false,
           "prompts": {},
           "slots": [
@@ -641,7 +548,7 @@
               "elicitationRequired": true,
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.1480670123954.1248925533981"
+                "elicitation": "Elicit.Slot.613701604217.1329438306800"
               }
             },
             {
@@ -650,16 +557,16 @@
               "elicitationRequired": true,
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.1480670123954.1203339646411"
+                "elicitation": "Elicit.Slot.613701604217.1029451954646"
               }
             },
             {
-              "name": "habilidad",
+              "name": "interes",
               "type": "AMAZON.CreativeWorkType",
               "elicitationRequired": true,
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.1480670123954.639173371817"
+                "elicitation": "Elicit.Slot.613701604217.950547550631"
               }
             }
           ]
@@ -895,8 +802,43 @@
             "value": "¿cuál es la habilidad?"
           }
         ]
+      },
+      {
+        "id": "Elicit.Slot.613701604217.1329438306800",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuál es el área general de tu interés?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.613701604217.1029451954646",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuál es el área específica de tu interés?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.613701604217.950547550631",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿qué interés deseas agregar?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cómo se llama el interés que quieres agregar?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cuál es tu interés?"
+          }
+        ]
       }
     ]
   },
-  "version": "20"
+  "version": "22"
 }
