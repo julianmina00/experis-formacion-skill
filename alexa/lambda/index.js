@@ -77,6 +77,7 @@ const RegistrarUsuarioIntentHandler = {
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
         const intent = handlerInput.requestEnvelope.request.intent;
+        console.log('processando intent: '+Alexa.getIntentName(handlerInput.requestEnvelope));
         
         const usuario = JSON.stringify({
           nombre: intent.slots.nombre.value,
@@ -99,7 +100,6 @@ const RegistrarUsuarioIntentHandler = {
         console.log("Usuario creado: "+JSON.stringify(response));
         logic.setSessionAttribute(handlerInput,'userId', response.id);
         logic.setSessionAttribute(handlerInput,'userName', response.nombre);
-        logic.setSessionAttribute(handlerInput,'previousIntent', 'RegistrarUsuarioIntent');
         const speakOutput = requestAttributes.t('USUARIO_REGISTRADO_MSG', logic.getSessionAttribute(handlerInput, 'userName'))+utils.otrasOpciones(handlerInput);
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -108,16 +108,17 @@ const RegistrarUsuarioIntentHandler = {
     }
 };
 
-const RegistarIdiomasIntenttHandler = {
+const RegistrarIdiomasIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegistarIdiomasIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegistrarIdiomasIntent';
     },
     async handle(handlerInput) {
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
         const intent = handlerInput.requestEnvelope.request.intent;
+        console.log('processando intent: '+Alexa.getIntentName(handlerInput.requestEnvelope));
         
         const idioma = JSON.stringify({
           usuarioId: logic.getSessionAttribute(handlerInput, 'userId'),
@@ -129,7 +130,6 @@ const RegistarIdiomasIntenttHandler = {
         console.log("Idioma registrado: "+JSON.stringify(response));
         logic.setSessionAttribute(handlerInput, 'idiomasRegistrados', true);
         const speakOutput = requestAttributes.t('REGISTRAR_OTRO_IDIOMA_MSG')+utils.otrasOpciones(handlerInput);
-        logic.setSessionAttribute(handlerInput,'previousIntent', Alexa.getIntentName(handlerInput.requestEnvelope));
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -147,6 +147,7 @@ const RegistrarHabilidadesIntentHandler = {
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
         const intent = handlerInput.requestEnvelope.request.intent;
+        console.log('processando intent: '+Alexa.getIntentName(handlerInput.requestEnvelope));
         
         const habilidad = JSON.stringify({
           usuarioId: logic.getSessionAttribute(handlerInput, 'userId'),
@@ -155,14 +156,18 @@ const RegistrarHabilidadesIntentHandler = {
           habilidad: intent.slots.habilidad.value
         });
         
-        let speakOutput = '...';
+        let speakOutput = '';
         const response = await logic.registrarHabilidad(habilidad);
         if(response.usuarioId !== logic.getSessionAttribute(handlerInput, 'userId')){
-            speakOutput += 'Ha ocurrido un error. '+response.detail;
+            speakOutput += requestAttributes.t('ERROR_LLAMANDO_API_MSG', response.detail);
+            console.log("Error registrando habilidad: "+JSON.stringify(response));
         }
-        console.log("Habilidad registrada: "+JSON.stringify(response));
-        logic.setSessionAttribute(handlerInput, 'habilidadesRegistradas', true);
-        speakOutput += requestAttributes.t('REGISTRAR_OTRA_HABILIDAD_MSG')+utils.otrasOpciones(handlerInput);
+        else{
+            speakOutput += requestAttributes.t('HABILIDAD_REGISTRADA_EXITOSAMENTE_MSG');
+            logic.setSessionAttribute(handlerInput, 'habilidadesRegistradas', true);
+            console.log("Habilidad registrada: "+JSON.stringify(response));
+        }
+        speakOutput += '<break time="1s"/>'+requestAttributes.t('REGISTRAR_OTRA_HABILIDAD_MSG')+utils.otrasOpciones(handlerInput);
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -180,6 +185,7 @@ const RegistrarInteresesIntentHandler = {
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
         const intent = handlerInput.requestEnvelope.request.intent;
+        console.log('processando intent: '+Alexa.getIntentName(handlerInput.requestEnvelope));
         
         const interes = JSON.stringify({
           usuarioId: logic.getSessionAttribute(handlerInput, 'userId'),
@@ -188,11 +194,18 @@ const RegistrarInteresesIntentHandler = {
           interes: intent.slots.interes.value
         });
         
+        let speakOutput = '';
         const response = await logic.registrarInteres(interes);
-        console.log("Interés registrado: "+JSON.stringify(response));
-        logic.setSessionAttribute(handlerInput, 'interesesRegistrados', true);
-        let speakOutput = requestAttributes.t('REGISTRAR_OTRO_INTERES_MSG')+utils.otrasOpciones(handlerInput);
-        logic.setSessionAttribute(handlerInput,'previousIntent', Alexa.getIntentName(handlerInput.requestEnvelope));
+        if(response.usuarioId !== logic.getSessionAttribute(handlerInput, 'userId')){
+            speakOutput += requestAttributes.t('ERROR_LLAMANDO_API_MSG', response.detail);
+            console.log("Error registrando interés: "+JSON.stringify(response));
+        }
+        else{
+            speakOutput += requestAttributes.t('INTERES_REGISTRADO_EXITOSAMENTE_MSG');
+            logic.setSessionAttribute(handlerInput, 'interesesRegistrados', true);
+            console.log("Interés registrado: "+JSON.stringify(response));
+        }
+        speakOutput += '<break time="1s"/>'+requestAttributes.t('REGISTRAR_OTRO_INTERES_MSG')+utils.otrasOpciones(handlerInput);
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -243,9 +256,7 @@ const SessionEndedRequestHandler = {
 // handler chain below.
 const IntentReflectorHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' 
-                && (Alexa.getIntentName(handlerInput.requestEnvelope) !== 'NoIdiomasIntent' )
-                && (Alexa.getIntentName(handlerInput.requestEnvelope) !== 'SiIdiomasIntent' );
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest';
     },
     handle(handlerInput) {
         const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
@@ -285,10 +296,11 @@ exports.handler = Alexa.SkillBuilders.custom()
         RegistrarUsuarioIntentHandler,
         RegistrarHabilidadesIntentHandler,
         RegistrarInteresesIntentHandler,
+        RegistrarIdiomasIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
-        SessionEndedRequestHandler/*,
-        IntentReflectorHandler*/ // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
+        SessionEndedRequestHandler,
+        IntentReflectorHandler // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
     )
     .addErrorHandlers(
         ErrorHandler

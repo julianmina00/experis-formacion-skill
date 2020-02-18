@@ -144,9 +144,7 @@
             }
           ],
           "samples": [
-            "registrar perfil",
             "registro",
-            "regístrame",
             "quiero registrarme"
           ]
         },
@@ -183,8 +181,6 @@
             }
           ],
           "samples": [
-            "interés",
-            "registrar interés",
             "otro interés",
             "registrar intereses",
             "intereses"
@@ -203,12 +199,12 @@
               ]
             },
             {
-              "name": "tipoHabilidadEspecifico",
+              "name": "tipoHabilidadEspecifica",
               "type": "AMAZON.CreativeWorkType",
               "samples": [
-                "el tipo específico de la habilidad es {tipoHabilidadEspecifico}",
-                "es {tipoHabilidadEspecifico}",
-                "{tipoHabilidadEspecifico}"
+                "el tipo específico de la habilidad es {tipoHabilidadEspecifica}",
+                "es {tipoHabilidadEspecifica}",
+                "{tipoHabilidadEspecifica}"
               ]
             },
             {
@@ -224,14 +220,12 @@
           ],
           "samples": [
             "otra habilidad",
-            "habilidad",
-            "registrar habilidad",
             "registrar habilidades",
             "habilidades"
           ]
         },
         {
-          "name": "RegistarIdiomasIntent",
+          "name": "RegistrarIdiomasIntent",
           "slots": [
             {
               "name": "idioma",
@@ -255,9 +249,7 @@
           ],
           "samples": [
             "otro idioma",
-            "idioma",
             "registrar idiomas",
-            "registrar idioma",
             "idiomas"
           ]
         },
@@ -336,13 +328,19 @@
             {
               "id": "1",
               "name": {
-                "value": "básico"
+                "value": "básico",
+                "synonyms": [
+                  "básico"
+                ]
               }
             },
             {
               "id": "2",
               "name": {
-                "value": "intermedio"
+                "value": "intermedio",
+                "synonyms": [
+                  "intermedio"
+                ]
               }
             },
             {
@@ -350,6 +348,7 @@
               "name": {
                 "value": "avanzado",
                 "synonyms": [
+                  "avanzado",
                   "conversación",
                   "conversacional"
                 ]
@@ -360,6 +359,7 @@
               "name": {
                 "value": "nativo",
                 "synonyms": [
+                  "nativo",
                   "lengua nativa"
                 ]
               }
@@ -372,133 +372,35 @@
     "dialog": {
       "intents": [
         {
-          "name": "RegistrarUsuarioIntent",
+          "name": "RegistrarInteresesIntent",
           "confirmationRequired": false,
           "prompts": {},
           "slots": [
             {
-              "name": "nombre",
-              "type": "AMAZON.FirstName",
+              "name": "tipoInteresPrincipal",
+              "type": "AMAZON.CreativeWorkType",
               "elicitationRequired": true,
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.407848082910.836403356546"
+                "elicitation": "Elicit.Slot.1314235343495.1400762139675"
               }
             },
             {
-              "name": "apellido",
-              "type": "AMAZON.Person",
+              "name": "tipoInteresEspecifico",
+              "type": "AMAZON.CreativeWorkType",
               "elicitationRequired": true,
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.451472066678.1156657986527"
+                "elicitation": "Elicit.Slot.1314235343495.731218897842"
               }
             },
             {
-              "name": "tipoDocumento",
-              "type": "TIPO_DOCUMENTO",
+              "name": "interes",
+              "type": "AMAZON.CreativeWorkType",
               "elicitationRequired": true,
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.451472066678.325158486528"
-              }
-            },
-            {
-              "name": "numeroDocumento",
-              "type": "AMAZON.NUMBER",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.407848082910.637770884034"
-              }
-            },
-            {
-              "name": "telefono",
-              "type": "AMAZON.PhoneNumber",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.407848082910.780388203252"
-              }
-            },
-            {
-              "name": "compania",
-              "type": "AMAZON.Corporation",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.1480327222193.515304352507"
-              }
-            },
-            {
-              "name": "ciudad",
-              "type": "AMAZON.Region",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.410171193745.75850235213"
-              }
-            },
-            {
-              "name": "proyecto",
-              "type": "AMAZON.Corporation",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.451472066678.1223243993448"
-              }
-            },
-            {
-              "name": "manager",
-              "type": "AMAZON.Person",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.407848082910.222971244624"
-              }
-            },
-            {
-              "name": "talentMentor",
-              "type": "AMAZON.Person",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.1480327222193.970261587539"
-              }
-            },
-            {
-              "name": "perfilTecnico",
-              "type": "PERFIL_TECNICO",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.410171193745.1327108364408"
-              }
-            }
-          ],
-          "delegationStrategy": "ALWAYS"
-        },
-        {
-          "name": "RegistarIdiomasIntent",
-          "confirmationRequired": false,
-          "prompts": {},
-          "slots": [
-            {
-              "name": "idioma",
-              "type": "AMAZON.Language",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.1084722133137.1182798065212"
-              }
-            },
-            {
-              "name": "nivel",
-              "type": "NIVEL_IDIOMA",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.418212342492.1186741400657"
+                "elicitation": "Elicit.Slot.1314235343495.291980149255"
               }
             }
           ],
@@ -515,16 +417,16 @@
               "elicitationRequired": true,
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.1480670123954.1248925533981"
+                "elicitation": "Elicit.Slot.1304210882917.1333609899143"
               }
             },
             {
-              "name": "tipoHabilidadEspecifico",
+              "name": "tipoHabilidadEspecifica",
               "type": "AMAZON.CreativeWorkType",
               "elicitationRequired": true,
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.1480670123954.1203339646411"
+                "elicitation": "Elicit.Slot.1304210882917.158430009585"
               }
             },
             {
@@ -533,44 +435,144 @@
               "elicitationRequired": true,
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.1480670123954.639173371817"
+                "elicitation": "Elicit.Slot.1304210882917.191790730385"
               }
             }
-          ]
+          ],
+          "delegationStrategy": "ALWAYS"
         },
         {
-          "name": "RegistrarInteresesIntent",
+          "name": "RegistrarIdiomasIntent",
           "confirmationRequired": false,
           "prompts": {},
           "slots": [
             {
-              "name": "tipoInteresPrincipal",
-              "type": "AMAZON.CreativeWorkType",
+              "name": "idioma",
+              "type": "AMAZON.Language",
               "elicitationRequired": true,
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.613701604217.1329438306800"
+                "elicitation": "Elicit.Slot.907612580257.1218847587892"
               }
             },
             {
-              "name": "tipoInteresEspecifico",
-              "type": "AMAZON.CreativeWorkType",
+              "name": "nivel",
+              "type": "NIVEL_IDIOMA",
               "elicitationRequired": true,
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.613701604217.1029451954646"
-              }
-            },
-            {
-              "name": "interes",
-              "type": "AMAZON.CreativeWorkType",
-              "elicitationRequired": true,
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.613701604217.950547550631"
+                "elicitation": "Elicit.Slot.907612580257.1308546966156"
               }
             }
-          ]
+          ],
+          "delegationStrategy": "ALWAYS"
+        },
+        {
+          "name": "RegistrarUsuarioIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "nombre",
+              "type": "AMAZON.FirstName",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.834143548492.82161439717"
+              }
+            },
+            {
+              "name": "apellido",
+              "type": "AMAZON.Person",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.834143548492.454531366616"
+              }
+            },
+            {
+              "name": "tipoDocumento",
+              "type": "TIPO_DOCUMENTO",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.834143548492.1376524407178"
+              }
+            },
+            {
+              "name": "numeroDocumento",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.834143548492.1518485169853"
+              }
+            },
+            {
+              "name": "telefono",
+              "type": "AMAZON.PhoneNumber",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.834143548492.794174213606"
+              }
+            },
+            {
+              "name": "compania",
+              "type": "AMAZON.Corporation",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.834143548492.399331229638"
+              }
+            },
+            {
+              "name": "proyecto",
+              "type": "AMAZON.Corporation",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.834143548492.74401337384"
+              }
+            },
+            {
+              "name": "ciudad",
+              "type": "AMAZON.Region",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.834143548492.559299998996"
+              }
+            },
+            {
+              "name": "manager",
+              "type": "AMAZON.Person",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.834143548492.1066115115209"
+              }
+            },
+            {
+              "name": "talentMentor",
+              "type": "AMAZON.Person",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.834143548492.1103485086234"
+              }
+            },
+            {
+              "name": "perfilTecnico",
+              "type": "PERFIL_TECNICO",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.834143548492.224260412284"
+              }
+            }
+          ],
+          "delegationStrategy": "ALWAYS"
         }
       ],
       "delegationStrategy": "ALWAYS"
@@ -698,44 +700,6 @@
         ]
       },
       {
-        "id": "Elicit.Slot.1084722133137.1182798065212",
-        "variations": [
-          {
-            "type": "PlainText",
-            "value": "¿cuál idioma deseas añadir?"
-          },
-          {
-            "type": "PlainText",
-            "value": "¿qué idioma deseas añadir?"
-          },
-          {
-            "type": "PlainText",
-            "value": "¿Qué idioma?"
-          },
-          {
-            "type": "PlainText",
-            "value": "¿cuál?"
-          }
-        ]
-      },
-      {
-        "id": "Elicit.Slot.418212342492.1186741400657",
-        "variations": [
-          {
-            "type": "PlainText",
-            "value": "¿cómo consideras tu nivel de {idioma} . básico,  intermedio, avanzado o nativo?"
-          },
-          {
-            "type": "PlainText",
-            "value": "¿qué nivel de {idioma} tienes. básico,  intermedio, avanzado o nativo?"
-          },
-          {
-            "type": "PlainText",
-            "value": "¿cuál es tu nivel de {idioma} . básico,  intermedio, avanzado o nativo?"
-          }
-        ]
-      },
-      {
         "id": "Elicit.Slot.1480327222193.515304352507",
         "variations": [
           {
@@ -770,42 +734,7 @@
         ]
       },
       {
-        "id": "Elicit.Slot.1480670123954.1248925533981",
-        "variations": [
-          {
-            "type": "PlainText",
-            "value": "¿cuál es el tipo principal de la habilidad que quiere registrar?"
-          }
-        ]
-      },
-      {
-        "id": "Elicit.Slot.1480670123954.1203339646411",
-        "variations": [
-          {
-            "type": "PlainText",
-            "value": "¿cuál es el tipo específico de la habilidad que quieres registar?"
-          }
-        ]
-      },
-      {
-        "id": "Elicit.Slot.1480670123954.639173371817",
-        "variations": [
-          {
-            "type": "PlainText",
-            "value": "¿qué habilidad deseas agregar?"
-          },
-          {
-            "type": "PlainText",
-            "value": "¿cómo se llama la habilidad que quieres agregar?"
-          },
-          {
-            "type": "PlainText",
-            "value": "¿cuál es la habilidad?"
-          }
-        ]
-      },
-      {
-        "id": "Elicit.Slot.613701604217.1329438306800",
+        "id": "Elicit.Slot.1314235343495.1400762139675",
         "variations": [
           {
             "type": "PlainText",
@@ -814,7 +743,7 @@
         ]
       },
       {
-        "id": "Elicit.Slot.613701604217.1029451954646",
+        "id": "Elicit.Slot.1314235343495.731218897842",
         "variations": [
           {
             "type": "PlainText",
@@ -823,11 +752,11 @@
         ]
       },
       {
-        "id": "Elicit.Slot.613701604217.950547550631",
+        "id": "Elicit.Slot.1314235343495.291980149255",
         "variations": [
           {
             "type": "PlainText",
-            "value": "¿qué interés deseas agregar?"
+            "value": "¿cuál es tu interés?"
           },
           {
             "type": "PlainText",
@@ -835,11 +764,239 @@
           },
           {
             "type": "PlainText",
-            "value": "¿cuál es tu interés?"
+            "value": "¿qué interés deseas agregar?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1304210882917.1333609899143",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuál es el tipo principal de la habilidad que quiere registrar?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1304210882917.158430009585",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuál es el tipo específico de la habilidad que quieres registar?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1304210882917.191790730385",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuál es la habilidad?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cómo se llama la habilidad que quieres agregar?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿qué habilidad deseas agregar?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.907612580257.1218847587892",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuál?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Qué idioma?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿qué idioma deseas añadir?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cuál idioma deseas añadir?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.907612580257.1308546966156",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuál es tu nivel de {idioma} . básico,  intermedio, avanzado o nativo?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿qué nivel de {idioma} tienes. básico,  intermedio, avanzado o nativo?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cómo consideras tu nivel de {idioma} . básico,  intermedio, avanzado o nativo?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.834143548492.82161439717",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Cuál es tu nombre?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Cómo te llamas?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Dime tu nombre"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.834143548492.454531366616",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuales son tus apellidos?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.834143548492.1376524407178",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿qué tipo de documento de identidad tienes?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿qué tipo de documento personal tienes, de ene i, nie o pasaporte?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.834143548492.1518485169853",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Necesitaré también tu número de {tipoDocumento} , sin letras"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Cuales son los números de tu {tipoDocumento} , solo números.?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.834143548492.794174213606",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿A qué número telefónico podríamos llamarte?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.834143548492.399331229638",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿en qué compañía trabajas?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿para qué compañía trabajas?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿en qué compañía estás?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.834143548492.74401337384",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿en qué proyecto estas trabajando ahora mismo?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿a qué proyecto te encuentras asignado?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cuál es tu proyecto actual?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.834143548492.559299998996",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿En qué ciudad estás ubicado?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿En qué ciudad te encuentras?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿En qué ciudad estás?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.834143548492.1066115115209",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Quién es tu manager en Experis?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cómo se llama tu manager en Experis?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.834143548492.1103485086234",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿quién es tu tálent méntor?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cómo se llama tu tálent méntor?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cuál es el nombre de tu tálent méntor?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.834143548492.224260412284",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Cuál es tu perfil, eres técnico, consultor o especialista?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿eres técnico, consultor o especialista?"
           }
         ]
       }
     ]
   },
-  "version": "26"
+  "version": "36"
 }
