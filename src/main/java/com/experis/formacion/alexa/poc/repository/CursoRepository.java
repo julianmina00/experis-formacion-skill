@@ -24,8 +24,8 @@ public interface CursoRepository extends JpaRepository<Curso, Long> {
             "	where cc.cc_idhabilidad in (:habilidades) or cc.cc_idinteres in (:intereses) "+
             "	group by cc.cc_idcurso "+
             ") cc "+
-            "where cc.curso = cu.cu_idcurso and current_date >= cu.cu_fechaini "+
-            "order by cc.relaciones ",
+            " where cc.curso = cu.cu_idcurso and current_date <= cu.cu_fechaini "+
+            "order by cc.relaciones desc ",
         nativeQuery = true)
     List<Curso> findMoreRelevantAvailableByHabilidadesAndIntereses(
         @Param("habilidades") List<Long> habilidades,

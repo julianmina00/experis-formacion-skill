@@ -1,27 +1,37 @@
 package com.experis.formacion.alexa.poc.service.impl;
 
 import com.experis.formacion.alexa.poc.domain.Curso;
+import com.experis.formacion.alexa.poc.domain.CursoPlanFormativo;
+import com.experis.formacion.alexa.poc.domain.CursoUsuario;
 import com.experis.formacion.alexa.poc.domain.Habilidad;
+import com.experis.formacion.alexa.poc.domain.HabilidadUsuario;
 import com.experis.formacion.alexa.poc.domain.Interes;
+import com.experis.formacion.alexa.poc.domain.InteresUsuario;
 import com.experis.formacion.alexa.poc.domain.PlanFormativo;
+import com.experis.formacion.alexa.poc.domain.PlanFormativoUsuario;
 import com.experis.formacion.alexa.poc.domain.Usuario;
-import com.experis.formacion.alexa.poc.repository.ContenidoCursoRepository;
+import com.experis.formacion.alexa.poc.repository.CursoPlanFormativoRepository;
 import com.experis.formacion.alexa.poc.repository.CursoRepository;
-import com.experis.formacion.alexa.poc.repository.HabilidadRepository;
+import com.experis.formacion.alexa.poc.repository.CursoUsuarioRepository;
 import com.experis.formacion.alexa.poc.repository.HabilidadUsuarioRepository;
-import com.experis.formacion.alexa.poc.repository.InteresRepository;
 import com.experis.formacion.alexa.poc.repository.InteresUsuarioRepository;
-import com.experis.formacion.alexa.poc.repository.PerfilPlanFormativoRepository;
 import com.experis.formacion.alexa.poc.repository.PlanFormativoRepository;
+import com.experis.formacion.alexa.poc.repository.PlanFormativoUsuarioRepository;
 import com.experis.formacion.alexa.poc.repository.UsuarioRepository;
+import com.experis.formacion.alexa.poc.service.CursoUsuarioService;
 import com.experis.formacion.alexa.poc.service.FormacionesService;
+import com.experis.formacion.alexa.poc.service.PlanFormativoUsuarioService;
+import com.experis.formacion.alexa.poc.service.dto.CursoUsuarioDTO;
 import com.experis.formacion.alexa.poc.service.dto.FormacionesSugeridasDTO;
+import com.experis.formacion.alexa.poc.service.dto.PlanFormativoUsuarioDTO;
+import com.experis.formacion.alexa.poc.service.dto.RegistroFormacionDTO;
 import com.experis.formacion.alexa.poc.service.mapper.FormacionesCursoMapper;
 import com.experis.formacion.alexa.poc.service.mapper.FormacionesPlanMapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -38,18 +48,68 @@ public class FormacionesServiceImpl implements FormacionesService {
     private UsuarioRepository usuarioRepository;
     private FormacionesCursoMapper formacionesCursoMapper;
     private FormacionesPlanMapper formacionesPlanMapper;
+    private CursoUsuarioService cursoUsuarioService;
+    private PlanFormativoUsuarioService planFormativoUsuarioService;
+    private HabilidadUsuarioRepository habilidadUsuarioRepository;
+    private InteresUsuarioRepository interesUsuarioRepository;
+    private CursoPlanFormativoRepository cursoPlanFormativoRepository;
+    private CursoUsuarioRepository cursoUsuarioRepository;
+    private PlanFormativoUsuarioRepository planFormativoUsuarioRepository;
 
     public FormacionesServiceImpl(
         CursoRepository cursoRepository,
         PlanFormativoRepository planFormativoRepository,
         UsuarioRepository usuarioRepository,
         FormacionesCursoMapper formacionesCursoMapper,
-        FormacionesPlanMapper formacionesPlanMapper) {
+        FormacionesPlanMapper formacionesPlanMapper,
+        CursoUsuarioService cursoUsuarioService,
+        PlanFormativoUsuarioService planFormativoUsuarioService,
+        HabilidadUsuarioRepository habilidadUsuarioRepository,
+        InteresUsuarioRepository interesUsuarioRepository,
+        CursoPlanFormativoRepository cursoPlanFormativoRepository,
+        CursoUsuarioRepository cursoUsuarioRepository,
+        PlanFormativoUsuarioRepository planFormativoUsuarioRepository) {
         this.cursoRepository = cursoRepository;
         this.planFormativoRepository = planFormativoRepository;
         this.usuarioRepository = usuarioRepository;
         this.formacionesCursoMapper = formacionesCursoMapper;
         this.formacionesPlanMapper = formacionesPlanMapper;
+        this.cursoUsuarioService = cursoUsuarioService;
+        this.planFormativoUsuarioService = planFormativoUsuarioService;
+        this.habilidadUsuarioRepository = habilidadUsuarioRepository;
+        this.interesUsuarioRepository = interesUsuarioRepository;
+        this.cursoPlanFormativoRepository = cursoPlanFormativoRepository;
+        this.cursoUsuarioRepository = cursoUsuarioRepository;
+        this.planFormativoUsuarioRepository = planFormativoUsuarioRepository;
+    }
+
+    @Override
+    public RegistroFormacionDTO registerFormacionUsuario(RegistroFormacionDTO dto) {
+        if(dto.getTipoFormacion().equalsIgnoreCase(TIPO_FORMACION_CURSO)){
+            CursoUsuarioDTO cursoUsuarioDTO = new CursoUsuarioDTO();
+            cursoUsuarioDTO.setUsuarioId(dto.getUsuarioId());
+            cursoUsuarioDTO.setCursoId(dto.getFormacionId());
+            Optional<CursoUsuario> cursoUsuarioOptional = cursoUsuarioRepository.findOneByUsuarioIdAndCursoId(dto.getUsuarioId(), dto.getFormacionId());
+            if (cursoUsuarioOptional.isPresent()) {
+                throw new RuntimeException("el usuario ya se había dado de alta en este curso");
+            }
+            cursoUsuarioDTO = cursoUsuarioService.save(cursoUsuarioDTO);
+            dto.setId(cursoUsuarioDTO.getId());
+            return dto;
+        }
+        else if(dto.getTipoFormacion().equalsIgnoreCase(TIPO_FORMACION_PLANES)){
+            PlanFormativoUsuarioDTO planFormativoUsuarioDTO = new PlanFormativoUsuarioDTO();
+            planFormativoUsuarioDTO.setUsuarioId(dto.getUsuarioId());
+            planFormativoUsuarioDTO.setPlanFormativoId(dto.getFormacionId());
+            Optional<PlanFormativoUsuario> planFormativoUsuarioOptional = planFormativoUsuarioRepository.findOneByUsuarioIdAndPlanFormativoId(dto.getUsuarioId(), dto.getFormacionId());
+            if (planFormativoUsuarioOptional.isPresent()) {
+                throw new RuntimeException("el usuario ya se había dado de alta en este plan formativo");
+            }
+            planFormativoUsuarioDTO = planFormativoUsuarioService.save(planFormativoUsuarioDTO);
+            dto.setId(planFormativoUsuarioDTO.getId());
+            return dto;
+        }
+        throw new RuntimeException("El tipo de formación "+dto.getTipoFormacion()+" no es válido");
     }
 
     @Override
@@ -59,54 +119,60 @@ public class FormacionesServiceImpl implements FormacionesService {
         return optionalUsuario.map(usuario -> {
             List<Long> idHabilidades = new ArrayList<>();
             List<Long> idIntereses = new ArrayList<>();
-            List<String> habilidades = new ArrayList<>();
-            List<String> intereses = new ArrayList<>();
             usuario.getHabilidadUsuarios().forEach(habilidadUsuario -> {
                 Habilidad habilidad = habilidadUsuario.getHabilidad();
-                habilidades.add(habilidad.getDescripcion());
                 idHabilidades.add(habilidad.getId());
             });
             usuario.getInteresUsuarios().forEach(interesUsuario -> {
                 Interes interes = interesUsuario.getInteres();
-                intereses.add(interes.getDescripcion());
                 idIntereses.add(interes.getId());
             });
             if(tipoFormacion.equalsIgnoreCase(TIPO_FORMACION_CURSO)){
-                return getCursosSugeridos(idHabilidades, idIntereses, habilidades, intereses, pagina, registrosPorPagina);
+                return getCursosSugeridos(usuarioId, idHabilidades, idIntereses, pagina, registrosPorPagina);
             }
             if(tipoFormacion.equalsIgnoreCase(TIPO_FORMACION_PLANES)){
-                return getPlanesFormativosSugeridos(idHabilidades, idIntereses, habilidades, intereses, pagina, registrosPorPagina);
+                return getPlanesFormativosSugeridos(usuarioId, idHabilidades, idIntereses, pagina, registrosPorPagina);
             }
             return Collections.<FormacionesSugeridasDTO>emptyList();
         }).orElseThrow(() -> new RuntimeException("El usuario con id "+usuarioId+" no es válido"));
     }
 
-    private List<FormacionesSugeridasDTO> getCursosSugeridos(List<Long> idHabilidades, List<Long> idIntereses, List<String> habilidades, List<String> intereses, int page, int size){
+    private List<FormacionesSugeridasDTO> getCursosSugeridos(Long usuarioId, List<Long> idHabilidades, List<Long> idIntereses, int page, int size){
         Pageable pageable = PageRequest.of(page, size);
         List<Curso> cursos = cursoRepository.findMoreRelevantAvailableByHabilidadesAndIntereses(idHabilidades, idIntereses, pageable);
         List<FormacionesSugeridasDTO> formacionesSugeridas = new ArrayList<>();
         cursos.forEach(curso -> {
             FormacionesSugeridasDTO dto = formacionesCursoMapper.toDto(curso);
             dto.setTipoFormacion(TIPO_FORMACION_CURSO);
-            dto.setHabilidadesRelacionadas(habilidades);
-            dto.setInteresesRelacionados(intereses);
+            List<HabilidadUsuario> matchHabilidades = habilidadUsuarioRepository.findMatchByUsuarioAndCurso(usuarioId, curso.getId());
+            List<InteresUsuario> matchIntereses = interesUsuarioRepository.findMatchByUsuarioAndCurso(usuarioId, curso.getId());
+            dto.setHabilidadesRelacionadas(
+                matchHabilidades.stream().map(habilidadUsuario -> habilidadUsuario.getHabilidad().getDescripcion()).collect(Collectors.toList()));
+            dto.setInteresesRelacionados(
+                matchIntereses.stream().map(interesUsuario -> interesUsuario.getInteres().getDescripcion()).collect(Collectors.toList()));
             formacionesSugeridas.add(dto);
         });
         return formacionesSugeridas;
     }
 
-    private List<FormacionesSugeridasDTO> getPlanesFormativosSugeridos(List<Long> idHabilidades, List<Long> idIntereses, List<String> habilidades, List<String> intereses, int page, int size){
+    private List<FormacionesSugeridasDTO> getPlanesFormativosSugeridos(Long usuarioId, List<Long> idHabilidades, List<Long> idIntereses, int page, int size){
         Pageable pageable = PageRequest.of(page, size);
         List<PlanFormativo> planesFormativos = planFormativoRepository.findMoreRelevantAvailableByHabilidadesAndIntereses(idHabilidades, idIntereses, pageable);
         List<FormacionesSugeridasDTO> formacionesSugeridas = new ArrayList<>();
         planesFormativos.forEach(planFormativo -> {
             FormacionesSugeridasDTO dto = formacionesPlanMapper.toDto(planFormativo);
             dto.setTipoFormacion(TIPO_FORMACION_PLANES);
-            dto.setHabilidadesRelacionadas(habilidades);
-            dto.setInteresesRelacionados(intereses);
+            List<HabilidadUsuario> matchHabilidades = habilidadUsuarioRepository.findMatchByUsuarioAndPlanFormativo(usuarioId, planFormativo.getId());
+            List<InteresUsuario> matchIntereses = interesUsuarioRepository.findMatchByUsuarioAndPlanFormativo(usuarioId, planFormativo.getId());
+            dto.setHabilidadesRelacionadas(
+                matchHabilidades.stream().map(habilidadUsuario -> habilidadUsuario.getHabilidad().getDescripcion()).collect(Collectors.toList()));
+            dto.setInteresesRelacionados(
+                matchIntereses.stream().map(interesUsuario -> interesUsuario.getInteres().getDescripcion()).collect(Collectors.toList()));
             List<String> cursos = new ArrayList<>();
             planFormativo.getCursoPlanFormativos().forEach(cursoPlanFormativo -> cursos.add(cursoPlanFormativo.getCurso().getDescripcion()));
-            dto.setCursos(cursos);
+            List<CursoPlanFormativo> cursosPlanFormativo =  cursoPlanFormativoRepository.findByPlanFormativo(planFormativo);
+            dto.setCursos(
+                cursosPlanFormativo.stream().map(cursoPlanFormativo -> cursoPlanFormativo.getCurso().getDescripcion()).collect(Collectors.toList()));
             formacionesSugeridas.add(dto);
         });
         return formacionesSugeridas;

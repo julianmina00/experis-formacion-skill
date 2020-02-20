@@ -1,6 +1,8 @@
 package com.experis.formacion.alexa.poc.repository;
 
 import com.experis.formacion.alexa.poc.domain.CursoPlanFormativo;
+import com.experis.formacion.alexa.poc.domain.PlanFormativo;
+import java.util.List;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +14,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CursoPlanFormativoRepository extends JpaRepository<CursoPlanFormativo, Long> {
 
+    List<CursoPlanFormativo> findByPlanFormativo(PlanFormativo planFormativo);
 }
