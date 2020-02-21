@@ -1,13 +1,14 @@
 package com.experis.formacion.alexa.poc.web.rest;
 
 import com.experis.formacion.alexa.poc.service.FormacionesService;
-import com.experis.formacion.alexa.poc.service.dto.CursoUsuarioDTO;
+import com.experis.formacion.alexa.poc.service.dto.FormacionesDTO;
 import com.experis.formacion.alexa.poc.service.dto.FormacionesSugeridasDTO;
 import com.experis.formacion.alexa.poc.service.dto.RegistroFormacionDTO;
 import com.experis.formacion.alexa.poc.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.List;
 import javax.annotation.MatchesPattern;
 import org.slf4j.Logger;
@@ -41,6 +42,19 @@ public class FormacionResource {
         this.formacionesService = formacionesService;
     }
 
+    @GetMapping("/formaciones-usuario/{usuarioId}/{fechaInicial}/{fechaFinal}")
+    public ResponseEntity<List<FormacionesDTO>> getFormacionesUsuario(
+        @PathVariable(name = "usuarioId") long usuarioId,
+        @PathVariable(name = "fechaInicial", required = false) String fechaInicial,
+        @PathVariable(name = "fechaFinal", required = false) String fechaFinal) {
+        log.debug("REST request to get Formaciones por usuario");
+        LocalDate inicio = (fechaInicial == null) ? LocalDate.now() : LocalDate.parse(fechaFinal);
+        LocalDate fin = (fechaFinal == null) ? inicio : LocalDate.parse(fechaFinal);
+        List<FormacionesDTO> formaciones = formacionesService
+            .getFormacionesPorFecha(usuarioId, inicio, fin);
+        return ResponseEntity.ok().body(formaciones);
+    }
+
     @GetMapping("/formaciones-sugeridas/{usuarioId}/{tipoFormacion}/{pagina}/{registrosPorPagina}")
     public ResponseEntity<List<FormacionesSugeridasDTO>> getFormacionesSugeridas(
         @PathVariable(name = "usuarioId") long usuarioId,
@@ -54,15 +68,18 @@ public class FormacionResource {
     }
 
     @PostMapping("/formacion-usuarios")
-    public ResponseEntity<RegistroFormacionDTO> createCursoUsuario(@RequestBody RegistroFormacionDTO dto) throws URISyntaxException {
+    public ResponseEntity<RegistroFormacionDTO> createCursoUsuario(
+        @RequestBody RegistroFormacionDTO dto) throws URISyntaxException {
         log.debug("REST request to save CursoUsuario : {}", dto);
         if (dto.getId() != null) {
-            throw new BadRequestAlertException("A new cursoUsuario cannot already have an ID", ENTITY_NAME, "idexists");
+            throw new BadRequestAlertException("A new cursoUsuario cannot already have an ID",
+                ENTITY_NAME, "idexists");
         }
         RegistroFormacionDTO result = formacionesService.registerFormacionUsuario(dto);
         return ResponseEntity.created(new URI("/api/curso-usuarios/" + result.getId()))
             .headers(HeaderUtil
-                .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .createEntityCreationAlert(applicationName, true, ENTITY_NAME,
+                    result.getId().toString()))
             .body(result);
     }
 

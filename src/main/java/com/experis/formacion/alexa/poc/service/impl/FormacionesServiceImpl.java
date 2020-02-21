@@ -22,11 +22,15 @@ import com.experis.formacion.alexa.poc.service.CursoUsuarioService;
 import com.experis.formacion.alexa.poc.service.FormacionesService;
 import com.experis.formacion.alexa.poc.service.PlanFormativoUsuarioService;
 import com.experis.formacion.alexa.poc.service.dto.CursoUsuarioDTO;
+import com.experis.formacion.alexa.poc.service.dto.FormacionesDTO;
 import com.experis.formacion.alexa.poc.service.dto.FormacionesSugeridasDTO;
 import com.experis.formacion.alexa.poc.service.dto.PlanFormativoUsuarioDTO;
 import com.experis.formacion.alexa.poc.service.dto.RegistroFormacionDTO;
 import com.experis.formacion.alexa.poc.service.mapper.FormacionesCursoMapper;
 import com.experis.formacion.alexa.poc.service.mapper.FormacionesPlanMapper;
+import com.experis.formacion.alexa.poc.service.mapper.FormacionesSugeridasCursoMapper;
+import com.experis.formacion.alexa.poc.service.mapper.FormacionesSugeridasPlanMapper;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -46,6 +50,8 @@ public class FormacionesServiceImpl implements FormacionesService {
     private CursoRepository cursoRepository;
     private PlanFormativoRepository planFormativoRepository;
     private UsuarioRepository usuarioRepository;
+    private FormacionesSugeridasCursoMapper formacionesSugeridasCursoMapper;
+    private FormacionesSugeridasPlanMapper formacionesSugeridasPlanMapper;
     private FormacionesCursoMapper formacionesCursoMapper;
     private FormacionesPlanMapper formacionesPlanMapper;
     private CursoUsuarioService cursoUsuarioService;
@@ -60,6 +66,8 @@ public class FormacionesServiceImpl implements FormacionesService {
         CursoRepository cursoRepository,
         PlanFormativoRepository planFormativoRepository,
         UsuarioRepository usuarioRepository,
+        FormacionesSugeridasCursoMapper formacionesSugeridasCursoMapper,
+        FormacionesSugeridasPlanMapper formacionesSugeridasPlanMapper,
         FormacionesCursoMapper formacionesCursoMapper,
         FormacionesPlanMapper formacionesPlanMapper,
         CursoUsuarioService cursoUsuarioService,
@@ -72,6 +80,8 @@ public class FormacionesServiceImpl implements FormacionesService {
         this.cursoRepository = cursoRepository;
         this.planFormativoRepository = planFormativoRepository;
         this.usuarioRepository = usuarioRepository;
+        this.formacionesSugeridasCursoMapper = formacionesSugeridasCursoMapper;
+        this.formacionesSugeridasPlanMapper = formacionesSugeridasPlanMapper;
         this.formacionesCursoMapper = formacionesCursoMapper;
         this.formacionesPlanMapper = formacionesPlanMapper;
         this.cursoUsuarioService = cursoUsuarioService;
@@ -81,6 +91,18 @@ public class FormacionesServiceImpl implements FormacionesService {
         this.cursoPlanFormativoRepository = cursoPlanFormativoRepository;
         this.cursoUsuarioRepository = cursoUsuarioRepository;
         this.planFormativoUsuarioRepository = planFormativoUsuarioRepository;
+    }
+
+    @Override
+    public List<FormacionesDTO> getFormacionesPorFecha(long usuarioId, LocalDate fechaIni, LocalDate fechaFin) {
+        List<FormacionesDTO> formaciones = new ArrayList<>();
+        List<CursoUsuario> cursosUsuario = cursoUsuarioRepository.findAvailableByUsuarioIdAndRangeOfDates(usuarioId, fechaIni, fechaFin);
+        List<PlanFormativoUsuario> planesUsuario = planFormativoUsuarioRepository.findAvailableByUsuarioIdAndRangeOfDates(usuarioId, fechaIni, fechaFin);
+        formaciones.addAll(cursosUsuario.stream().map(cursoUsuario -> formacionesCursoMapper.toDto(cursoUsuario.getCurso())).collect(
+            Collectors.toList()));
+        formaciones.addAll(planesUsuario.stream().map(planUsuario -> formacionesPlanMapper.toDto(planUsuario.getPlanFormativo())).collect(
+            Collectors.toList()));
+        return formaciones;
     }
 
     @Override
@@ -127,6 +149,12 @@ public class FormacionesServiceImpl implements FormacionesService {
                 Interes interes = interesUsuario.getInteres();
                 idIntereses.add(interes.getId());
             });
+            if(idHabilidades.isEmpty()){
+                idHabilidades.add(0L);
+            }
+            if(idIntereses.isEmpty()){
+                idIntereses.add(0L);
+            }
             if(tipoFormacion.equalsIgnoreCase(TIPO_FORMACION_CURSO)){
                 return getCursosSugeridos(usuarioId, idHabilidades, idIntereses, pagina, registrosPorPagina);
             }
@@ -142,7 +170,7 @@ public class FormacionesServiceImpl implements FormacionesService {
         List<Curso> cursos = cursoRepository.findMoreRelevantAvailableByHabilidadesAndIntereses(idHabilidades, idIntereses, pageable);
         List<FormacionesSugeridasDTO> formacionesSugeridas = new ArrayList<>();
         cursos.forEach(curso -> {
-            FormacionesSugeridasDTO dto = formacionesCursoMapper.toDto(curso);
+            FormacionesSugeridasDTO dto = formacionesSugeridasCursoMapper.toDto(curso);
             dto.setTipoFormacion(TIPO_FORMACION_CURSO);
             List<HabilidadUsuario> matchHabilidades = habilidadUsuarioRepository.findMatchByUsuarioAndCurso(usuarioId, curso.getId());
             List<InteresUsuario> matchIntereses = interesUsuarioRepository.findMatchByUsuarioAndCurso(usuarioId, curso.getId());
@@ -160,7 +188,7 @@ public class FormacionesServiceImpl implements FormacionesService {
         List<PlanFormativo> planesFormativos = planFormativoRepository.findMoreRelevantAvailableByHabilidadesAndIntereses(idHabilidades, idIntereses, pageable);
         List<FormacionesSugeridasDTO> formacionesSugeridas = new ArrayList<>();
         planesFormativos.forEach(planFormativo -> {
-            FormacionesSugeridasDTO dto = formacionesPlanMapper.toDto(planFormativo);
+            FormacionesSugeridasDTO dto = formacionesSugeridasPlanMapper.toDto(planFormativo);
             dto.setTipoFormacion(TIPO_FORMACION_PLANES);
             List<HabilidadUsuario> matchHabilidades = habilidadUsuarioRepository.findMatchByUsuarioAndPlanFormativo(usuarioId, planFormativo.getId());
             List<InteresUsuario> matchIntereses = interesUsuarioRepository.findMatchByUsuarioAndPlanFormativo(usuarioId, planFormativo.getId());
