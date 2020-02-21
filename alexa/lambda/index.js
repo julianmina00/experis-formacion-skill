@@ -5,6 +5,7 @@ const Alexa = require('ask-sdk-core');
 const interceptors = require('./interceptors');
 const persistence = require('./persistence');
 const logic = require('./logic');
+const constants = require('./constants');
 
 const utils = {
     otrasOpciones(handlerInput) {
@@ -213,6 +214,80 @@ const RegistrarInteresesIntentHandler = {
     }
 };
 
+// Javi: intent de sugerencia de cursos o planes
+const SugerenciaCursosPlanesIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SugerenciaCursosPlanesIntent';
+    },
+    async handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const intent = handlerInput.requestEnvelope.request.intent;
+        console.log('processando intent: '+Alexa.getIntentName(handlerInput.requestEnvelope));
+        //let numregistro = 0;
+        let numregistroW = logic.getSessionAttribute(handlerInput, 'numregistro');
+        if (numregistroW === '') {
+            numregistroW = '0'
+        }
+        else {
+            numregistroW = numregistroW + 1
+        }
+        
+        const userName = logic.getSessionAttribute(handlerInput, 'userName');
+        // /api/formaciones-sugeridas/ idusuario / Curso o Plan / num registro mostrado / num registros por pagina
+        const EntradaSugerenciaCursosPlanes = constants.endpoints.SUGERENCIA_CURSOS_PLANES + logic.getSessionAttribute(handlerInput, 'userId') +
+              '/' + intent.slots.PlanesCursos.resolutions.resolutionsPerAuthority[0].values[0].value.id + '/' + numregistroW + '/' + '1'
+        
+       
+        
+        let speakOutput = '';
+        // se debe llamar a la logic del SugerenciaCursosPlanesIntent
+        const response = await logic.SugerenciaCursosPlanes(EntradaSugerenciaCursosPlanes);
+        
+        console.log('respuesta api: '+JSON.stringify(response));
+        if(response.id[0] === ''){
+            if(intent.slots.PlanesCursos.resolutions.resolutionsPerAuthority[0].values[0].value.id === 'P'){
+                speakOutput += requestAttributes.t('NO_HAY_SUGERENCIA_PLANES', userName);
+            }
+            else{
+                speakOutput += requestAttributes.t('NO_HAY_SUGERENCIA_CURSOS', userName);
+            }
+            console.log("No se han obtenido sugerencia de cursos o planes: "+JSON.stringify(response));
+        }
+        else{
+            // QUEDA ver si se necesita además separar dia mes año
+             if(intent.slots.PlanesCursos.resolutions.resolutionsPerAuthority[0].values[0].value.id === 'P'){
+                speakOutput += requestAttributes.t('SUGERENCIA_PLAN', response.descripcion[0], response.fechaInicio[0], response.fechaFin)[0];
+            }
+            else{
+                speakOutput += requestAttributes.t('SUGERENCIA_CURSO', response.descripcion[0], response.fechaInicio[0], response.fechaFin)[0];
+            }
+            //logic.setSessionAttribute(handlerInput, 'interesesRegistrados', true);
+            console.log("sugerencia curso/plan obtenida: "+JSON.stringify(response));
+        }
+        // QUEDA toda la logica de apuntate o quieres que busque mas, REVISAR lo de UTILS.OTRASOPCIONES????
+        
+        logic.setSessionAttribute(handlerInput,'numregistro', numregistroW);
+        logic.setSessionAttribute(handlerInput,'formacionId', response.id[0]);
+        logic.setSessionAttribute(handlerInput,'tipoFormacion', response.tipoFormacion[0]);
+        logic.setSessionAttribute(handlerInput,'DescrFormacion', response.descripcion[0]);
+        speakOutput += '<break time="1s"/>'+requestAttributes.t('APUNTARSE_O_SIGUIENTE')+utils.otrasOpciones(handlerInput);
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+//FIN JAVI
+
+
+
+
+
+
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -297,6 +372,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         RegistrarHabilidadesIntentHandler,
         RegistrarInteresesIntentHandler,
         RegistrarIdiomasIntentHandler,
+        SugerenciaCursosPlanesIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
@@ -316,3 +392,4 @@ exports.handler = Alexa.SkillBuilders.custom()
     )
     .withPersistenceAdapter(persistence.getPersistenceAdapter())
     .lambda();
+

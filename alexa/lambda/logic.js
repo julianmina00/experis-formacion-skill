@@ -17,32 +17,44 @@ module.exports = {
     
     registrarUsuario(data){
         console.log("....Registrando usuario: "+data);
-        return this.httpPost(data, constants.endpoints.REGISTRO_USUARIOS);
+        return this.httpPost(data, constants.endpoints.REGISTRO_USUARIOS, 'POST');
     },
     
     registrarIdioma(data){
         console.log("....Registrando idioma: "+data);
-        return this.httpPost(data, constants.endpoints.REGISTRO_IDIOMAS);
+        return this.httpPost(data, constants.endpoints.REGISTRO_IDIOMAS, 'POST');
     },
     
     registrarHabilidad(data){
         console.log("....Registrando habilidad: "+data);
-        return this.httpPost(data, constants.endpoints.REGISTRO_HABILIDAD);
+        return this.httpPost(data, constants.endpoints.REGISTRO_HABILIDAD, 'POST');
     },
     
     registrarInteres(data){
         console.log("....Registrando interés: "+data);
-        return this.httpPost(data, constants.endpoints.REGISTRO_INTERES);
+        return this.httpPost(data, constants.endpoints.REGISTRO_INTERES, 'POST');
     },
-        
-    httpPost(data, endpoint){
+
+    registrarFormacionUsuario(data){
+        console.log("....Registrando formacion: "+data);
+        return this.httpPost(data, constants.endpoints.REGISTRO_FORMACION_USUARIO, 'POST');
+    },
+     
+
+// JAVI: SugerenciaCursosPlanesIntent
+    SugerenciaCursosPlanes(EntradaSugerenciaCursosPlanes){
+        console.log("....Sugerencia Cursos Planes: "+EntradaSugerenciaCursosPlanes);
+        return this.httpPost('' , EntradaSugerenciaCursosPlanes, 'GET');
+    },
+// FIN JAVI          
+    httpPost(data, endpoint, httpMethod){
         return new Promise(((resolve, reject) => {
             const https = require('https')
             const options = {
               hostname: 'experis-formacion.herokuapp.com',
               port: 443,
               path: endpoint,
-              method: 'POST',
+              method: httpMethod,
               headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': Buffer.byteLength(data),

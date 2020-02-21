@@ -259,6 +259,31 @@
           "samples": [
             "cambiar de usuario"
           ]
+        },
+        {
+          "name": "SugerenciaCursosPlanesIntent",
+          "slots": [
+            {
+              "name": "PlanesCursos",
+              "type": "CursosPlanes",
+              "samples": [
+                "{PlanesCursos} formativos",
+                "Empiezo por {PlanesCursos}",
+                "Primero {PlanesCursos}",
+                "{PlanesCursos}"
+              ]
+            }
+          ],
+          "samples": [
+            "sugíereme formaciones",
+            "En que {PlanesCursos} me puedo apuntar",
+            "Tiene Experis alguna {PlanesCursos} de curso para mi",
+            "Hay alguna sugerencia de {PlanesCursos} para mí",
+            "Tiene Experis algún {PlanesCursos} para mí",
+            "Qué {PlanesCursos} tiene Experis",
+            "Qué {PlanesCursos} tiene Experis para mi",
+            "Qué tiene Experis formación para mi"
+          ]
         }
       ],
       "types": [
@@ -366,6 +391,23 @@
             }
           ],
           "name": "NIVEL_IDIOMA"
+        },
+        {
+          "values": [
+            {
+              "id": "P",
+              "name": {
+                "value": "Planes"
+              }
+            },
+            {
+              "id": "C",
+              "name": {
+                "value": "Cursos"
+              }
+            }
+          ],
+          "name": "CursosPlanes"
         }
       ]
     },
@@ -476,8 +518,9 @@
               "name": "nombre",
               "type": "AMAZON.FirstName",
               "elicitationRequired": true,
-              "confirmationRequired": false,
+              "confirmationRequired": true,
               "prompts": {
+                "confirmation": "Confirm.Slot.732853672272.1554532899458",
                 "elicitation": "Elicit.Slot.834143548492.82161439717"
               }
             },
@@ -573,6 +616,22 @@
             }
           ],
           "delegationStrategy": "ALWAYS"
+        },
+        {
+          "name": "SugerenciaCursosPlanesIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "PlanesCursos",
+              "type": "CursosPlanes",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1361540677960.1472936338388"
+              }
+            }
+          ]
         }
       ],
       "delegationStrategy": "ALWAYS"
@@ -995,8 +1054,34 @@
             "value": "¿eres técnico, consultor o especialista?"
           }
         ]
+      },
+      {
+        "id": "Elicit.Slot.1361540677960.1472936338388",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Genial, ¿quieres ver cursos o planes?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Qué quieres ver primero cursos o planes formativos?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Qué quieres cursos o planes formativos?"
+          }
+        ]
+      },
+      {
+        "id": "Confirm.Slot.732853672272.1554532899458",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿te llamas {nombre} ?"
+          }
+        ]
       }
     ]
   },
-  "version": "36"
+  "version": "45"
 }
