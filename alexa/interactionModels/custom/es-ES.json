@@ -275,14 +275,30 @@
             }
           ],
           "samples": [
+            "qué {PlanesCursos} tienes para mí",
+            "siguiente formación",
+            "Tiene experis alguna formación para mí",
             "sugíereme formaciones",
             "En que {PlanesCursos} me puedo apuntar",
-            "Tiene Experis alguna {PlanesCursos} de curso para mi",
+            "Tiene Experis alguna sugerencia de {PlanesCursos} para mi",
             "Hay alguna sugerencia de {PlanesCursos} para mí",
             "Tiene Experis algún {PlanesCursos} para mí",
             "Qué {PlanesCursos} tiene Experis",
             "Qué {PlanesCursos} tiene Experis para mi",
             "Qué tiene Experis formación para mi"
+          ]
+        },
+        {
+          "name": "ConsultaFormacionesUsuarioIntent",
+          "slots": [
+            {
+              "name": "fechaInicio",
+              "type": "AMAZON.DATE"
+            }
+          ],
+          "samples": [
+            "que tengo para {fechaInicio}",
+            "que formaciones tengo para {fechaInicio}"
           ]
         }
       ],
@@ -1083,5 +1099,5 @@
       }
     ]
   },
-  "version": "45"
+  "version": "46"
 }

@@ -226,19 +226,19 @@ const SugerenciaCursosPlanesIntentHandler = {
         const sessionAttributes = attributesManager.getSessionAttributes();
         const intent = handlerInput.requestEnvelope.request.intent;
         console.log('processando intent: '+Alexa.getIntentName(handlerInput.requestEnvelope));
-        //let numregistro = 0;
-        let numregistroW = logic.getSessionAttribute(handlerInput, 'numregistro');
+        let numregistroN = 0;
+        var numregistroW = logic.getSessionAttribute(handlerInput, 'numregistro');
         if (numregistroW === '') {
-            numregistroW = '0'
+            numregistroN = 0
         }
         else {
-            numregistroW = numregistroW + 1
+            numregistroN = parseInt(numregistroW, 10) + 1
         }
         
         const userName = logic.getSessionAttribute(handlerInput, 'userName');
         // /api/formaciones-sugeridas/ idusuario / Curso o Plan / num registro mostrado / num registros por pagina
         const EntradaSugerenciaCursosPlanes = constants.endpoints.SUGERENCIA_CURSOS_PLANES + logic.getSessionAttribute(handlerInput, 'userId') +
-              '/' + intent.slots.PlanesCursos.resolutions.resolutionsPerAuthority[0].values[0].value.id + '/' + numregistroW + '/' + '1'
+              '/' + intent.slots.PlanesCursos.resolutions.resolutionsPerAuthority[0].values[0].value.id + '/' + numregistroN + '/' + '1'
         
        
         
@@ -247,7 +247,8 @@ const SugerenciaCursosPlanesIntentHandler = {
         const response = await logic.SugerenciaCursosPlanes(EntradaSugerenciaCursosPlanes);
         
         console.log('respuesta api: '+JSON.stringify(response));
-        if(response.id[0] === ''){
+    
+        if(typeof response[0].id === "undefined"){
             if(intent.slots.PlanesCursos.resolutions.resolutionsPerAuthority[0].values[0].value.id === 'P'){
                 speakOutput += requestAttributes.t('NO_HAY_SUGERENCIA_PLANES', userName);
             }
@@ -259,21 +260,28 @@ const SugerenciaCursosPlanesIntentHandler = {
         else{
             // QUEDA ver si se necesita además separar dia mes año
              if(intent.slots.PlanesCursos.resolutions.resolutionsPerAuthority[0].values[0].value.id === 'P'){
-                speakOutput += requestAttributes.t('SUGERENCIA_PLAN', response.descripcion[0], response.fechaInicio[0], response.fechaFin)[0];
+                speakOutput += requestAttributes.t('SUGERENCIA_PLAN', response[0].descripcion, response[0].fechaInicio, response[0].fechaFin);
             }
             else{
-                speakOutput += requestAttributes.t('SUGERENCIA_CURSO', response.descripcion[0], response.fechaInicio[0], response.fechaFin)[0];
+                speakOutput += requestAttributes.t('SUGERENCIA_CURSO', response[0].descripcion, response[0].fechaInicio, response[0].fechaFin);
             }
             //logic.setSessionAttribute(handlerInput, 'interesesRegistrados', true);
             console.log("sugerencia curso/plan obtenida: "+JSON.stringify(response));
-        }
-        // QUEDA toda la logica de apuntate o quieres que busque mas, REVISAR lo de UTILS.OTRASOPCIONES????
         
-        logic.setSessionAttribute(handlerInput,'numregistro', numregistroW);
-        logic.setSessionAttribute(handlerInput,'formacionId', response.id[0]);
-        logic.setSessionAttribute(handlerInput,'tipoFormacion', response.tipoFormacion[0]);
-        logic.setSessionAttribute(handlerInput,'DescrFormacion', response.descripcion[0]);
-        speakOutput += '<break time="1s"/>'+requestAttributes.t('APUNTARSE_O_SIGUIENTE')+utils.otrasOpciones(handlerInput);
+            // QUEDA toda la logica de apuntate o quieres que busque mas, REVISAR lo de UTILS.OTRASOPCIONES????
+        
+            //numregistroW = numregistroN.toString();
+            //console.log("sugerencia curso/plan obtenida: "+numregistroN);
+            //console.log("sugerencia curso/plan obtenida: "+numregistroW);
+            //console.log("sugerencia curso/plan obtenida: "+response[0].id);
+            //console.log("sugerencia curso/plan obtenida: "+response[0].tipoFormacion);
+            //console.log("sugerencia curso/plan obtenida: "+response[0].descripcion);
+            logic.setSessionAttribute(handlerInput,'numregistro', numregistroN);
+            logic.setSessionAttribute(handlerInput,'formacionId', response[0].id);
+            logic.setSessionAttribute(handlerInput,'tipoFormacion', response[0].tipoFormacion);
+            logic.setSessionAttribute(handlerInput,'DescrFormacion', response[0].descripcion);
+            speakOutput += '<break time="1s"/>'+requestAttributes.t('APUNTARSE_O_SIGUIENTE')+utils.otrasOpciones(handlerInput);
+        }
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -283,8 +291,44 @@ const SugerenciaCursosPlanesIntentHandler = {
 
 //FIN JAVI
 
-
-
+const ConsultaFormacionesUsuarioIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ConsultaFormacionesUsuarioIntent';
+    },
+    async handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const intent = handlerInput.requestEnvelope.request.intent;
+        console.log('processando intent: '+Alexa.getIntentName(handlerInput.requestEnvelope));
+        
+        const request = JSON.stringify({
+          usuarioId: logic.getSessionAttribute(handlerInput, 'userId'),
+          fechaInicio: intent.slots.fechaInicio.value
+        });
+        console.log("request: "+JSON.stringify(request));
+        
+        let speakOutput = 'Okey!';
+        /*
+        const response = await logic.registrarInteres(interes);
+        if(response.usuarioId !== logic.getSessionAttribute(handlerInput, 'userId')){
+            speakOutput += requestAttributes.t('ERROR_LLAMANDO_API_MSG', response.detail);
+            console.log("Error registrando interés: "+JSON.stringify(response));
+        }
+        else{
+            speakOutput += requestAttributes.t('INTERES_REGISTRADO_EXITOSAMENTE_MSG');
+            logic.setSessionAttribute(handlerInput, 'interesesRegistrados', true);
+            console.log("Interés registrado: "+JSON.stringify(response));
+        }
+        speakOutput += '<break time="1s"/>'+requestAttributes.t('REGISTRAR_OTRO_INTERES_MSG')+utils.otrasOpciones(handlerInput);
+        */
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
 
 
 
@@ -373,6 +417,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         RegistrarInteresesIntentHandler,
         RegistrarIdiomasIntentHandler,
         SugerenciaCursosPlanesIntentHandler,
+        ConsultaFormacionesUsuarioIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
