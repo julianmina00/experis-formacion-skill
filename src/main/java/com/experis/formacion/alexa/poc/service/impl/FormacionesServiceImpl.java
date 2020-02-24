@@ -100,8 +100,16 @@ public class FormacionesServiceImpl implements FormacionesService {
         List<PlanFormativoUsuario> planesUsuario = planFormativoUsuarioRepository.findAvailableByUsuarioIdAndRangeOfDates(usuarioId, fechaIni, fechaFin);
         formaciones.addAll(cursosUsuario.stream().map(cursoUsuario -> formacionesCursoMapper.toDto(cursoUsuario.getCurso())).collect(
             Collectors.toList()));
-        formaciones.addAll(planesUsuario.stream().map(planUsuario -> formacionesPlanMapper.toDto(planUsuario.getPlanFormativo())).collect(
-            Collectors.toList()));
+        List<FormacionesDTO> planesFormativos = planesUsuario.stream()
+            .map(planUsuario -> formacionesPlanMapper.toDto(planUsuario.getPlanFormativo()))
+            .collect(Collectors.toList());
+        planesFormativos.forEach(planFormativo ->  {
+            List<String> cursos = new ArrayList<>();
+            List<CursoPlanFormativo> cursoPlanFormativo = cursoPlanFormativoRepository.findByPlanFormativoId(planFormativo.getId());
+            cursoPlanFormativo.forEach(cursoPlan -> cursos.add(cursoPlan.getCurso().getDescripcion()));
+            planFormativo.setCursos(cursos);
+        });
+        formaciones.addAll(planesFormativos);
         return formaciones;
     }
 

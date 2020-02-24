@@ -13,7 +13,7 @@ import org.mapstruct.Mapping;
 public interface FormacionesCursoMapper extends EntityMapper<FormacionesDTO, Curso> {
 
 
-    @Mapping(target = "tipoFormacion", ignore = true)
+    @Mapping(target = "tipoFormacion", constant = "C")
     @Mapping(target = "idioma", ignore = true)
     @Mapping(target = "cursos", ignore = true)
     FormacionesDTO toDto(Curso curso);

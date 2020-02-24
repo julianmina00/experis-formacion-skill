@@ -15,4 +15,6 @@ import org.springframework.stereotype.Repository;
 public interface CursoPlanFormativoRepository extends JpaRepository<CursoPlanFormativo, Long> {
 
     List<CursoPlanFormativo> findByPlanFormativo(PlanFormativo planFormativo);
+
+    List<CursoPlanFormativo> findByPlanFormativoId(Long planFormativoId);
 }

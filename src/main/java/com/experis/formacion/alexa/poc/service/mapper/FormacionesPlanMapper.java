@@ -13,7 +13,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = {})
 public interface FormacionesPlanMapper extends EntityMapper<FormacionesDTO, PlanFormativo> {
 
-    @Mapping(target = "tipoFormacion", ignore = true)
+    @Mapping(target = "tipoFormacion", constant = "P")
     @Mapping(target = "hora", ignore = true)
     @Mapping(target = "numeroHoras", ignore = true)
     @Mapping(target = "telematicoPresencial", ignore = true)
