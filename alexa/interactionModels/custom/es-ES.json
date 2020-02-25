@@ -294,11 +294,39 @@
             {
               "name": "fechaInicio",
               "type": "AMAZON.DATE"
+            },
+            {
+              "name": "fechaFin",
+              "type": "AMAZON.DATE"
             }
           ],
           "samples": [
+            "que formaciones tengo entre {fechaInicio} y el {fechaFin}",
+            "que tengo entre {fechaInicio} y el {fechaFin}",
+            "que tengo para el {fechaInicio}",
+            "que tengo entre el {fechaInicio} y el {fechaFin}",
+            "que tengo entre  {fechaInicio} y {fechaFin}",
+            "que formaciones tengo entre el {fechaInicio} y el {fechaFin}",
+            "que formaciones tengo entre  {fechaInicio} y {fechaFin}",
             "que tengo para {fechaInicio}",
             "que formaciones tengo para {fechaInicio}"
+          ]
+        },
+        {
+          "name": "ApuntarseFormacionIntent",
+          "slots": [],
+          "samples": [
+            "Apuntame al plan formativo",
+            "Apuntame al curso",
+            "Apuntame a la formación",
+            "Apuntame"
+          ]
+        },
+        {
+          "name": "MasFormacionesIntent",
+          "slots": [],
+          "samples": [
+            "formación siguiente"
           ]
         }
       ],
@@ -1099,5 +1127,5 @@
       }
     ]
   },
-  "version": "46"
+  "version": "52"
 }

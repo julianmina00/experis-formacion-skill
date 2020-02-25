@@ -39,14 +39,26 @@ module.exports = {
         console.log("....Registrando formacion: "+data);
         return this.httpPost(data, constants.endpoints.REGISTRO_FORMACION_USUARIO, 'POST');
     },
-     
+    
+    
+    consultarFormacionUsuario(usuarioId, fechaInicio, fechaFin){
+        console.log("....Consultando formaciones: ["+usuarioId+", "+fechaInicio+", "+fechaFin+"]");
+        const url = constants.endpoints.CONSULTA_FORMACION_USUARIO+'/'+usuarioId+'/'+fechaInicio+'/'+fechaFin;
+        console.log("....URL: "+url);
+        const response = this.httpPost('', url, 'GET');
+        console.log("...Formaciones Usuario: "+JSON.stringify(response));
+        return response;
+    },
+    
+    
 
 // JAVI: SugerenciaCursosPlanesIntent
     SugerenciaCursosPlanes(EntradaSugerenciaCursosPlanes){
         console.log("....Sugerencia Cursos Planes: "+EntradaSugerenciaCursosPlanes);
-        return this.httpPost('' , EntradaSugerenciaCursosPlanes, 'GET');
+        return this.httpPost('', EntradaSugerenciaCursosPlanes, 'GET');
     },
-// FIN JAVI          
+// FIN JAVI     
+
     httpPost(data, endpoint, httpMethod){
         return new Promise(((resolve, reject) => {
             const https = require('https')

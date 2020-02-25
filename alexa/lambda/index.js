@@ -29,6 +29,84 @@ const utils = {
             return '...'+requestAttributes.t('OPCION_AYUDA_MSG');
         }
         return opcionesOutput;
+    },
+    
+    
+    descripcionFormacion(handlerInput){
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const formaciones = logic.getSessionAttribute(handlerInput, 'formaciones');
+        let seq = logic.getSessionAttribute(handlerInput, 'formacionesNextIndex');
+        if(seq === undefined || seq === ''){
+            seq = 0;
+        }
+        console.log('Index: '+seq+' -  formacionesNextIndex: '+logic.getSessionAttribute(handlerInput, 'formacionesNextIndex'));
+        console.log('procesando descripcionFormacion para index: '+seq+' y formaciones: '+JSON.stringify(formaciones));
+        if(formaciones === undefined){
+            return requestAttributes.t('NO_HAY_FORMACIONES_MSG');
+        }
+        console.log('formaciones['+seq+']: '+JSON.stringify(formaciones[seq]));
+        if(formaciones[seq] === undefined){
+            return requestAttributes.t('NO_HAY_MAS_FORMACIONES_MSG');
+        }
+        
+        
+        let description = '';
+        if(formaciones[seq].fechaInicio === formaciones[seq].fechaFin){
+            description += requestAttributes.t('DIA_FORMACION_MSG', formaciones[seq].fechaInicio);
+        }
+        else{
+            description += requestAttributes.t('RANGO_FORMACION_MSG', formaciones[seq].fechaInicio, formaciones[seq].fechaFin);
+        }
+        
+        if(formaciones[seq].tipoFormacion === 'P' || formaciones[seq].tipoFormacion === 'p'){
+            description += requestAttributes.t('FORMACION_DESCRIPCION_MSG', 'plan formativo', formaciones[seq].descripcion);
+            const cursos = formaciones[seq].cursos;
+            if(cursos !== undefined && cursos.length > 0){
+                let descCursos = '';
+                let i; 
+                for (i = 0; i < cursos.length; i++) {
+                  if(i>0 && i===cursos.length-1){
+                      descCursos += ' y '
+                  }
+                  descCursos += cursos[i];
+                  if(i===cursos.length-1){
+                      descCursos += '. '
+                  }
+                  else{
+                      descCursos += ', '
+                  }
+                  
+                }
+                description += requestAttributes.t('CURSOS_PLAN_FORMATIVO_MSG',descCursos);
+            }
+        }
+        else{
+            description += requestAttributes.t('FORMACION_DESCRIPCION_MSG', 'curso', formaciones[seq].descripcion);
+            const curso = formaciones[seq];
+            const modalidadCurso = curso.telematicoPresencial === 't' || curso.telematicoPresencial === 'T' ? 'online' : 'presencial';
+            description += requestAttributes.t('CURSO_PRESENCIAL_ONLINE_MSG', modalidadCurso);
+            if(curso.hora !== undefined){
+                description += requestAttributes.t('CURSO_HORA_INICIO_MSG', curso.hora);
+                if(curso.numeroHoras !== undefined){
+                    description += requestAttributes.t('CURSO_DURACION_MSG', curso.numeroHoras);    
+                }
+            }
+            if(curso.ubicacion !== undefined){
+                description += requestAttributes.t('CURSO_LUGAR_MSG', curso.ubicacion);
+            }
+        }
+        seq++;
+        if(seq < formaciones.length){
+            const pendientes = formaciones.length - seq;
+            description += requestAttributes.t('MAS_FORMACIONES_MSG', pendientes === 1 ? 'queda una formación' : 'quedan '+pendientes+' formaciones ');
+        }
+        else{
+            description += '<break time="2s"/>'+requestAttributes.t('NO_HAY_MAS_FORMACIONES_MSG');
+            description += '.<break time="1s"/>'+requestAttributes.t('OPCION_AYUDA_MSG');
+        }
+        logic.setSessionAttribute(handlerInput, 'formacionesNextIndex', seq);
+        return description; 
     }
 };
 
@@ -256,6 +334,10 @@ const SugerenciaCursosPlanesIntentHandler = {
                 speakOutput += requestAttributes.t('NO_HAY_SUGERENCIA_CURSOS', userName);
             }
             console.log("No se han obtenido sugerencia de cursos o planes: "+JSON.stringify(response));
+            logic.setSessionAttribute(handlerInput,'numregistro', '');
+            logic.setSessionAttribute(handlerInput,'formacionId', '');
+            logic.setSessionAttribute(handlerInput,'tipoFormacion', '');
+            logic.setSessionAttribute(handlerInput,'DescrFormacion', '');
         }
         else{
             // QUEDA ver si se necesita además separar dia mes año
@@ -303,26 +385,28 @@ const ConsultaFormacionesUsuarioIntentHandler = {
         const intent = handlerInput.requestEnvelope.request.intent;
         console.log('processando intent: '+Alexa.getIntentName(handlerInput.requestEnvelope));
         
-        const request = JSON.stringify({
-          usuarioId: logic.getSessionAttribute(handlerInput, 'userId'),
-          fechaInicio: intent.slots.fechaInicio.value
-        });
-        console.log("request: "+JSON.stringify(request));
+        const usuarioId = logic.getSessionAttribute(handlerInput, 'userId');
+        const fechaInicio = intent.slots.fechaInicio.value;
+        let fechaFin = intent.slots.fechaFin.value;
+        console.log("Fecha fin: "+fechaFin);
+        if(fechaFin === undefined){
+            fechaFin = fechaInicio;
+        }
         
-        let speakOutput = 'Okey!';
-        /*
-        const response = await logic.registrarInteres(interes);
-        if(response.usuarioId !== logic.getSessionAttribute(handlerInput, 'userId')){
-            speakOutput += requestAttributes.t('ERROR_LLAMANDO_API_MSG', response.detail);
-            console.log("Error registrando interés: "+JSON.stringify(response));
+        let speakOutput = '';
+        const response = await logic.consultarFormacionUsuario(usuarioId, fechaInicio, fechaFin);
+        console.log('response: --> '+JSON.stringify(response))+' <-- '+response;
+        if(response[0] === undefined ){
+            speakOutput += requestAttributes.t('NO_HAY_FORMACIONES_MSG');
+            logic.setSessionAttribute(handlerInput, 'formaciones', undefined);
+            logic.setSessionAttribute(handlerInput, 'formacionesNextIndex', undefined);
         }
         else{
-            speakOutput += requestAttributes.t('INTERES_REGISTRADO_EXITOSAMENTE_MSG');
-            logic.setSessionAttribute(handlerInput, 'interesesRegistrados', true);
-            console.log("Interés registrado: "+JSON.stringify(response));
+            console.log("Formaciones del usuario: "+JSON.stringify(response));
+            logic.setSessionAttribute(handlerInput, 'formaciones', response);
+            logic.setSessionAttribute(handlerInput, 'formacionesNextIndex', undefined);
+            speakOutput += utils.descripcionFormacion(handlerInput);
         }
-        speakOutput += '<break time="1s"/>'+requestAttributes.t('REGISTRAR_OTRO_INTERES_MSG')+utils.otrasOpciones(handlerInput);
-        */
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -330,7 +414,70 @@ const ConsultaFormacionesUsuarioIntentHandler = {
     }
 };
 
+const MasFormacionesIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'MasFormacionesIntent';
+    },
+    handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        console.log('processando intent: '+Alexa.getIntentName(handlerInput.requestEnvelope));
+        
+        const speakOutput = utils.descripcionFormacion(handlerInput);
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
 
+// ApuntarseFormacionIntent
+const ApuntarseFormacionIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ApuntarseFormacionIntent';
+    },
+    async handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const intent = handlerInput.requestEnvelope.request.intent;
+        console.log('processando intent: '+Alexa.getIntentName(handlerInput.requestEnvelope));
+        
+        let speakOutput = '';
+        if(typeof logic.getSessionAttribute(handlerInput, 'formacionId') === "undefined"){
+            speakOutput += requestAttributes.t('BUSCA_PRIMERO_FORMACION');
+        }
+        else {
+          const formacion = JSON.stringify({
+          usuarioId: logic.getSessionAttribute(handlerInput, 'userId'),
+          tipoFormacion: logic.getSessionAttribute(handlerInput, 'tipoFormacion'),
+          formacionId: logic.getSessionAttribute(handlerInput, 'formacionId'),
+          }); 
+          const response = await logic.registrarFormacionUsuario(formacion);
+          console.log('respuesta api: '+JSON.stringify(response));
+          
+          if(response.usuarioId !== logic.getSessionAttribute(handlerInput, 'userId')){
+                speakOutput += requestAttributes.t('ERROR_LLAMANDO_API_MSG', response.detail);
+                console.log("Error registrando formacion: "+JSON.stringify(response));
+            }
+            else{
+                if(logic.getSessionAttribute(handlerInput, 'tipoFormacion') === 'C'){
+                    speakOutput += requestAttributes.t('REGISTRADO_FORMACION_CURSO',logic.getSessionAttribute(handlerInput, 'DescrFormacion'));
+                }
+                else{
+                    speakOutput += requestAttributes.t('REGISTRADO_FORMACION_PLAN',logic.getSessionAttribute(handlerInput, 'DescrFormacion'));
+                }
+                console.log("formación registrada: "+JSON.stringify(response));
+            }
+        }
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
 
 const HelpIntentHandler = {
     canHandle(handlerInput) {
@@ -418,6 +565,8 @@ exports.handler = Alexa.SkillBuilders.custom()
         RegistrarIdiomasIntentHandler,
         SugerenciaCursosPlanesIntentHandler,
         ConsultaFormacionesUsuarioIntentHandler,
+        MasFormacionesIntentHandler,
+        ApuntarseFormacionIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
