@@ -3,6 +3,7 @@ package com.experis.formacion.alexa.poc.service;
 import com.experis.formacion.alexa.poc.service.dto.FormacionesDTO;
 import com.experis.formacion.alexa.poc.service.dto.FormacionesSugeridasDTO;
 import com.experis.formacion.alexa.poc.service.dto.RegistroFormacionDTO;
+import com.experis.formacion.alexa.poc.service.dto.SessionUsuarioDTO;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,5 +14,7 @@ public interface FormacionesService {
     RegistroFormacionDTO registerFormacionUsuario(RegistroFormacionDTO dto);
 
     List<FormacionesDTO> getFormacionesPorFecha(long usuarioId, LocalDate fechaIni, LocalDate fechaFin);
+
+    SessionUsuarioDTO getSessionUsuario(String nombreUsuario, String numeroIdentificacion);
 
 }

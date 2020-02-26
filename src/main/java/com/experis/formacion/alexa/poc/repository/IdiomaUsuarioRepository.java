@@ -12,4 +12,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IdiomaUsuarioRepository extends JpaRepository<IdiomaUsuario, Long> {
 
+    boolean existsByUsuarioId(Long usuarioId);
 }

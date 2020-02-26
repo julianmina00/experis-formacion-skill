@@ -4,10 +4,12 @@ import com.experis.formacion.alexa.poc.service.FormacionesService;
 import com.experis.formacion.alexa.poc.service.dto.FormacionesDTO;
 import com.experis.formacion.alexa.poc.service.dto.FormacionesSugeridasDTO;
 import com.experis.formacion.alexa.poc.service.dto.RegistroFormacionDTO;
+import com.experis.formacion.alexa.poc.service.dto.SessionUsuarioDTO;
 import com.experis.formacion.alexa.poc.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.List;
 import javax.annotation.MatchesPattern;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,6 +43,16 @@ public class FormacionResource {
 
     public FormacionResource(FormacionesService formacionesService) {
         this.formacionesService = formacionesService;
+    }
+
+    @GetMapping(value = "/session-usuario")
+    public ResponseEntity<SessionUsuarioDTO> getSessionUsuario(
+        @RequestHeader("nombreUsuario") String nombreUsuario,
+        @RequestHeader("numeroIdentificacion") String numeroIdentificacion) {
+        log.debug("REST request to get Session por usuario");
+        String utfNombreUsuario = new String(nombreUsuario.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        log.info("nombreUusuario "+nombreUsuario+" - nombreusuario UTF8: "+utfNombreUsuario);
+        return ResponseEntity.ok().body(formacionesService.getSessionUsuario(utfNombreUsuario, numeroIdentificacion));
     }
 
     @GetMapping("/formaciones-usuario/{usuarioId}/{fechaInicial}/{fechaFinal}")

@@ -36,4 +36,5 @@ public interface InteresUsuarioRepository extends JpaRepository<InteresUsuario, 
     List<InteresUsuario> findMatchByUsuarioAndPlanFormativo(@Param("usuarioId") Long usuarioId, @Param("planFormativoId") Long planFormativoId);
 
 
+    boolean existsByUsuarioId(Long usuarioId);
 }

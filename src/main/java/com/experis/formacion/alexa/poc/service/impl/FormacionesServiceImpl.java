@@ -14,6 +14,7 @@ import com.experis.formacion.alexa.poc.repository.CursoPlanFormativoRepository;
 import com.experis.formacion.alexa.poc.repository.CursoRepository;
 import com.experis.formacion.alexa.poc.repository.CursoUsuarioRepository;
 import com.experis.formacion.alexa.poc.repository.HabilidadUsuarioRepository;
+import com.experis.formacion.alexa.poc.repository.IdiomaUsuarioRepository;
 import com.experis.formacion.alexa.poc.repository.InteresUsuarioRepository;
 import com.experis.formacion.alexa.poc.repository.PlanFormativoRepository;
 import com.experis.formacion.alexa.poc.repository.PlanFormativoUsuarioRepository;
@@ -26,6 +27,7 @@ import com.experis.formacion.alexa.poc.service.dto.FormacionesDTO;
 import com.experis.formacion.alexa.poc.service.dto.FormacionesSugeridasDTO;
 import com.experis.formacion.alexa.poc.service.dto.PlanFormativoUsuarioDTO;
 import com.experis.formacion.alexa.poc.service.dto.RegistroFormacionDTO;
+import com.experis.formacion.alexa.poc.service.dto.SessionUsuarioDTO;
 import com.experis.formacion.alexa.poc.service.mapper.FormacionesCursoMapper;
 import com.experis.formacion.alexa.poc.service.mapper.FormacionesPlanMapper;
 import com.experis.formacion.alexa.poc.service.mapper.FormacionesSugeridasCursoMapper;
@@ -47,20 +49,21 @@ public class FormacionesServiceImpl implements FormacionesService {
 
     private static final String TIPO_FORMACION_CURSO = "C";
     private static final String TIPO_FORMACION_PLANES = "P";
-    private CursoRepository cursoRepository;
-    private PlanFormativoRepository planFormativoRepository;
-    private UsuarioRepository usuarioRepository;
-    private FormacionesSugeridasCursoMapper formacionesSugeridasCursoMapper;
-    private FormacionesSugeridasPlanMapper formacionesSugeridasPlanMapper;
-    private FormacionesCursoMapper formacionesCursoMapper;
-    private FormacionesPlanMapper formacionesPlanMapper;
-    private CursoUsuarioService cursoUsuarioService;
-    private PlanFormativoUsuarioService planFormativoUsuarioService;
-    private HabilidadUsuarioRepository habilidadUsuarioRepository;
-    private InteresUsuarioRepository interesUsuarioRepository;
-    private CursoPlanFormativoRepository cursoPlanFormativoRepository;
-    private CursoUsuarioRepository cursoUsuarioRepository;
-    private PlanFormativoUsuarioRepository planFormativoUsuarioRepository;
+    private final CursoRepository cursoRepository;
+    private final PlanFormativoRepository planFormativoRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final FormacionesSugeridasCursoMapper formacionesSugeridasCursoMapper;
+    private final FormacionesSugeridasPlanMapper formacionesSugeridasPlanMapper;
+    private final FormacionesCursoMapper formacionesCursoMapper;
+    private final FormacionesPlanMapper formacionesPlanMapper;
+    private final CursoUsuarioService cursoUsuarioService;
+    private final PlanFormativoUsuarioService planFormativoUsuarioService;
+    private final HabilidadUsuarioRepository habilidadUsuarioRepository;
+    private final InteresUsuarioRepository interesUsuarioRepository;
+    private final CursoPlanFormativoRepository cursoPlanFormativoRepository;
+    private final CursoUsuarioRepository cursoUsuarioRepository;
+    private final PlanFormativoUsuarioRepository planFormativoUsuarioRepository;
+    private final IdiomaUsuarioRepository idiomaUsuarioRepository;
 
     public FormacionesServiceImpl(
         CursoRepository cursoRepository,
@@ -76,7 +79,8 @@ public class FormacionesServiceImpl implements FormacionesService {
         InteresUsuarioRepository interesUsuarioRepository,
         CursoPlanFormativoRepository cursoPlanFormativoRepository,
         CursoUsuarioRepository cursoUsuarioRepository,
-        PlanFormativoUsuarioRepository planFormativoUsuarioRepository) {
+        PlanFormativoUsuarioRepository planFormativoUsuarioRepository,
+        IdiomaUsuarioRepository idiomaUsuarioRepository) {
         this.cursoRepository = cursoRepository;
         this.planFormativoRepository = planFormativoRepository;
         this.usuarioRepository = usuarioRepository;
@@ -91,6 +95,22 @@ public class FormacionesServiceImpl implements FormacionesService {
         this.cursoPlanFormativoRepository = cursoPlanFormativoRepository;
         this.cursoUsuarioRepository = cursoUsuarioRepository;
         this.planFormativoUsuarioRepository = planFormativoUsuarioRepository;
+        this.idiomaUsuarioRepository = idiomaUsuarioRepository;
+    }
+
+    @Override
+    public SessionUsuarioDTO getSessionUsuario(String nombreUsuario, String numeroIdentificacion) {
+        Optional<Usuario> optionalUsuario = usuarioRepository.findOneByNombreIgnoreCaseAndDocumento(nombreUsuario, numeroIdentificacion);
+        return optionalUsuario.map(usuario -> {
+            SessionUsuarioDTO session = new SessionUsuarioDTO();
+            Long usuarioId = usuario.getId();
+            session.setUserId(usuarioId);
+            session.setUserName(usuario.getNombre());
+            session.setHabilidadesRegistradas(habilidadUsuarioRepository.existsByUsuarioId(usuarioId));
+            session.setInteresesRegistrados(interesUsuarioRepository.existsByUsuarioId(usuarioId));
+            session.setIdiomasRegistrados(idiomaUsuarioRepository.existsByUsuarioId(usuarioId));
+            return session;
+        }).orElseThrow(() -> new RuntimeException(("No he podido encontrar al usuario "+nombreUsuario+" con número de identificación: "+numeroIdentificacion)));
     }
 
     @Override

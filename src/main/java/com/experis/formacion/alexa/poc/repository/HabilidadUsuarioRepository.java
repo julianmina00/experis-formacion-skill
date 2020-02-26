@@ -36,4 +36,6 @@ public interface HabilidadUsuarioRepository extends JpaRepository<HabilidadUsuar
         nativeQuery = true)
     List<HabilidadUsuario> findMatchByUsuarioAndPlanFormativo(@Param("usuarioId") Long usuarioId, @Param("planFormativoId") Long planFormativoId);
 
+    boolean existsByUsuarioId(Long usuarioId);
+
 }
