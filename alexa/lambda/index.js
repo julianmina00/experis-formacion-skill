@@ -31,6 +31,46 @@ const utils = {
         return opcionesOutput;
     },
     
+    limpiarSession(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const usuario = logic.getSessionAttribute(handlerInput, 'userId')+'-'+logic.getSessionAttribute(handlerInput, 'userName')
+        console.log('Cerrando la session del usuario: '+usuario);
+        // registro de usuario
+        logic.setSessionAttribute(handlerInput, 'userId', undefined);
+		logic.setSessionAttribute(handlerInput, 'userName', undefined);
+		logic.setSessionAttribute(handlerInput, 'habilidadesRegistradas', undefined);
+		logic.setSessionAttribute(handlerInput, 'interesesRegistrados', undefined);
+		logic.setSessionAttribute(handlerInput, 'idiomasRegistrados', undefined);
+		// formaciones sugeridas
+		logic.setSessionAttribute(handlerInput, 'formacionesNextIndex', undefined);
+        logic.setSessionAttribute(handlerInput, 'DescrFormacion', undefined);
+		logic.setSessionAttribute(handlerInput, 'formacionId', undefined);
+		logic.setSessionAttribute(handlerInput, 'tipoFormacion', undefined);
+		logic.setSessionAttribute(handlerInput, 'numregistro', undefined);
+		logic.setSessionAttribute(handlerInput, 'numregistroW recuperado entrada', undefined);
+		logic.setSessionAttribute(handlerInput, 'numregistroN entra por cero', undefined);
+		// consulta de formaciones
+		logic.setSessionAttribute(handlerInput, 'formaciones', undefined);
+		logic.setSessionAttribute(handlerInput, 'formacionesNextIndex', undefined);
+		console.log('Se ha cerrado la session del usuario: '+usuario);
+    },
+    
+    cargarSession(handlerInput, session){
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        if(session !== undefined){
+            const usuario = session.userName+'-'+session.userId
+            console.log('cargando la session del usuario: '+usuario);
+            // registro de usuario
+            logic.setSessionAttribute(handlerInput, 'userId', session.userId);
+    		logic.setSessionAttribute(handlerInput, 'userName', session.userName);
+    		logic.setSessionAttribute(handlerInput, 'habilidadesRegistradas', session.habilidadesRegistradas);
+    		logic.setSessionAttribute(handlerInput, 'interesesRegistrados', session.interesesRegistrados);
+    		logic.setSessionAttribute(handlerInput, 'idiomasRegistrados', session.idiomasRegistrados);
+    		console.log('Se ha cargado la session del usuario: '+usuario);
+        }
+    },
     
     descripcionFormacion(handlerInput){
         const {attributesManager} = handlerInput;
@@ -49,7 +89,6 @@ const utils = {
         if(formaciones[seq] === undefined){
             return requestAttributes.t('NO_HAY_MAS_FORMACIONES_MSG');
         }
-        
         
         let description = '';
         if(formaciones[seq].fechaInicio === formaciones[seq].fechaFin){
@@ -107,14 +146,9 @@ const utils = {
         }
         logic.setSessionAttribute(handlerInput, 'formacionesNextIndex', seq);
         return description; 
-    }
-};
-
-const LaunchRequestHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
-    handle(handlerInput) {
+    
+    bienvenida(handlerInput){
         const {attributesManager} = handlerInput;
         const requestAttributes = attributesManager.getRequestAttributes();
         const userName = logic.getSessionAttribute(handlerInput, 'userName');
@@ -133,12 +167,24 @@ const LaunchRequestHandler = {
                 else{
                     const idiomas = logic.getSessionAttribute(handlerInput, 'idiomasRegistrados');
                     if(idiomas !== true){
-                        speakOutput = speakOutput + requestAttributes.t('BIENVENIDA_REGISTRO_INTERESES');
+                        speakOutput = speakOutput + requestAttributes.t('BIENVENIDA_REGISTRO_IDIOMAS');
+                    }
+                    else{
+                        speakOutput = speakOutput + requestAttributes.t('OPCION_AYUDA_MSG');
                     }
                 }
             }
         }
-        
+        return speakOutput;
+    }
+};
+
+const LaunchRequestHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
+    },
+    handle(handlerInput) {
+        const speakOutput = utils.bienvenida(handlerInput);
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -305,12 +351,23 @@ const SugerenciaCursosPlanesIntentHandler = {
         const intent = handlerInput.requestEnvelope.request.intent;
         console.log('processando intent: '+Alexa.getIntentName(handlerInput.requestEnvelope));
         let numregistroN = 0;
-        var numregistroW = logic.getSessionAttribute(handlerInput, 'numregistro');
+        //var numregistroW = logic.getSessionAttribute(handlerInput, 'numregistro');
+        let numregistroW = logic.getSessionAttribute(handlerInput, 'numregistro');
+        console.log("numregistroW de entrada: "+numregistroW);
         if (numregistroW === '') {
             numregistroN = 0
+            console.log("numregistroN entra por cero: "+numregistroN);
         }
         else {
-            numregistroN = parseInt(numregistroW, 10) + 1
+            //numregistroN = parseInt(numregistroW, 10) + 1
+            numregistroN = numregistroW
+            console.log("numregistroN le suma 1: "+numregistroN);
+            console.log("guardado tipo formación: "+logic.getSessionAttribute(handlerInput, 'tipoFormacion'));
+            console.log("entrada tipo formación: "+intent.slots.PlanesCursos.resolutions.resolutionsPerAuthority[0].values[0].value.id);
+            if (intent.slots.PlanesCursos.resolutions.resolutionsPerAuthority[0].values[0].value.id !== logic.getSessionAttribute(handlerInput, 'tipoFormacion'))
+            {
+                numregistroN = 0
+            }
         }
         
         const userName = logic.getSessionAttribute(handlerInput, 'userName');
@@ -326,7 +383,10 @@ const SugerenciaCursosPlanesIntentHandler = {
         
         console.log('respuesta api: '+JSON.stringify(response));
     
-        if(typeof response[0].id === "undefined"){
+        //if (typeof response[0].id === undefined){
+        //if (response === undefined){     
+        if (response[0] === undefined){ 
+            console.log("hace el if del id: ");
             if(intent.slots.PlanesCursos.resolutions.resolutionsPerAuthority[0].values[0].value.id === 'P'){
                 speakOutput += requestAttributes.t('NO_HAY_SUGERENCIA_PLANES', userName);
             }
@@ -358,6 +418,7 @@ const SugerenciaCursosPlanesIntentHandler = {
             //console.log("sugerencia curso/plan obtenida: "+response[0].id);
             //console.log("sugerencia curso/plan obtenida: "+response[0].tipoFormacion);
             //console.log("sugerencia curso/plan obtenida: "+response[0].descripcion);
+            numregistroN = parseInt(numregistroN, 10) + 1
             logic.setSessionAttribute(handlerInput,'numregistro', numregistroN);
             logic.setSessionAttribute(handlerInput,'formacionId', response[0].id);
             logic.setSessionAttribute(handlerInput,'tipoFormacion', response[0].tipoFormacion);
@@ -443,7 +504,7 @@ const ApuntarseFormacionIntentHandler = {
         const requestAttributes = attributesManager.getRequestAttributes();
         const sessionAttributes = attributesManager.getSessionAttributes();
         const intent = handlerInput.requestEnvelope.request.intent;
-        console.log('processando intent: '+Alexa.getIntentName(handlerInput.requestEnvelope));
+        console.log('procesando intent: '+Alexa.getIntentName(handlerInput.requestEnvelope));
         
         let speakOutput = '';
         if(typeof logic.getSessionAttribute(handlerInput, 'formacionId') === "undefined"){
@@ -479,13 +540,63 @@ const ApuntarseFormacionIntentHandler = {
     }
 };
 
+const CambiarUsuarioIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'CambiarUsuarioIntent';
+    },
+    handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        console.log('procesando intent: '+Alexa.getIntentName(handlerInput.requestEnvelope));
+        utils.limpiarSession(handlerInput);
+        const speakOutput = requestAttributes.t('CAMBIAR_USUARIO_MSG');
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const IniciarSessionIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'IniciarSessionIntent';
+    },
+    async handle(handlerInput) {
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const intent = handlerInput.requestEnvelope.request.intent;
+        const nombreUsuario = intent.slots.nombreUsuario.value;
+        const numeroIdentificacion = intent.slots.documentoUsuario.value;
+        const session = await logic.sessionUsuario(nombreUsuario, numeroIdentificacion);
+        console.log('session: --> '+JSON.stringify(session));
+        utils.cargarSession(handlerInput, session);
+        const speakOutput = utils.bienvenida(handlerInput);
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'You can say hello to me! How can I help?';
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        let speakOutput = requestAttributes.t('OPCIONES_DISPONIBLES_AYUDA_MSG');
+        speakOutput += '<break time="1s"/>'+requestAttributes.t('OPCION_REGISTRAR_USUARIO_MSG');
+        speakOutput += '<break time="1s"/>'+requestAttributes.t('OPCION_CAMBIAR_USUARIO_MSG');
+        speakOutput += '<break time="1s"/>'+requestAttributes.t('OPCION_HABILIDADES_MSG');
+        speakOutput += '<break time="1s"/>'+requestAttributes.t('OPCION_INTERESES_MSG');
+        speakOutput += '<break time="1s"/>'+requestAttributes.t('OPCION_IDIOMAS_MSG');
+        speakOutput += '<break time="1s"/>'+requestAttributes.t('OPCION_SUGERENCIA_FORMACION_MSG');
+        speakOutput += '<break time="1s"/>'+requestAttributes.t('OPCION_FORMACIONES_USUARIO_MSG');
+        speakOutput += '<break time="1s"/>'+requestAttributes.t('OPCION_SALIR_MSG');
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -500,7 +611,10 @@ const CancelAndStopIntentHandler = {
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = 'Goodbye!';
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const userName = logic.getSessionAttribute(handlerInput, 'userName');
+        const speakOutput = requestAttributes.t('ADIOS_MSG', userName);
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .getResponse();
@@ -544,8 +658,9 @@ const ErrorHandler = {
     },
     handle(handlerInput, error) {
         console.log(`~~~~ Error handled: ${error.stack}`);
-        const speakOutput = `Sorry, I had trouble doing what you asked. Please try again.`;
-
+        const {attributesManager} = handlerInput;
+        const requestAttributes = attributesManager.getRequestAttributes();
+        const speakOutput = requestAttributes.t('ERROR_MSG');
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -567,6 +682,8 @@ exports.handler = Alexa.SkillBuilders.custom()
         ConsultaFormacionesUsuarioIntentHandler,
         MasFormacionesIntentHandler,
         ApuntarseFormacionIntentHandler,
+        CambiarUsuarioIntentHandler,
+        IniciarSessionIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,

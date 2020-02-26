@@ -13,7 +13,14 @@
         },
         {
           "name": "AMAZON.StopIntent",
-          "samples": []
+          "samples": [
+            "me voy",
+            "hasta luego",
+            "terminar",
+            "salir",
+            "chao",
+            "adios"
+          ]
         },
         {
           "name": "AMAZON.NavigateHomeIntent",
@@ -326,7 +333,42 @@
           "name": "MasFormacionesIntent",
           "slots": [],
           "samples": [
-            "formación siguiente"
+            "siguiente"
+          ]
+        },
+        {
+          "name": "IniciarSessionIntent",
+          "slots": [
+            {
+              "name": "nombreUsuario",
+              "type": "AMAZON.FirstName",
+              "samples": [
+                "me llamo {nombreUsuario}",
+                "mi nombre es {nombreUsuario}",
+                "estoy registrado como {nombreUsuario}",
+                "soy {nombreUsuario}",
+                "{nombreUsuario}"
+              ]
+            },
+            {
+              "name": "documentoUsuario",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "el número de mi pasaporte es {documentoUsuario}",
+                "el número de mi nie es {documentoUsuario}",
+                "el número de mi dénei es {documentoUsuario}",
+                "el número de mi déenei es {documentoUsuario}",
+                "el número de mi dni es {documentoUsuario}",
+                "el número de mi documento de identidad es {documentoUsuario}",
+                "el número de mi documento es {documentoUsuario}",
+                "es {documentoUsuario}",
+                "{documentoUsuario}"
+              ]
+            }
+          ],
+          "samples": [
+            "iniciar sesión como {nombreUsuario}",
+            "iniciar sesión"
           ]
         }
       ],
@@ -676,6 +718,34 @@
               }
             }
           ]
+        },
+        {
+          "name": "IniciarSessionIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "nombreUsuario",
+              "type": "AMAZON.FirstName",
+              "elicitationRequired": true,
+              "confirmationRequired": true,
+              "prompts": {
+                "confirmation": "Confirm.Slot.1376174056280.260022964761",
+                "elicitation": "Elicit.Slot.1376174056280.260022964761"
+              }
+            },
+            {
+              "name": "documentoUsuario",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": true,
+              "prompts": {
+                "confirmation": "Confirm.Slot.1376174056280.428410637727",
+                "elicitation": "Elicit.Slot.1376174056280.428410637727"
+              }
+            }
+          ],
+          "delegationStrategy": "ALWAYS"
         }
       ],
       "delegationStrategy": "ALWAYS"
@@ -1108,7 +1178,7 @@
           },
           {
             "type": "PlainText",
-            "value": "¿Qué quieres ver primero cursos o planes formativos?"
+            "value": "¿Qué quieres ver primero, cursos o planes formativos?"
           },
           {
             "type": "PlainText",
@@ -1124,8 +1194,80 @@
             "value": "¿te llamas {nombre} ?"
           }
         ]
+      },
+      {
+        "id": "Elicit.Slot.1376174056280.260022964761",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿con qué nombre estás registrado, sin apellidos?"
+          },
+          {
+            "type": "PlainText",
+            "value": "dime tu nombre, sin apellidos"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿con qué nombre te registraste, sin apellidos?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cuál es tu nombre, sin apellidos?"
+          }
+        ]
+      },
+      {
+        "id": "Confirm.Slot.1376174056280.260022964761",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "he entendido {nombreUsuario}  ¿es correcto?"
+          },
+          {
+            "type": "PlainText",
+            "value": "{nombreUsuario} , ¿verdad?"
+          },
+          {
+            "type": "PlainText",
+            "value": "me parece que has dicho {nombreUsuario} , ¿es correcto?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿Has dicho {nombreUsuario} ?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1376174056280.428410637727",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿cuáles son los números de tu documento de identidad, sin letras?"
+          },
+          {
+            "type": "PlainText",
+            "value": "¿cuál es el número de tu documento de identidad, sólo los números?"
+          }
+        ]
+      },
+      {
+        "id": "Confirm.Slot.1376174056280.428410637727",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "tu número de identidad es {documentoUsuario} , ¿es cierto?"
+          },
+          {
+            "type": "PlainText",
+            "value": "me parece que has dicho {documentoUsuario} , ¿verdad?"
+          },
+          {
+            "type": "PlainText",
+            "value": "he entendido {documentoUsuario} , ¿es correcto?"
+          }
+        ]
       }
     ]
   },
-  "version": "52"
+  "version": "56"
 }

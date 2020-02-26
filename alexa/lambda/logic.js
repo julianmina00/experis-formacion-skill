@@ -51,6 +51,20 @@ module.exports = {
     },
     
     
+    sessionUsuario(nombreUsuario, numeroIdentificacion){
+        console.log("....Recuperando la session del usuario: ["+nombreUsuario+"-"+numeroIdentificacion+"]");
+        const url = constants.endpoints.SESSION_USUARIO;
+        const headers = {
+                  'nombreUsuario': nombreUsuario,
+                  'numeroIdentificacion': numeroIdentificacion,
+                  'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU4MzcwODkzNn0.4CO1L2fha0jW-D3oGQBI2KzZo1BgXtcRiIPZIwTudJkl01Rj6DwYn_2WrRiP1R6BJJ8AQMjNKvCmDM6dPmHVgw'
+                };
+        const response = this.httpPost('', url, 'GET', headers);
+        console.log("...Session de usuario: "+JSON.stringify(response));
+        return response;
+    },
+    
+    
 
 // JAVI: SugerenciaCursosPlanesIntent
     SugerenciaCursosPlanes(EntradaSugerenciaCursosPlanes){
@@ -59,19 +73,24 @@ module.exports = {
     },
 // FIN JAVI     
 
-    httpPost(data, endpoint, httpMethod){
+    httpPost(data, endpoint, httpMethod, headers){
         return new Promise(((resolve, reject) => {
+            if(headers === undefined){
+                headers = {
+                  'Content-Type': 'application/json',
+                  'Content-Length': Buffer.byteLength(data),
+                  'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU4MzcwODkzNn0.4CO1L2fha0jW-D3oGQBI2KzZo1BgXtcRiIPZIwTudJkl01Rj6DwYn_2WrRiP1R6BJJ8AQMjNKvCmDM6dPmHVgw'
+                };
+            }
+            
+            
             const https = require('https')
             const options = {
               hostname: 'experis-formacion.herokuapp.com',
               port: 443,
               path: endpoint,
               method: httpMethod,
-              headers: {
-                'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(data),
-                'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU4MzcwODkzNn0.4CO1L2fha0jW-D3oGQBI2KzZo1BgXtcRiIPZIwTudJkl01Rj6DwYn_2WrRiP1R6BJJ8AQMjNKvCmDM6dPmHVgw'
-              }
+              headers: headers
             }
             
             const request = https.request(options, (response) => {

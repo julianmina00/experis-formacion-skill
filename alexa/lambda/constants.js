@@ -6,6 +6,7 @@ module.exports = {
         REGISTRO_INTERES: '/api/registrar-interes',
         REGISTRO_FORMACION_USUARIO: '/api/formacion-usuarios',
         SUGERENCIA_CURSOS_PLANES: '/api/formaciones-sugeridas/',
-        CONSULTA_FORMACION_USUARIO: '/api/formaciones-usuario'
+        CONSULTA_FORMACION_USUARIO: '/api/formaciones-usuario',
+        SESSION_USUARIO: '/api/session-usuario'
     }
 }
