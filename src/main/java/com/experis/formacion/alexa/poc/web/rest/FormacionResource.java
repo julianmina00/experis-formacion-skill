@@ -52,7 +52,7 @@ public class FormacionResource {
         log.debug("REST request to get Session por usuario");
         String utfNombreUsuario = new String(nombreUsuario.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
         log.info("nombreUusuario "+nombreUsuario+" - nombreusuario UTF8: "+utfNombreUsuario);
-        return ResponseEntity.ok().body(formacionesService.getSessionUsuario(utfNombreUsuario, numeroIdentificacion));
+        return ResponseEntity.ok().body(formacionesService.getSessionUsuario(nombreUsuario, numeroIdentificacion));
     }
 
     @GetMapping("/formaciones-usuario/{usuarioId}/{fechaInicial}/{fechaFinal}")
