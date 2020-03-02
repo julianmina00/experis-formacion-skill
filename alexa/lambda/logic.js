@@ -57,7 +57,7 @@ module.exports = {
         const headers = {
                   'nombreUsuario': nombreUsuario,
                   'numeroIdentificacion': numeroIdentificacion,
-                  'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU4MzcwODkzNn0.4CO1L2fha0jW-D3oGQBI2KzZo1BgXtcRiIPZIwTudJkl01Rj6DwYn_2WrRiP1R6BJJ8AQMjNKvCmDM6dPmHVgw'
+                  'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU4NTM4NjIxMH0.6HxIV2O4cI9K51phtRO8PUIijQy89EO41b-nqHRtCsgcVMhWpVMqyFHo71k0n88NbqYiR8OyaVWWHa0vw8CaVw'
                 };
         const response = this.httpPost('', url, 'GET', headers);
         console.log("...Session de usuario: "+JSON.stringify(response));
@@ -79,7 +79,7 @@ module.exports = {
                 headers = {
                   'Content-Type': 'application/json',
                   'Content-Length': Buffer.byteLength(data),
-                  'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU4MzcwODkzNn0.4CO1L2fha0jW-D3oGQBI2KzZo1BgXtcRiIPZIwTudJkl01Rj6DwYn_2WrRiP1R6BJJ8AQMjNKvCmDM6dPmHVgw'
+                  'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU4NTM4NjIxMH0.6HxIV2O4cI9K51phtRO8PUIijQy89EO41b-nqHRtCsgcVMhWpVMqyFHo71k0n88NbqYiR8OyaVWWHa0vw8CaVw'
                 };
             }
             
